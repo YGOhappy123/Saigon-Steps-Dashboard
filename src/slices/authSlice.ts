@@ -22,8 +22,8 @@ export const authSlice = createSlice({
             state.isLogged = payload
         },
         signOut: () => {
-            cookies.remove('access_token_fes', { path: '/' })
-            cookies.remove('refresh_token_fes', { path: '/' })
+            cookies.remove('access_token_dash', { path: '/' })
+            cookies.remove('refresh_token_dash', { path: '/' })
             return initialState
         }
     }

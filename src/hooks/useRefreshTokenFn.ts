@@ -33,7 +33,7 @@ const useRefreshTokenFn = (axiosIns: AxiosInstance) => {
                 .then(res => {
                     const { accessToken } = res?.data?.data
                     if (accessToken) {
-                        cookies.set('access_token_fec', accessToken, {
+                        cookies.set('access_token_dash', accessToken, {
                             path: '/',
                             expires: new Date(dayjs(Date.now()).add(30, 'minutes').toISOString())
                         })

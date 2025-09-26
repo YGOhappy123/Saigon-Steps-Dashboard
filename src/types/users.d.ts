@@ -10,7 +10,7 @@ declare global {
 
     interface IStaff {
         staffId: number
-        fullName: string
+        name: string
         createdAt: string
         email?: string
         avatar?: string

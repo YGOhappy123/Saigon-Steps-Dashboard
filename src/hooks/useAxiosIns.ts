@@ -12,8 +12,8 @@ const axiosIns = axios.create({
 })
 
 const useAxiosIns = () => {
-    const getAccessToken = () => cookies.get('access_token_fec') || localStorage.getItem('access_token_fec')
-    const getRefreshToken = () => cookies.get('refresh_token_fec') || localStorage.getItem('refresh_token_fec')
+    const getAccessToken = () => cookies.get('access_token_dash') || localStorage.getItem('access_token_dash')
+    const getRefreshToken = () => cookies.get('refresh_token_dash') || localStorage.getItem('refresh_token_dash')
     const refreshTokenFn = useRefreshTokenFn(axiosIns)
 
     useEffect(() => {

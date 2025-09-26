@@ -4,6 +4,7 @@ import DashboardLayout from '@/layouts/DashboardLayout'
 import ErrorPage from '@/pages/ErrorPage'
 import AuthProtector from '@/components/container/AuthProtector'
 import EditProfilePage from '@/features/profile/pages/EditProfilePage'
+import ChangePasswordPage from '@/features/profile/pages/ChangePasswordPage'
 
 const ProfileRoutes = [
     {
@@ -22,11 +23,11 @@ const ProfileRoutes = [
             {
                 path: 'profile',
                 element: <EditProfilePage />
+            },
+            {
+                path: 'change-password',
+                element: <ChangePasswordPage />
             }
-            // {
-            //     path: 'change-password',
-            //     element: <ChangePasswordPage />
-            // }
         ]
     }
 ]
