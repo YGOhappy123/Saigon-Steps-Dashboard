@@ -1,10 +1,13 @@
 import {
     Album,
+    ArrowDown10,
     ChartLine,
     CircleDollarSignIcon,
     ClipboardType,
-    Fish,
+    Crown,
+    Footprints,
     KeyRound,
+    LockKeyhole,
     LucideIcon,
     MessageCircleMore,
     Package,
@@ -40,11 +43,13 @@ export const sidebarGroups: SidebarGroupData[] = [
             {
                 title: 'Thông tin cá nhân',
                 icon: UserIcon,
-                isActive: true,
-                children: [
-                    { title: 'Xem thông tin', url: '/profile' },
-                    { title: 'Đổi mật khẩu', url: '/change-password' }
-                ]
+
+                url: '/profile'
+            },
+            {
+                title: 'Đổi mật khẩu',
+                icon: LockKeyhole,
+                url: '/change-password'
             }
         ]
     },
@@ -77,8 +82,13 @@ export const sidebarGroups: SidebarGroupData[] = [
         ]
     },
     {
-        title: 'Sản phẩm và khuyến mãi',
+        title: 'Sản phẩm và thuơng hiệu',
         items: [
+            {
+                title: 'Thương hiệu',
+                icon: Crown,
+                url: '/brands'
+            },
             {
                 title: 'Danh mục hàng hóa',
                 icon: Album,
@@ -86,24 +96,24 @@ export const sidebarGroups: SidebarGroupData[] = [
             },
             {
                 title: 'Danh sách sản phẩm',
-                icon: Fish,
+                icon: Footprints,
                 url: '/products'
+            }
+        ]
+    },
+    {
+        title: 'Khuyến mãi',
+        items: [
+            {
+                title: 'Chương trình khuyến mãi',
+                icon: ArrowDown10,
+                url: '/promotions'
             },
             {
-                title: 'Khuyến mãi',
+                title: 'Phiếu giảm giá',
                 icon: TicketCheck,
-                children: [
-                    {
-                        title: 'Chương trình khuyến mãi',
-                        url: '/promotions',
-                        accessRequirement: permissions.accessPromotionDashboardPage
-                    },
-                    {
-                        title: 'Phiếu giảm giá',
-                        url: '/coupons',
-                        accessRequirement: permissions.accessCouponDashboardPage
-                    }
-                ]
+                url: '/coupons',
+                accessRequirement: permissions.accessCouponDashboardPage
             }
         ]
     },

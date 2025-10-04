@@ -1,7 +1,7 @@
 declare global {
     interface ICustomer {
         customerId: number
-        fullName: string
+        name: string
         createdAt: string
         email?: string
         avatar?: string

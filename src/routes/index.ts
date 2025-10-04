@@ -1,10 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom'
-import ProfileRoutes from '@/features/profile/ProfileRoutes'
 import AuthRoutes from '@/features/auth/AuthRoutes'
+import ProfileRoutes from '@/features/profile/ProfileRoutes'
+import CustomerRoutes from '@/features/customer/CustomerRoutes'
 
-const developmentRoutes = createBrowserRouter([...ProfileRoutes, ...AuthRoutes])
-
-const productionRoutes = createBrowserRouter([...ProfileRoutes, ...AuthRoutes])
+const developmentRoutes = createBrowserRouter([...AuthRoutes, ...ProfileRoutes, ...CustomerRoutes])
+const productionRoutes = createBrowserRouter([...AuthRoutes, ...ProfileRoutes, ...CustomerRoutes])
 
 const getRouter = (environment: 'development' | 'production') => {
     switch (environment) {
