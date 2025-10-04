@@ -7,6 +7,10 @@ export const SORT_MAPPING = {
     '+totalAmount': { totalAmount: 'asc' },
     '-orderId': { orderId: 'desc' },
     '+orderId': { orderId: 'asc' },
+    '-roleId': { roleId: 'desc' },
+    '+roleId': { roleId: 'asc' },
+    '-customerId': { customerId: 'desc' },
+    '+customerId': { customerId: 'asc' },
     '-cost': { totalCost: 'desc' },
     '+cost': { totalCost: 'asc' }
 }

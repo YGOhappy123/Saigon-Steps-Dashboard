@@ -2,14 +2,13 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { useMutation } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
-import dayjs from 'dayjs'
-
 import { onError } from '@/utils/errorsHandler'
 import { setLogged, setUser } from '@/slices/authSlice'
 import { getMappedMessage } from '@/utils/resMessageMapping'
 import useAxiosIns from '@/hooks/useAxiosIns'
 import cookies from '@/libs/cookies'
 import toastConfig from '@/configs/toast'
+import dayjs from '@/libs/dayjs'
 
 interface LoginResponse {
     user: IStaff
@@ -31,11 +30,11 @@ const authService = () => {
             const { user, accessToken, refreshToken } = res.data.data
             cookies.set('access_token_dash', accessToken, {
                 path: '/',
-                expires: new Date(dayjs(Date.now()).add(30, 'day').toISOString())
+                expires: new Date(dayjs(Date.now()).add(30, 'minutes').toISOString())
             })
             cookies.set('refresh_token_dash', refreshToken, {
                 path: '/',
-                expires: new Date(dayjs(Date.now()).add(30, 'day').toISOString())
+                expires: new Date(dayjs(Date.now()).add(30, 'days').toISOString())
             })
 
             navigate(redirectPath as string)

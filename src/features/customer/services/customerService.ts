@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
-import dayjs from 'dayjs'
-
 import { onError } from '@/utils/errorsHandler'
 import { getMappedSort } from '@/utils/apiSortMapping'
 import { getMappedMessage } from '@/utils/resMessageMapping'
 import useAxiosIns from '@/hooks/useAxiosIns'
 import toastConfig from '@/configs/toast'
+import dayjs from '@/libs/dayjs'
 
 export type CustomerSortAndFilterParams = {
     searchName: string
@@ -26,8 +25,8 @@ const customerService = ({ enableFetching }: { enableFetching: boolean }) => {
 
     const [page, setPage] = useState<number>(1)
     const [limit, setLimit] = useState<number>(10)
-    const [query, setQuery] = useState<string>('')
-    const [sort, setSort] = useState<string>('')
+    const [query, setQuery] = useState<string>('{}')
+    const [sort, setSort] = useState<string>('{}')
 
     const buildQuery = ({
         searchName,
@@ -53,8 +52,11 @@ const customerService = ({ enableFetching }: { enableFetching: boolean }) => {
         queryKey: ['customers', page, limit],
         queryFn: () => {
             if (!isSearching) {
-                return axios.get<IResponseData<ICustomer[]>>(`/customers?skip=${limit * (page - 1)}&limit=${limit}`)
+                return axios.get<IResponseData<ICustomer[]>>(
+                    `/customers?skip=${limit * (page - 1)}&limit=${limit}&sort=${JSON.stringify({ customerId: 'desc' })}`
+                )
             }
+            return null
         },
         enabled: enableFetching,
         refetchOnWindowFocus: false,
@@ -109,7 +111,7 @@ const customerService = ({ enableFetching }: { enableFetching: boolean }) => {
     const getCsvCustomersQuery = useQuery({
         queryKey: ['csv-customers', query, sort],
         queryFn: () => {
-            return axios.get<IResponseData<ICustomer[]>>(`/guests?filter=${query}&sort=${sort}`)
+            return axios.get<IResponseData<ICustomer[]>>(`/customers?filter=${query}&sort=${sort}`)
         },
         enabled: false
     })

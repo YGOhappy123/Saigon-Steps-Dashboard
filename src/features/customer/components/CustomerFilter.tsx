@@ -3,7 +3,7 @@ import { CustomerSortAndFilterParams } from '@/features/customer/services/custom
 import { DateRange } from 'react-day-picker'
 import { PopoverContent } from '@/components/ui/popover'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { ArrowDown10, ArrowUp10, CircleCheck, CircleUser, CircleX } from 'lucide-react'
+import { ArrowDown10, ArrowUp10, CircleCheck, CircleStar, CircleX } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import DateRangePicker from '@/components/common/DateRangePicker'
@@ -20,7 +20,7 @@ const CustomerFilter = ({ setHavingFilters, onChange, onSearch, onReset }: Custo
     const [searchEmail, setSearchEmail] = useState<string>('')
     const [searchIsActive, setSearchIsActive] = useState<boolean | undefined>(undefined)
     const [searchRange, setSearchRange] = useState<string[] | any[]>()
-    const [sort, setSort] = useState<string>('-createdAt')
+    const [sort, setSort] = useState<string>('-customerId')
 
     const [date, setDate] = useState<DateRange | undefined>(undefined)
     useEffect(() => {
@@ -54,7 +54,7 @@ const CustomerFilter = ({ setHavingFilters, onChange, onSearch, onReset }: Custo
             searchEmail !== '' ||
             searchIsActive !== null ||
             (searchRange && searchRange.length > 0) ||
-            sort !== '-createdAt'
+            sort !== '-customerId'
         setHavingFilters(isChanged)
     }
 
@@ -63,7 +63,7 @@ const CustomerFilter = ({ setHavingFilters, onChange, onSearch, onReset }: Custo
         setSearchEmail('')
         setSearchIsActive(undefined)
         setSearchRange([])
-        setSort('-createdAt')
+        setSort('-customerId')
         setDate(undefined)
 
         setHavingFilters(false)
@@ -95,7 +95,12 @@ const CustomerFilter = ({ setHavingFilters, onChange, onSearch, onReset }: Custo
                     onChange={e => setSearchEmail(e.target.value)}
                 />
 
-                <DateRangePicker date={date} setDate={setDate} triggerClassName="text-card-foreground h-10 text-sm" />
+                <DateRangePicker
+                    date={date}
+                    setDate={setDate}
+                    placeHolder="Lọc theo ngày đăng ký..."
+                    triggerClassName="text-card-foreground h-10 text-sm"
+                />
 
                 <Select
                     value={searchIsActive === undefined ? 'undefined' : searchIsActive.toString()}
@@ -108,7 +113,7 @@ const CustomerFilter = ({ setHavingFilters, onChange, onSearch, onReset }: Custo
                     </SelectTrigger>
                     <SelectContent side="top">
                         {[
-                            { value: 'undefined', label: 'Lọc theo trạng thái: Tất cả', Icon: CircleUser },
+                            { value: 'undefined', label: 'Lọc theo trạng thái: Tất cả', Icon: CircleStar },
                             { value: 'true', label: 'Lọc theo trạng thái: Đang hoạt động', Icon: CircleCheck },
                             { value: 'false', label: 'Lọc theo trạng thái: Đã bị khóa', Icon: CircleX }
                         ].map(sortOption => (
@@ -126,7 +131,9 @@ const CustomerFilter = ({ setHavingFilters, onChange, onSearch, onReset }: Custo
                     <SelectContent side="top">
                         {[
                             { value: '-createdAt', label: 'Xếp theo ngày đăng ký giảm dần', Icon: ArrowDown10 },
-                            { value: '+createdAt', label: 'Xếp theo ngày đăng ký tăng dần', Icon: ArrowUp10 }
+                            { value: '+createdAt', label: 'Xếp theo ngày đăng ký tăng dần', Icon: ArrowUp10 },
+                            { value: '-customerId', label: 'Xếp theo mã khách hàng giảm dần', Icon: ArrowDown10 },
+                            { value: '+customerId', label: 'Xếp theo mã khách hàng tăng dần', Icon: ArrowUp10 }
                         ].map(sortOption => (
                             <SelectItem key={sortOption.value} value={sortOption.value}>
                                 <sortOption.Icon /> {sortOption.label}

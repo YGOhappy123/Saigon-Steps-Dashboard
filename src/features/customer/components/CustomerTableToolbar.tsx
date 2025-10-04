@@ -32,16 +32,18 @@ const CustomerTableToolbar = ({
         getCsvCustomersQuery.refetch().then(res => {
             const csvCustomers = res.data?.data?.data ?? []
             const formattedCustomers = csvCustomers.map((customer: ICustomer) => ({
-                ['Mã Khách hàng']: customer.customerId,
+                ['Mã khách hàng']: customer.customerId,
                 ['Họ và tên']: customer.name,
-                ['Thời gian đăng ký']: dayjs(customer.createdAt).format('DD/MM/YYYY HH:mm:ss')
+                ['Email']: customer.email ?? 'Chưa cập nhật',
+                ['Thời gian đăng ký']: dayjs(customer.createdAt).format('DD/MM/YYYY HH:mm:ss'),
+                ['Trạng thái']: customer.isActive ? 'Đang hoạt động' : 'Đã bị khóa'
             }))
 
-            exportToCSV(formattedCustomers, `SS_danh_sach_khach_hang_${dayjs(Date.now()).format('DD/MM/YYYY')}`, [
-                { wch: 10 },
-                { wch: 50 },
-                { wch: 30 }
-            ])
+            exportToCSV(
+                formattedCustomers,
+                `SS_danh_sach_khach_hang_${dayjs(Date.now()).format('DD/MM/YYYY HH:mm:ss')}`,
+                [{ wch: 15 }, { wch: 30 }, { wch: 30 }, { wch: 30 }, { wch: 20 }]
+            )
         })
     }
 
