@@ -8,21 +8,7 @@ import appPermissions from '@/configs/permissions'
 
 const CustomerListPage = () => {
     const user = useSelector((state: RootState) => state.auth.user!)
-    const {
-        customers,
-        total,
-        page,
-        limit,
-        setPage,
-        setLimit,
-        buildQuery,
-        onFilterSearch,
-        onResetFilterSearch,
-        getCsvCustomersQuery,
-        deactivateCustomerMutation
-    } = customerService({
-        enableFetching: true
-    })
+    const customerServiceData = customerService({ enableFetching: true })
 
     return (
         <div className="flex h-full flex-1 flex-col space-y-8 p-4">
@@ -39,18 +25,18 @@ const CustomerListPage = () => {
             </div>
 
             <CustomerTable
-                customers={customers}
-                total={total}
-                page={page}
-                limit={limit}
-                setPage={setPage}
-                setLimit={setLimit}
-                buildQuery={buildQuery}
-                onFilterSearch={onFilterSearch}
-                onResetFilterSearch={onResetFilterSearch}
+                customers={customerServiceData.customers}
+                total={customerServiceData.total}
+                page={customerServiceData.page}
+                limit={customerServiceData.limit}
+                setPage={customerServiceData.setPage}
+                setLimit={customerServiceData.setLimit}
+                buildQuery={customerServiceData.buildQuery}
+                onFilterSearch={customerServiceData.onFilterSearch}
+                onResetFilterSearch={customerServiceData.onResetFilterSearch}
                 hasDeactivateCustomerPermission={verifyPermission(user, appPermissions.deactivateCustomerAccount)}
-                getCsvCustomersQuery={getCsvCustomersQuery}
-                deactivateCustomerMutation={deactivateCustomerMutation}
+                getCsvCustomersQuery={customerServiceData.getCsvCustomersQuery}
+                deactivateCustomerMutation={customerServiceData.deactivateCustomerMutation}
             />
         </div>
     )

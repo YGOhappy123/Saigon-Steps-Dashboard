@@ -4,6 +4,7 @@ import ErrorPage from '@/pages/ErrorPage'
 import AuthProtector from '@/components/container/AuthProtector'
 import PermissionProtector from '@/components/container/PermissionProtector'
 import RoleManagementPage from '@/features/personnel/pages/RoleManagementPage'
+import StaffManagementPage from '@/features/personnel/pages/StaffManagementPage'
 import permissions from '@/configs/permissions'
 
 const PersonnelRoutes = [
@@ -24,16 +25,16 @@ const PersonnelRoutes = [
                         permission={permissions.accessRoleDashboardPage}
                     />
                 )
+            },
+            {
+                path: 'staffs',
+                element: (
+                    <PermissionProtector
+                        children={<StaffManagementPage />}
+                        permission={permissions.accessStaffDashboardPage}
+                    />
+                )
             }
-            // {
-            //     path: 'staffs',
-            //     element: (
-            //         <PermissionProtector
-            //             children={<StaffManagementPage />}
-            //             permission={permissions.accessStaffDashboardPage}
-            //         />
-            //     )
-            // }
         ]
     }
 ]

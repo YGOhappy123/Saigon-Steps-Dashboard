@@ -123,7 +123,7 @@ export const sidebarGroups: SidebarGroupData[] = [
             {
                 title: 'Quản lý nhân viên',
                 icon: ShieldUser,
-                url: '/staffs',
+                url: '/personnel/staffs',
                 accessRequirement: permissions.accessStaffDashboardPage
             },
             {
@@ -146,8 +146,7 @@ export const sidebarGroups: SidebarGroupData[] = [
             {
                 title: 'Hàng tồn kho',
                 icon: ScanBarcode,
-                url: '/inventories',
-                accessRequirement: permissions.accessInventoryDashboardPage
+                url: '/inventories'
             },
             {
                 title: 'Báo cáo thiệt hại',

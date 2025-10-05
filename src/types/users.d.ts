@@ -15,11 +15,11 @@ declare global {
         email?: string
         avatar?: string
         isActive?: boolean
-
         roleId: number
-        role: Partial<IStaffRole> | string
         permissions: string[]
         createdBy?: number
+
+        role: Partial<IStaffRole> | string
         createdByStaff?: Partial<IStaff> | string
     }
 

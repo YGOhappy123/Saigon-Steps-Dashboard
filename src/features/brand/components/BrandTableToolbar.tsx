@@ -1,48 +1,52 @@
 import { useState } from 'react'
-import { UseQueryResult } from '@tanstack/react-query'
+import { UseMutationResult, UseQueryResult } from '@tanstack/react-query'
 import { FileSpreadsheet, Funnel } from 'lucide-react'
 import { Popover, PopoverTrigger } from '@/components/ui/popover'
 import { Button } from '@/components/ui/button'
 import { exportToCSV } from '@/utils/exportCsvFile'
-import { CustomerSortAndFilterParams } from '@/features/customer/services/customerService'
+import { BrandSortAndFilterParams } from '@/features/brand/services/brandService'
+import striptags from 'striptags'
 import PageLimitSelect from '@/components/common/PageLimitSelect'
-import CustomerFilter from '@/features/customer/components/CustomerFilter'
+import BrandFilter from '@/features/brand/components/BrandFilter'
+import AddBrandDialog from '@/features/brand/components/AddBrandDialog'
 import dayjs from '@/libs/dayjs'
 
-type CustomerTableToolbarProps = {
+type BrandTableToolbarProps = {
     limit: number
     setLimit: (limit: number) => void
-    getCsvCustomersQuery: UseQueryResult<any, any>
-    buildQuery: (params: CustomerSortAndFilterParams) => void
+    getCsvBrandsQuery: UseQueryResult<any, any>
+    buildQuery: (params: BrandSortAndFilterParams) => void
     onFilterSearch: () => void
     onResetFilterSearch: () => void
+    hasAddPermission: boolean
+    addNewBrandMutation: UseMutationResult<any, any, Partial<IProductBrand>, any>
 }
 
-const CustomerTableToolbar = ({
-    getCsvCustomersQuery,
+const BrandTableToolbar = ({
+    getCsvBrandsQuery,
     limit,
     setLimit,
     buildQuery,
     onFilterSearch,
-    onResetFilterSearch
-}: CustomerTableToolbarProps) => {
+    onResetFilterSearch,
+    hasAddPermission,
+    addNewBrandMutation
+}: BrandTableToolbarProps) => {
     const [havingFilters, setHavingFilters] = useState(false)
 
     const exportCsvFile = () => {
-        getCsvCustomersQuery.refetch().then(res => {
-            const csvCustomers = res.data?.data?.data ?? []
-            const formattedCustomers = csvCustomers.map((customer: ICustomer) => ({
-                ['Mã khách hàng']: customer.customerId,
-                ['Họ và tên']: customer.name,
-                ['Email']: customer.email ?? '(Chưa cập nhật)',
-                ['Thời gian đăng ký']: dayjs(customer.createdAt).format('DD/MM/YYYY HH:mm:ss'),
-                ['Trạng thái']: customer.isActive ? 'Đang hoạt động' : 'Đã bị khóa'
+        getCsvBrandsQuery.refetch().then(res => {
+            const csvBrands = res.data?.data?.data ?? []
+            const formattedBrands = csvBrands.map((brand: IProductBrand) => ({
+                ['Mã thương hiệu']: brand.brandId,
+                ['Tên thương hiệu']: brand.name,
+                ['Mô tả']: striptags(brand.description)
             }))
 
             exportToCSV(
-                formattedCustomers,
-                `SS_danh_sach_khach_hang ${dayjs(Date.now()).format('DD/MM/YYYY HH:mm:ss')}`,
-                [{ wch: 15 }, { wch: 30 }, { wch: 30 }, { wch: 30 }, { wch: 20 }]
+                formattedBrands,
+                `SS_danh_sach_thuong_hieu ${dayjs(Date.now()).format('DD/MM/YYYY HH:mm:ss')}`,
+                [{ wch: 15 }, { wch: 30 }, { wch: 80 }]
             )
         })
     }
@@ -56,19 +60,21 @@ const CustomerTableToolbar = ({
                     <PopoverTrigger asChild>
                         <Button variant="outline" className="relative">
                             <Funnel />
-                            Lọc khách hàng
+                            Lọc thương hiệu
                             {havingFilters && (
                                 <span className="absolute top-1 right-1 h-2 w-2 rounded-full bg-red-600" />
                             )}
                         </Button>
                     </PopoverTrigger>
-                    <CustomerFilter
+                    <BrandFilter
                         setHavingFilters={setHavingFilters}
                         onChange={buildQuery}
                         onSearch={onFilterSearch}
                         onReset={onResetFilterSearch}
                     />
                 </Popover>
+
+                {hasAddPermission && <AddBrandDialog addNewBrandMutation={addNewBrandMutation} />}
 
                 <Button onClick={exportCsvFile}>
                     <FileSpreadsheet /> Xuất file CSV
@@ -78,4 +84,4 @@ const CustomerTableToolbar = ({
     )
 }
 
-export default CustomerTableToolbar
+export default BrandTableToolbar

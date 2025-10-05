@@ -17,23 +17,7 @@ const RoleManagementPage = () => {
     const [dialogOpen, setDialogOpen] = useState(false)
     const [dialogMode, setDialogMode] = useState<'view' | 'update'>('view')
     const [selectedRole, setSelectedRole] = useState<IStaffRole | null>(null)
-    const {
-        roles,
-        total,
-        page,
-        limit,
-        setPage,
-        setLimit,
-        onFilterSearch,
-        onResetFilterSearch,
-        buildQuery,
-        getCsvRolesQuery,
-        addNewRoleMutation,
-        updateRoleMutation,
-        removeRoleMutation
-    } = roleService({
-        enableFetching: true
-    })
+    const roleServiceData = roleService({ enableFetching: true })
 
     const fetchAllPermissionsQuery = useQuery({
         queryKey: ['permissions-all'],
@@ -66,21 +50,21 @@ const RoleManagementPage = () => {
                 setMode={setDialogMode}
                 open={dialogOpen}
                 setOpen={setDialogOpen}
-                updateRoleMutation={updateRoleMutation}
+                updateRoleMutation={roleServiceData.updateRoleMutation}
                 hasUpdatePermission={verifyPermission(user, appPermissions.updateRole)}
             />
 
             <RoleTable
-                roles={roles}
+                roles={roleServiceData.roles}
                 permissions={permissions}
-                total={total}
-                page={page}
-                limit={limit}
-                setPage={setPage}
-                setLimit={setLimit}
-                buildQuery={buildQuery}
-                onFilterSearch={onFilterSearch}
-                onResetFilterSearch={onResetFilterSearch}
+                total={roleServiceData.total}
+                page={roleServiceData.page}
+                limit={roleServiceData.limit}
+                setPage={roleServiceData.setPage}
+                setLimit={roleServiceData.setLimit}
+                buildQuery={roleServiceData.buildQuery}
+                onFilterSearch={roleServiceData.onFilterSearch}
+                onResetFilterSearch={roleServiceData.onResetFilterSearch}
                 hasAddPermission={verifyPermission(user, appPermissions.addNewRole)}
                 hasUpdatePermission={verifyPermission(user, appPermissions.updateRole)}
                 hasDeletePermission={verifyPermission(user, appPermissions.removeRole)}
@@ -94,9 +78,9 @@ const RoleManagementPage = () => {
                     setDialogMode('update')
                     setDialogOpen(true)
                 }}
-                getCsvRolesQuery={getCsvRolesQuery}
-                addNewRoleMutation={addNewRoleMutation}
-                removeRoleMutation={removeRoleMutation}
+                getCsvRolesQuery={roleServiceData.getCsvRolesQuery}
+                addNewRoleMutation={roleServiceData.addNewRoleMutation}
+                removeRoleMutation={roleServiceData.removeRoleMutation}
             />
         </div>
     )

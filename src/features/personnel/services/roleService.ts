@@ -49,7 +49,7 @@ const roleService = ({ enableFetching }: { enableFetching: boolean }) => {
         enabled: enableFetching,
         refetchOnWindowFocus: false,
         refetchIntervalInBackground: true,
-        refetchInterval: 10000
+        refetchInterval: 30000
     })
 
     useEffect(() => {

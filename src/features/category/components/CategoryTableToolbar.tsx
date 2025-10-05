@@ -1,48 +1,51 @@
 import { useState } from 'react'
-import { UseQueryResult } from '@tanstack/react-query'
+import { UseMutationResult, UseQueryResult } from '@tanstack/react-query'
 import { FileSpreadsheet, Funnel } from 'lucide-react'
 import { Popover, PopoverTrigger } from '@/components/ui/popover'
 import { Button } from '@/components/ui/button'
 import { exportToCSV } from '@/utils/exportCsvFile'
-import { CustomerSortAndFilterParams } from '@/features/customer/services/customerService'
+import { CategorySortAndFilterParams } from '@/features/category/services/categoryService'
 import PageLimitSelect from '@/components/common/PageLimitSelect'
-import CustomerFilter from '@/features/customer/components/CustomerFilter'
+import CategoryFilter from '@/features/category/components/CategoryFilter'
+import AddCategoryDialog from '@/features/category/components/AddCategoryDialog'
 import dayjs from '@/libs/dayjs'
 
-type CustomerTableToolbarProps = {
+type CategoryTableToolbarProps = {
     limit: number
     setLimit: (limit: number) => void
-    getCsvCustomersQuery: UseQueryResult<any, any>
-    buildQuery: (params: CustomerSortAndFilterParams) => void
+    getCsvCategoriesQuery: UseQueryResult<any, any>
+    buildQuery: (params: CategorySortAndFilterParams) => void
     onFilterSearch: () => void
     onResetFilterSearch: () => void
+    hasAddPermission: boolean
+    addNewCategoryMutation: UseMutationResult<any, any, Partial<IShoeCategory>, any>
 }
 
-const CustomerTableToolbar = ({
-    getCsvCustomersQuery,
+const CategoryTableToolbar = ({
+    getCsvCategoriesQuery,
     limit,
     setLimit,
     buildQuery,
     onFilterSearch,
-    onResetFilterSearch
-}: CustomerTableToolbarProps) => {
+    onResetFilterSearch,
+    hasAddPermission,
+    addNewCategoryMutation
+}: CategoryTableToolbarProps) => {
     const [havingFilters, setHavingFilters] = useState(false)
 
     const exportCsvFile = () => {
-        getCsvCustomersQuery.refetch().then(res => {
-            const csvCustomers = res.data?.data?.data ?? []
-            const formattedCustomers = csvCustomers.map((customer: ICustomer) => ({
-                ['Mã khách hàng']: customer.customerId,
-                ['Họ và tên']: customer.name,
-                ['Email']: customer.email ?? '(Chưa cập nhật)',
-                ['Thời gian đăng ký']: dayjs(customer.createdAt).format('DD/MM/YYYY HH:mm:ss'),
-                ['Trạng thái']: customer.isActive ? 'Đang hoạt động' : 'Đã bị khóa'
+        getCsvCategoriesQuery.refetch().then(res => {
+            const csvCategories = res.data?.data?.data ?? []
+            const formattedCategories = csvCategories.map((category: IShoeCategory) => ({
+                ['Mã danh mục']: category.categoryId,
+                ['Tên danh mục']: category.name,
+                ['Người tạo']: (category.createdByStaff as IStaff | null)?.name
             }))
 
             exportToCSV(
-                formattedCustomers,
-                `SS_danh_sach_khach_hang ${dayjs(Date.now()).format('DD/MM/YYYY HH:mm:ss')}`,
-                [{ wch: 15 }, { wch: 30 }, { wch: 30 }, { wch: 30 }, { wch: 20 }]
+                formattedCategories,
+                `SS_danh_sach_danh_muc ${dayjs(Date.now()).format('DD/MM/YYYY HH:mm:ss')}`,
+                [{ wch: 15 }, { wch: 30 }, { wch: 30 }]
             )
         })
     }
@@ -56,19 +59,21 @@ const CustomerTableToolbar = ({
                     <PopoverTrigger asChild>
                         <Button variant="outline" className="relative">
                             <Funnel />
-                            Lọc khách hàng
+                            Lọc danh mục
                             {havingFilters && (
                                 <span className="absolute top-1 right-1 h-2 w-2 rounded-full bg-red-600" />
                             )}
                         </Button>
                     </PopoverTrigger>
-                    <CustomerFilter
+                    <CategoryFilter
                         setHavingFilters={setHavingFilters}
                         onChange={buildQuery}
                         onSearch={onFilterSearch}
                         onReset={onResetFilterSearch}
                     />
                 </Popover>
+
+                {hasAddPermission && <AddCategoryDialog addNewCategoryMutation={addNewCategoryMutation} />}
 
                 <Button onClick={exportCsvFile}>
                     <FileSpreadsheet /> Xuất file CSV
@@ -78,4 +83,4 @@ const CustomerTableToolbar = ({
     )
 }
 
-export default CustomerTableToolbar
+export default CategoryTableToolbar

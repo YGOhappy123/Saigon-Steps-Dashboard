@@ -4,54 +4,58 @@ import { FileSpreadsheet, Funnel } from 'lucide-react'
 import { Popover, PopoverTrigger } from '@/components/ui/popover'
 import { Button } from '@/components/ui/button'
 import { exportToCSV } from '@/utils/exportCsvFile'
-import { RoleSortAndFilterParams } from '@/features/personnel/services/roleService'
+import { StaffSortAndFilterParams } from '@/features/personnel/services/staffService'
 import PageLimitSelect from '@/components/common/PageLimitSelect'
-import RoleFilter from '@/features/personnel/components/RoleFilter'
-import AddRoleDialog from '@/features/personnel/components/AddRoleDialog'
+import StaffFilter from '@/features/personnel/components/StaffFilter'
+import AddStaffDialog from '@/features/personnel/components/AddStaffDialog'
 import dayjs from '@/libs/dayjs'
 
-type RoleTableToolbarProps = {
+type StaffTableToolbarProps = {
     limit: number
     setLimit: (limit: number) => void
-    getCsvRolesQuery: UseQueryResult<any, any>
-    buildQuery: (params: RoleSortAndFilterParams) => void
+    getCsvStaffsQuery: UseQueryResult<any, any>
+    buildQuery: (params: StaffSortAndFilterParams) => void
     onFilterSearch: () => void
     onResetFilterSearch: () => void
-    permissions: IPermission[]
+    roles: IStaffRole[]
     hasAddPermission: boolean
-    addNewRoleMutation: UseMutationResult<any, any, Partial<IStaffRole>, any>
+    addNewStaffMutation: UseMutationResult<any, any, Partial<IStaff>, any>
 }
 
-const RoleTableToolbar = ({
-    getCsvRolesQuery,
+const StaffTableToolbar = ({
+    getCsvStaffsQuery,
     limit,
     setLimit,
     buildQuery,
     onFilterSearch,
     onResetFilterSearch,
-    permissions,
+    roles,
     hasAddPermission,
-    addNewRoleMutation
-}: RoleTableToolbarProps) => {
+    addNewStaffMutation
+}: StaffTableToolbarProps) => {
     const [havingFilters, setHavingFilters] = useState(false)
 
     const exportCsvFile = () => {
-        getCsvRolesQuery.refetch().then(res => {
-            const csvRoles = res.data?.data?.data ?? []
-            const formattedRoles = csvRoles.map((role: IStaffRole) => ({
-                ['Mã vai trò']: role.roleId,
-                ['Tên vai trò']: role.name,
-                ['Loại vai trò']: role.isImmutable ? 'Không thể chỉnh sửa' : 'Có thể chỉnh sửa',
-                ['Danh sách quyền truy cập']: (role.permissions ?? [])
-                    .map(permission => (permission as IPermission).name)
-                    .join(', ')
+        getCsvStaffsQuery.refetch().then(res => {
+            const csvStaffs = res.data?.data?.data ?? []
+            const formattedStaffs = csvStaffs.map((staff: IStaff) => ({
+                ['Mã nhân viên']: staff.staffId,
+                ['Họ và tên']: staff.name,
+                ['Email']: staff.email ?? '(Chưa cập nhật)',
+                ['Vai trò']: (staff.role as IStaffRole).name,
+                ['Người tạo']: (staff.createdByStaff as IStaff | null)?.name ?? '(Không có)',
+                ['Thời gian tạo']: dayjs(staff.createdAt).format('DD/MM/YYYY HH:mm:ss'),
+                ['Trạng thái']: staff.isActive ? 'Đang hoạt động' : 'Đã bị khóa'
             }))
 
-            exportToCSV(formattedRoles, `SS_danh_sach_vai_tro ${dayjs(Date.now()).format('DD/MM/YYYY HH:mm:ss')}`, [
+            exportToCSV(formattedStaffs, `SS_danh_sach_nhan_vien ${dayjs(Date.now()).format('DD/MM/YYYY HH:mm:ss')}`, [
                 { wch: 15 },
                 { wch: 30 },
-                { wch: 20 },
-                { wch: 80 }
+                { wch: 30 },
+                { wch: 30 },
+                { wch: 30 },
+                { wch: 30 },
+                { wch: 20 }
             ])
         })
     }
@@ -65,24 +69,22 @@ const RoleTableToolbar = ({
                     <PopoverTrigger asChild>
                         <Button variant="outline" className="relative">
                             <Funnel />
-                            Lọc vai trò
+                            Lọc nhân viên
                             {havingFilters && (
                                 <span className="absolute top-1 right-1 h-2 w-2 rounded-full bg-red-600" />
                             )}
                         </Button>
                     </PopoverTrigger>
-                    <RoleFilter
+                    <StaffFilter
                         setHavingFilters={setHavingFilters}
                         onChange={buildQuery}
                         onSearch={onFilterSearch}
                         onReset={onResetFilterSearch}
-                        permissions={permissions}
+                        roles={roles}
                     />
                 </Popover>
 
-                {hasAddPermission && (
-                    <AddRoleDialog permissions={permissions} addNewRoleMutation={addNewRoleMutation} />
-                )}
+                {hasAddPermission && <AddStaffDialog roles={roles} addNewStaffMutation={addNewStaffMutation} />}
 
                 <Button onClick={exportCsvFile}>
                     <FileSpreadsheet /> Xuất file CSV
@@ -92,4 +94,4 @@ const RoleTableToolbar = ({
     )
 }
 
-export default RoleTableToolbar
+export default StaffTableToolbar

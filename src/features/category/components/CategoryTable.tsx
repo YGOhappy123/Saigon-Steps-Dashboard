@@ -1,7 +1,7 @@
 import { UseMutationResult, UseQueryResult } from '@tanstack/react-query'
 import { ColumnDef } from '@tanstack/react-table'
 import { DataTable } from '@/components/ui/data-table'
-import { CircleCheck, CircleX, MoreHorizontal } from 'lucide-react'
+import { MoreHorizontal } from 'lucide-react'
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -9,49 +9,35 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
-import { RoleSortAndFilterParams } from '@/features/personnel/services/roleService'
+import { CategorySortAndFilterParams } from '@/features/category/services/categoryService'
 import { Button } from '@/components/ui/button'
-import RoleTableToolbar from '@/features/personnel/components/RoleTableToolbar'
+import CategoryTableToolbar from '@/features/category/components/CategoryTableToolbar'
 import ConfirmationDialog from '@/components/common/ConfirmationDialog'
 import Pagination from '@/components/common/Pagination'
+import dayjs from '@/libs/dayjs'
 
-type RoleTableProps = {
-    roles: IStaffRole[]
-    permissions: IPermission[]
+type CategoryTableProps = {
+    categories: IShoeCategory[]
     total: number
     page: number
     limit: number
     setPage: (page: number) => void
     setLimit: (limit: number) => void
-    buildQuery: (params: RoleSortAndFilterParams) => void
+    buildQuery: (params: CategorySortAndFilterParams) => void
     onFilterSearch: () => void
     onResetFilterSearch: () => void
     hasAddPermission: boolean
     hasUpdatePermission: boolean
     hasDeletePermission: boolean
-    onViewRole: (value: IStaffRole) => void
-    onUpdateRole: (value: IStaffRole) => void
-    getCsvRolesQuery: UseQueryResult<any, any>
-    addNewRoleMutation: UseMutationResult<any, any, Partial<IStaffRole>, any>
-    removeRoleMutation: UseMutationResult<any, any, number, any>
+    onViewCategory: (value: IShoeCategory) => void
+    onUpdateCategory: (value: IShoeCategory) => void
+    getCsvCategoriesQuery: UseQueryResult<any, any>
+    addNewCategoryMutation: UseMutationResult<any, any, Partial<IShoeCategory>, any>
+    deleteCategoryMutation: UseMutationResult<any, any, number, any>
 }
 
-export const roleTypes = [
-    {
-        value: false,
-        label: 'Có thể chỉnh sửa',
-        icon: CircleCheck
-    },
-    {
-        value: true,
-        label: 'Không thể chỉnh sửa',
-        icon: CircleX
-    }
-]
-
-const RoleTable = ({
-    roles,
-    permissions,
+const CategoryTable = ({
+    categories,
     total,
     page,
     limit,
@@ -63,52 +49,38 @@ const RoleTable = ({
     hasAddPermission,
     hasUpdatePermission,
     hasDeletePermission,
-    onViewRole,
-    onUpdateRole,
-    getCsvRolesQuery,
-    addNewRoleMutation,
-    removeRoleMutation
-}: RoleTableProps) => {
-    const columns: ColumnDef<IStaffRole>[] = [
+    onViewCategory,
+    onUpdateCategory,
+    getCsvCategoriesQuery,
+    addNewCategoryMutation,
+    deleteCategoryMutation
+}: CategoryTableProps) => {
+    const columns: ColumnDef<IShoeCategory>[] = [
         {
-            accessorKey: 'roleId',
-            header: () => <div className="text-center">Mã vai trò</div>,
-            cell: ({ row }) => <div>{row.original.roleId}</div>
+            accessorKey: 'categoryId',
+            header: () => <div className="text-center">Mã danh mục</div>,
+            cell: ({ row }) => <div>{row.original.categoryId}</div>
         },
 
         {
             accessorKey: 'name',
-            header: () => <div>Tên vai trò</div>,
+            header: () => <div>Tên danh mục</div>,
             cell: ({ row }) => <div>{row.original.name}</div>
         },
         {
-            accessorKey: 'isImmutable',
-            header: () => <div>Loại vai trò</div>,
+            accessorKey: 'createdBy',
+            header: () => <div>Thông tin người tạo</div>,
             cell: ({ row }) => {
-                const roleType = roleTypes.find(type => type.value === row.original.isImmutable)
-                if (!roleType) return null
-
                 return (
-                    <div className="flex w-[200px] items-center">
-                        {roleType.icon && <roleType.icon className="text-muted-foreground mr-2 h-4 w-4" />}
-                        <span>{roleType.label}</span>
-                    </div>
-                )
-            }
-        },
-        {
-            accessorKey: 'permissions',
-            header: () => <div>Danh sách quyền truy cập</div>,
-            cell: ({ row }) => {
-                const permissions = (row.original.permissions ?? []) as IPermission[]
-
-                return (
-                    <div className="flex flex-col items-start space-y-2">
-                        {permissions
-                            .filter(permission => permission.code.startsWith('ACCESS'))
-                            .map((permission, index) => (
-                                <span key={index}>{permission.name}</span>
-                            ))}
+                    <div className="flex flex-col gap-2 break-words whitespace-normal">
+                        <p>
+                            <span className="font-semibold">Người tạo: </span>
+                            {(row.original.createdByStaff as Partial<IStaff> | undefined)?.name}
+                        </p>
+                        <p>
+                            <span className="font-semibold">Ngày tạo: </span>
+                            {dayjs(row.original.createdAt).format('DD/MM/YYYY HH:mm:ss')}
+                        </p>
                     </div>
                 )
             }
@@ -126,15 +98,15 @@ const RoleTable = ({
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="center" className="w-[160px]">
-                            <DropdownMenuItem className="cursor-pointer" onClick={() => onViewRole(row.original)}>
+                            <DropdownMenuItem className="cursor-pointer" onClick={() => onViewCategory(row.original)}>
                                 Chi tiết
                             </DropdownMenuItem>
                             <DropdownMenuItem
-                                disabled={row.original.isImmutable || !hasUpdatePermission}
+                                disabled={!hasUpdatePermission}
                                 className="cursor-pointer"
                                 onClick={() => {
-                                    if (!row.original.isImmutable && hasUpdatePermission) {
-                                        onUpdateRole(row.original)
+                                    if (hasUpdatePermission) {
+                                        onUpdateCategory(row.original)
                                     }
                                 }}
                             >
@@ -142,17 +114,17 @@ const RoleTable = ({
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />
                             <ConfirmationDialog
-                                title="Bạn có chắc muốn xóa vai trò này?"
-                                description="Không thể hoàn tác hành động này. Thao tác này sẽ xóa vĩnh viễn vai trò khỏi hệ thốngSaigon Steps."
+                                title="Bạn có chắc muốn xóa danh mục này?"
+                                description="Không thể hoàn tác hành động này. Thao tác này sẽ xóa vĩnh viễn danh mục khỏi hệ thốngSaigon Steps."
                                 onConfirm={async () => {
-                                    if (!row.original.isImmutable && hasDeletePermission) {
-                                        removeRoleMutation.mutateAsync(row.original.roleId)
+                                    if (hasDeletePermission) {
+                                        deleteCategoryMutation.mutateAsync(row.original.categoryId)
                                     }
                                 }}
                                 trigger={
                                     <DropdownMenuItem
                                         variant="destructive"
-                                        disabled={row.original.isImmutable || !hasDeletePermission}
+                                        disabled={!hasDeletePermission}
                                         className="cursor-pointer"
                                     >
                                         Xóa
@@ -170,21 +142,20 @@ const RoleTable = ({
 
     return (
         <div className="flex flex-col gap-8">
-            <RoleTableToolbar
-                getCsvRolesQuery={getCsvRolesQuery}
+            <CategoryTableToolbar
+                getCsvCategoriesQuery={getCsvCategoriesQuery}
                 limit={limit}
                 setLimit={setLimit}
                 buildQuery={buildQuery}
                 onFilterSearch={onFilterSearch}
                 onResetFilterSearch={onResetFilterSearch}
-                permissions={permissions}
                 hasAddPermission={hasAddPermission}
-                addNewRoleMutation={addNewRoleMutation}
+                addNewCategoryMutation={addNewCategoryMutation}
             />
-            <DataTable columns={columns} data={roles} />
+            <DataTable columns={columns} data={categories} />
             <Pagination currentPage={page} totalPages={lastPage} onPageChange={setPage} />
         </div>
     )
 }
 
-export default RoleTable
+export default CategoryTable
