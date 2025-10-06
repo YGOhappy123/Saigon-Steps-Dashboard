@@ -173,7 +173,6 @@ const AddStaffDialog = ({ roles, addNewStaffMutation }: AddStaffDialogProps) => 
                                 />
                             </div>
                         </div>
-
                         <Separator />
                         <DialogFooter>
                             <Button type="button" variant="outline" onClick={() => form.reset()}>

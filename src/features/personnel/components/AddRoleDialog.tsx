@@ -16,7 +16,7 @@ import {
 } from '@/components/ui/dialog'
 import { Separator } from '@/components/ui/separator'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Input } from '@/components/ui/input'
 import { Checkbox } from '@/components/ui/checkbox'
 
@@ -96,30 +96,19 @@ const AddRoleDialog = ({ permissions, addNewRoleMutation }: AddRoleDialogProps) 
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel className="text-card-foreground">Loại vai trò</FormLabel>
-                                        <FormControl>
-                                            <RadioGroup
-                                                onValueChange={val => field.onChange(val === 'true')}
-                                                defaultValue={field.value.toString()}
-                                                className="flex items-center gap-12"
-                                            >
-                                                <FormItem className="flex items-center gap-3">
-                                                    <FormControl>
-                                                        <RadioGroupItem value="false" />
-                                                    </FormControl>
-                                                    <FormLabel className="text-card-foreground font-normal">
-                                                        Có thể chỉnh sửa
-                                                    </FormLabel>
-                                                </FormItem>
-                                                <FormItem className="flex items-center gap-3">
-                                                    <FormControl>
-                                                        <RadioGroupItem value="true" disabled />
-                                                    </FormControl>
-                                                    <FormLabel className="text-muted-foreground font-normal">
-                                                        Không thể chỉnh sửa
-                                                    </FormLabel>
-                                                </FormItem>
-                                            </RadioGroup>
-                                        </FormControl>
+                                        <Select onValueChange={() => {}} defaultValue={field.value?.toString()}>
+                                            <FormControl>
+                                                <SelectTrigger className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2">
+                                                    <SelectValue placeholder="Chọn loại vai trò..." />
+                                                </SelectTrigger>
+                                            </FormControl>
+                                            <SelectContent>
+                                                <SelectItem value="false">Có thể chỉnh sửa</SelectItem>
+                                                <SelectItem value="true" disabled>
+                                                    Không thể chỉnh sửa
+                                                </SelectItem>
+                                            </SelectContent>
+                                        </Select>
                                     </FormItem>
                                 )}
                             />

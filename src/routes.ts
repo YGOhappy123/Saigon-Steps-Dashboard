@@ -5,6 +5,7 @@ import CustomerRoutes from '@/features/customer/CustomerRoutes'
 import PersonnelRoutes from '@/features/personnel/PersonnelRoutes'
 import CategoryRoutes from '@/features/category/CategoryRoutes'
 import BrandRoutes from '@/features/brand/BrandRoutes'
+import ProductRoutes from '@/features/product/ProductRoutes'
 import StatisticRoutes from '@/features/statistic/StatisticRoutes'
 
 const developmentRoutes = createBrowserRouter([
@@ -14,6 +15,7 @@ const developmentRoutes = createBrowserRouter([
     ...PersonnelRoutes,
     ...CategoryRoutes,
     ...BrandRoutes,
+    ...ProductRoutes,
     ...StatisticRoutes
 ])
 const productionRoutes = createBrowserRouter([
@@ -23,6 +25,7 @@ const productionRoutes = createBrowserRouter([
     ...PersonnelRoutes,
     ...CategoryRoutes,
     ...BrandRoutes,
+    ...ProductRoutes,
     ...StatisticRoutes
 ])
 

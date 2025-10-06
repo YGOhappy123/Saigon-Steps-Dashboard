@@ -177,7 +177,6 @@ const DataBrandDialog = ({
                                 />
                             </div>
                         </div>
-
                         <Separator />
                         {mode === 'update' && (
                             <DialogFooter>

@@ -105,8 +105,8 @@ const RoleFilter = ({ setHavingFilters, onChange, onSearch, onReset, permissions
                     <SelectContent side="top">
                         {[
                             { value: 'undefined', label: 'Lọc theo loại: Tất cả', Icon: CircleStar },
-                            { value: 'true', label: 'Lọc theo loại: Không thể thay đổi', Icon: CircleCheck },
-                            { value: 'false', label: 'Lọc theo loại: Có thể thay đổi', Icon: CircleX }
+                            { value: 'true', label: 'Lọc theo loại: Không thể chỉnh sửa', Icon: CircleCheck },
+                            { value: 'false', label: 'Lọc theo loại: Có thể chỉnh sửa', Icon: CircleX }
                         ].map(sortOption => (
                             <SelectItem key={sortOption.value} value={sortOption.value}>
                                 <sortOption.Icon /> {sortOption.label}

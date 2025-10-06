@@ -10,6 +10,7 @@ declare global {
         createdAt: string
         createdBy: number
 
+        discountRate?: number
         brand?: Partial<IProductBrand> | string
         images?: Partial<IProductImage>[] | string[]
         createdByStaff?: Partial<IStaff> | string

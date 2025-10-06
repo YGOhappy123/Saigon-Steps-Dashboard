@@ -75,7 +75,6 @@ const RoleTable = ({
             header: () => <div className="text-center">Mã vai trò</div>,
             cell: ({ row }) => <div>{row.original.roleId}</div>
         },
-
         {
             accessorKey: 'name',
             header: () => <div>Tên vai trò</div>,

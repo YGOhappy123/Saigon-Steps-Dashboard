@@ -61,7 +61,6 @@ const CategoryTable = ({
             header: () => <div className="text-center">Mã danh mục</div>,
             cell: ({ row }) => <div>{row.original.categoryId}</div>
         },
-
         {
             accessorKey: 'name',
             header: () => <div>Tên danh mục</div>,

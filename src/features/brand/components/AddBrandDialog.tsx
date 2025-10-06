@@ -97,11 +97,10 @@ const AddBrandDialog = ({ addNewBrandMutation }: AddBrandDialogProps) => {
                                             <FormControl>
                                                 <NoButtonImageUploader
                                                     hasPermission
-                                                    image={field.value}
+                                                    image={field.value ?? ''}
                                                     setImage={field.onChange}
                                                     originalImage={''}
                                                     shape="square"
-                                                    allowRemove
                                                 />
                                             </FormControl>
                                             <FormMessage />
@@ -148,7 +147,6 @@ const AddBrandDialog = ({ addNewBrandMutation }: AddBrandDialogProps) => {
                                 />
                             </div>
                         </div>
-
                         <Separator />
                         <DialogFooter>
                             <Button type="button" variant="outline" onClick={() => form.reset()}>

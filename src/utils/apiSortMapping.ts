@@ -9,6 +9,8 @@ export const SORT_MAPPING = {
     '+categoryId': { categoryId: 'asc' },
     '-brandId': { brandId: 'desc' },
     '+brandId': { brandId: 'asc' },
+    '-productId': { rootProductId: 'desc' },
+    '+productId': { rootProductId: 'asc' },
     '-orderId': { orderId: 'desc' },
     '+orderId': { orderId: 'asc' },
 

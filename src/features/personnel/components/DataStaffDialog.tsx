@@ -202,7 +202,6 @@ const DataStaffDialog = ({
                                 />
                             </div>
                         </div>
-
                         <Separator />
                         {mode === 'update' && (
                             <DialogFooter>
