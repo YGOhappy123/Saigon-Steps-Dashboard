@@ -13,6 +13,7 @@ import { getProductSlug } from '@/utils/getProductSlug'
 import productService, { UpdateProductInfoDto } from '@/features/product/services/productService'
 import RichTextEditor from '@/components/common/RichTextEditor'
 import ProductImageUploader from '@/features/product/components/ProductImageUploader'
+import TagInputField from '@/features/product/components/TagInputField'
 import fileService from '@/services/fileService'
 
 const baseInfoFormSchema = z.object({
@@ -133,7 +134,6 @@ const ProductInfoCard = ({
                 brandId: values.brandId,
                 images: newImages
             }
-
             if (values.type === 'shoe') {
                 data.features = { ...values.features }
                 if (!data.features.secondaryColor) delete data.features.secondaryColor
@@ -226,27 +226,6 @@ const ProductInfoCard = ({
                             </div>
 
                             <div className="grid grid-cols-2 gap-4">
-                                <div className="grid gap-2">
-                                    <FormLabel className="text-card-foreground">Loại sản phẩm</FormLabel>
-                                    <Select
-                                        onValueChange={() => {}}
-                                        defaultValue={product.isAccessory ? 'accessory' : 'shoe'}
-                                        disabled
-                                    >
-                                        <SelectTrigger className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2">
-                                            <SelectValue placeholder="Chọn loại sản phẩm..." />
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            <SelectItem value="accessory" disabled>
-                                                Phụ kiện
-                                            </SelectItem>
-                                            <SelectItem value="shoe" disabled>
-                                                Giày / dép
-                                            </SelectItem>
-                                        </SelectContent>
-                                    </Select>
-                                </div>
-
                                 <FormField
                                     control={form.control}
                                     name="brandId"
@@ -278,6 +257,26 @@ const ProductInfoCard = ({
                                         </FormItem>
                                     )}
                                 />
+                                <div className="grid gap-2">
+                                    <FormLabel className="text-card-foreground">Loại sản phẩm</FormLabel>
+                                    <Select
+                                        onValueChange={() => {}}
+                                        defaultValue={product.isAccessory ? 'accessory' : 'shoe'}
+                                        disabled
+                                    >
+                                        <SelectTrigger className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2">
+                                            <SelectValue placeholder="Chọn loại sản phẩm..." />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            <SelectItem value="accessory" disabled>
+                                                Phụ kiện
+                                            </SelectItem>
+                                            <SelectItem value="shoe" disabled>
+                                                Giày / dép
+                                            </SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                </div>
                             </div>
 
                             <FormField
@@ -346,7 +345,7 @@ const ProductInfoCard = ({
                             </div>
 
                             {form.watch('type') === 'shoe' && (
-                                <div className="grid grid-cols-2 gap-4">
+                                <div className="grid grid-cols-2 items-start gap-x-4 gap-y-6">
                                     <FormField
                                         control={form.control}
                                         name="features.categoryId"
@@ -420,8 +419,8 @@ const ProductInfoCard = ({
                                         { name: 'breathability', label: 'Độ thoáng khí', type: 'text' },
                                         { name: 'pattern', label: 'Họa tiết', type: 'text' },
                                         { name: 'countryOfOrigin', label: 'Quốc gia xuất xứ', type: 'text' },
-                                        { name: 'heelHeight', label: 'Chiều cao gót', type: 'number' },
-                                        { name: 'durabilityRating', label: 'Độ bền', type: 'number' },
+                                        { name: 'heelHeight', label: 'Chiều cao gót (cm)', type: 'number' },
+                                        { name: 'durabilityRating', label: 'Độ bền (thang 10)', type: 'number' },
                                         { name: 'releaseYear', label: 'Năm phát hành', type: 'number' },
                                         { name: 'primaryColor', label: 'Màu sắc chủ đạo', type: 'color' }
                                     ].map(feature => (
@@ -462,7 +461,7 @@ const ProductInfoCard = ({
                                                                     disabled={
                                                                         !hasModifyInfoPermission || mode === 'view'
                                                                     }
-                                                                    placeholder={`Màu sắc phụ...`}
+                                                                    placeholder="Màu sắc phụ..."
                                                                     className="caret-card-foreground text-card-foreground h-12 rounded border-2"
                                                                     type="color"
                                                                     {...field}
@@ -496,6 +495,34 @@ const ProductInfoCard = ({
                                                 <FormMessage />
                                             </FormItem>
                                         )}
+                                    />
+                                    <TagInputField
+                                        className="col-span-2"
+                                        label="Dịp sử dụng"
+                                        value={form.watch('features.occasionTags')}
+                                        onChange={tags => form.setValue('features.occasionTags', tags)}
+                                        editable={hasModifyInfoPermission && mode === 'update'}
+                                        placeholder="Dịp sử dụng..."
+                                        errorMessage={
+                                            Object.keys(form.formState.errors).length > 0 &&
+                                            form.watch('features.occasionTags').length === 0
+                                                ? 'Vui lòng chọn ít nhất một thẻ dịp sử dụng.'
+                                                : undefined
+                                        }
+                                    />
+                                    <TagInputField
+                                        className="col-span-2"
+                                        label="Phong cách thiết kế"
+                                        value={form.watch('features.designTags')}
+                                        onChange={tags => form.setValue('features.designTags', tags)}
+                                        editable={hasModifyInfoPermission && mode === 'update'}
+                                        placeholder="Phong cách thiết kế..."
+                                        errorMessage={
+                                            Object.keys(form.formState.errors).length > 0 &&
+                                            form.watch('features.designTags').length === 0
+                                                ? 'Vui lòng chọn ít nhất một thẻ thiết kế.'
+                                                : undefined
+                                        }
                                     />
                                 </div>
                             )}

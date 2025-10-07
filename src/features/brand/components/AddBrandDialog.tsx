@@ -162,8 +162,8 @@ const AddBrandDialog = ({ addNewBrandMutation }: AddBrandDialogProps) => {
                             >
                                 Hủy bỏ
                             </Button>
-                            <Button type="submit" disabled={form.formState.isLoading}>
-                                Xác nhận
+                            <Button type="submit" disabled={form.formState.isSubmitting}>
+                                {form.formState.isSubmitting ? 'Đang tải...' : 'Xác nhận'}
                             </Button>
                         </DialogFooter>
                     </form>
