@@ -73,7 +73,7 @@ const DataBrandDialog = ({
         }
 
         if (values.logoUrl && values.logoUrl !== brand.logoUrl) {
-            const res = await uploadBase64Mutation.mutateAsync({ base64: values.logoUrl, folder: 'logo' })
+            const res = await uploadBase64Mutation.mutateAsync({ base64: values.logoUrl, folder: 'brand' })
             const newImageUrl = res.data.data?.imageUrl
             if (newImageUrl) data.logoUrl = newImageUrl
         }

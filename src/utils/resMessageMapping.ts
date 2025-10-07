@@ -41,7 +41,7 @@ const ERROR_MESSAGES = {
 
     // Products related
     PRODUCT_NOT_FOUND: 'Không tìm thấy sản phẩm.',
-    PRODUCT_EXISTED: 'Tên sản phẩm đã tồn tại.',
+    PRODUCT_EXISTED: 'Tên sản phẩm hoặc chuỗi slug đã tồn tại.',
     PRODUCT_ITEM_NOT_FOUND: 'Không tìm thấy chi tiết sản phẩm.',
     PRODUCT_BEING_USED: 'Sản phẩm đang được sử dụng.',
 

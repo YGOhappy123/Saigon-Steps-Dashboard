@@ -8,12 +8,6 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import productService from '@/features/product/services/productService'
 
-type ProductPriceFormProps = {
-    product: IRootProduct
-    hasModifyItemPermission: boolean
-    onUpdateSuccess: () => Promise<any>
-}
-
 const productPriceFormSchema = z
     .object({
         price: z.coerce.number().min(1000, { message: 'Giá tiền phải lớn hơn 1000 đồng.' })
@@ -22,6 +16,12 @@ const productPriceFormSchema = z
         message: 'Giá tiền phải là bội số của 1000 đồng.',
         path: ['price']
     })
+
+type ProductPriceFormProps = {
+    product: IRootProduct
+    hasModifyItemPermission: boolean
+    onUpdateSuccess: () => Promise<any>
+}
 
 const ProductPriceForm = ({ product, hasModifyItemPermission, onUpdateSuccess }: ProductPriceFormProps) => {
     const [mode, setMode] = useState<'view' | 'update'>('view')

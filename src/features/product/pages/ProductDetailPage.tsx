@@ -6,7 +6,7 @@ import { RootState } from '@/store'
 import { Button } from '@/components/ui/button'
 import { Avatar, AvatarImage } from '@/components/ui/avatar'
 import TableOfContents from '@/features/product/components/TableOfContents'
-// import ProductInfoCard from '@/pages/DashboardProduct/ProductDetailPage/ProductInfoCard'
+import ProductInfoCard from '@/features/product/components/ProductInfoCard'
 import ProductVariantsCard from '@/features/product/components/ProductVariantsCard'
 import ProductPromotionsCard from '@/features/product/components/ProductPromotionsCard'
 import useAxiosIns from '@/hooks/useAxiosIns'
@@ -29,9 +29,19 @@ const ProductDetailPage = () => {
     })
     const product = getProductDetailQuery.data?.data
 
+    const getBrandsQuery = useQuery({
+        queryKey: ['brands-all'],
+        queryFn: () => axios.get<IResponseData<IProductBrand[]>>('/brands'),
+        enabled: true,
+        refetchOnWindowFocus: false,
+        refetchIntervalInBackground: true,
+        select: res => res.data
+    })
+    const brands = getBrandsQuery.data?.data ?? []
+
     const getCategoriesQuery = useQuery({
         queryKey: ['categories-all'],
-        queryFn: () => axios.get<IResponseData<IShoeCategory[]>>('/products/categories'),
+        queryFn: () => axios.get<IResponseData<IShoeCategory[]>>('/categories'),
         enabled: true,
         refetchOnWindowFocus: false,
         refetchIntervalInBackground: true,
@@ -98,12 +108,13 @@ const ProductDetailPage = () => {
 
             <div className="flex items-start gap-8">
                 <div className="flex flex-1 flex-col items-center gap-4">
-                    {/* <ProductInfoCard
+                    <ProductInfoCard
                         product={product!}
+                        brands={brands}
                         categories={categories}
                         hasModifyInfoPermission={verifyPermission(user, permissions.updateProductInformation)}
                         onUpdateSuccess={() => getProductDetailQuery.refetch()}
-                    />*/}
+                    />
                     <ProductVariantsCard
                         product={product!}
                         hasModifyItemPermission={verifyPermission(user, permissions.updateProductPrice)}

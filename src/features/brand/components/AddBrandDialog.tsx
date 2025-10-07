@@ -57,7 +57,7 @@ const AddBrandDialog = ({ addNewBrandMutation }: AddBrandDialogProps) => {
         }
 
         if (values.logoUrl) {
-            const res = await uploadBase64Mutation.mutateAsync({ base64: values.logoUrl, folder: 'logo' })
+            const res = await uploadBase64Mutation.mutateAsync({ base64: values.logoUrl, folder: 'brand' })
             const newImageUrl = res.data.data?.imageUrl
             if (newImageUrl) data.logoUrl = newImageUrl
         }
