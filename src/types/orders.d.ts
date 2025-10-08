@@ -11,9 +11,10 @@ declare global {
         deliveryPhone?: string
         note?: string
         createdAt: string
+        deliveredAt?: string
+        refundedAt?: string
 
         customer: Partial<ICustomer>
-        orderStatus: IOrderStatus
         coupon?: ICoupon
         orderItems: {
             productItemId: number

@@ -1,6 +1,7 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { Button } from '@/components/ui/button'
 import { AddProductData } from '@/features/product/pages/AddProductPage'
+import { SHOE_GENDER_MAP } from '@/configs/constants'
 import formatCurrency from '@/utils/formatCurrency'
 
 type AddProductFormFinalStepProps = {
@@ -14,12 +15,6 @@ type AddProductFormFinalStepProps = {
         title: string
         description: string
     }[]
-}
-
-const ShoeGenderMap = {
-    UNISEX: 'Unisex',
-    MALE: 'Nam',
-    FEMALE: 'Nữ'
 }
 
 const AddProductFormFinalStep = ({
@@ -110,7 +105,7 @@ const AddProductFormFinalStep = ({
                                 </div>
                                 <div className="text-justify">
                                     <span className="text-card-foreground font-medium">3.2. Giới tính: </span>
-                                    {ShoeGenderMap[data.features.gender as keyof typeof ShoeGenderMap]}
+                                    {SHOE_GENDER_MAP[data.features.gender as keyof typeof SHOE_GENDER_MAP]}
                                 </div>
                                 {[
                                     { name: 'upperMaterial', label: 'Chất liệu thân' },

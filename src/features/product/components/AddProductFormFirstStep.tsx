@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { getProductSlug } from '@/utils/getProductSlug'
+import { SHOE_GENDER_OPTIONS } from '@/configs/constants'
 import striptags from 'striptags'
 import RichTextEditor from '@/components/common/RichTextEditor'
 import TagInputField from '@/features/product/components/TagInputField'
@@ -273,13 +274,9 @@ const AddProductFormFirstStep = ({ defaultValues, brands, categories, onNext }: 
                                                 </SelectTrigger>
                                             </FormControl>
                                             <SelectContent>
-                                                {[
-                                                    { label: 'Nam', value: 'MALE' },
-                                                    { label: 'Nữ', value: 'FEMALE' },
-                                                    { label: 'Unisex', value: 'UNISEX' }
-                                                ].map(category => (
-                                                    <SelectItem key={category.value} value={category.value}>
-                                                        {category.label}
+                                                {SHOE_GENDER_OPTIONS.map(gender => (
+                                                    <SelectItem key={gender.value} value={gender.value}>
+                                                        {gender.label}
                                                     </SelectItem>
                                                 ))}
                                             </SelectContent>

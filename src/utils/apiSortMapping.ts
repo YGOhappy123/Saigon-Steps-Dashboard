@@ -18,8 +18,8 @@ export const SORT_MAPPING = {
 
     '-createdAt': { createdAt: 'desc' },
     '+createdAt': { createdAt: 'asc' },
-    '-totalAmount': { totalAmount: 'desc' },
-    '+totalAmount': { totalAmount: 'asc' },
+    '-amount': { totalAmount: 'desc' },
+    '+amount': { totalAmount: 'asc' },
     '-price': { price: 'desc' },
     '+price': { price: 'asc' },
     '-discountRate': { discountRate: 'desc' },
