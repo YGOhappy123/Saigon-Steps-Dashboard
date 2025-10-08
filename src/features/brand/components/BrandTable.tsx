@@ -121,7 +121,7 @@ const BrandTable = ({
                             <DropdownMenuSeparator />
                             <ConfirmationDialog
                                 title="Bạn có chắc muốn xóa thương hiệu này?"
-                                description="Không thể hoàn tác hành động này. Thao tác này sẽ xóa vĩnh viễn thương hiệu khỏi hệ thốngSaigon Steps."
+                                description="Không thể hoàn tác hành động này. Thao tác này sẽ xóa vĩnh viễn thương hiệu khỏi hệ thống Saigon Steps."
                                 onConfirm={async () => {
                                     if (hasDeletePermission) {
                                         deleteBrandMutation.mutateAsync(row.original.brandId)

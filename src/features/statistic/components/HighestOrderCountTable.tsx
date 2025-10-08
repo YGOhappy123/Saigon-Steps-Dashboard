@@ -44,9 +44,7 @@ const HighestOrderCountTable = ({ customers }: HighestOrderCountTableProps) => {
         {
             accessorKey: 'createdAt',
             header: () => <div>Thời gian đăng ký</div>,
-            cell: ({ row }) => (
-                <div className="w-[150px]">{dayjs(row.original.createdAt).format('DD/MM/YYYY HH:mm:ss')}</div>
-            )
+            cell: ({ row }) => <div>{dayjs(row.original.createdAt).format('DD/MM/YYYY HH:mm:ss')}</div>
         },
         {
             accessorKey: 'orderCount',

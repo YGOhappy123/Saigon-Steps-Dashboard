@@ -125,7 +125,7 @@ const StaffTable = ({
                 if (!staffType) return null
 
                 return (
-                    <div className="flex w-[150px] items-center">
+                    <div className="flex items-center">
                         {staffType.icon && <staffType.icon className="text-muted-foreground mr-2 h-4 w-4" />}
                         <span>{staffType.label}</span>
                     </div>
@@ -209,7 +209,7 @@ const StaffTable = ({
                             <DropdownMenuSeparator />
                             <ConfirmationDialog
                                 title="Bạn có chắc muốn khóa tài khoản nhân viên này?"
-                                description="Không thể hoàn tác hành động này. Thao tác này sẽ khóa tài khoản nhân viên vĩnh viễn trong hệ thốngSaigon Steps."
+                                description="Không thể hoàn tác hành động này. Thao tác này sẽ khóa tài khoản nhân viên vĩnh viễn trong hệ thống Saigon Steps."
                                 onConfirm={async () => {
                                     if (
                                         (row.original.role as Partial<IStaffRole>).isImmutable ||

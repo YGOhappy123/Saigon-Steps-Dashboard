@@ -114,7 +114,7 @@ const CategoryTable = ({
                             <DropdownMenuSeparator />
                             <ConfirmationDialog
                                 title="Bạn có chắc muốn xóa danh mục này?"
-                                description="Không thể hoàn tác hành động này. Thao tác này sẽ xóa vĩnh viễn danh mục khỏi hệ thốngSaigon Steps."
+                                description="Không thể hoàn tác hành động này. Thao tác này sẽ xóa vĩnh viễn danh mục khỏi hệ thống Saigon Steps."
                                 onConfirm={async () => {
                                     if (hasDeletePermission) {
                                         deleteCategoryMutation.mutateAsync(row.original.categoryId)

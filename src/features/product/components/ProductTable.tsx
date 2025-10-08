@@ -243,8 +243,8 @@ const ProductTable = ({
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />
                             <ConfirmationDialog
-                                title="Bạn có chắc muốn xóa vai trò này?"
-                                description="Không thể hoàn tác hành động này. Thao tác này sẽ xóa vĩnh viễn vai trò khỏi hệ thống Saigon Steps."
+                                title="Bạn có chắc muốn xóa sản phẩm này?"
+                                description="Không thể hoàn tác hành động này. Thao tác này sẽ xóa vĩnh viễn sản phẩm khỏi hệ thống Saigon Steps."
                                 onConfirm={async () => {
                                     if (hasDeletePermission) {
                                         deleteProductMutation.mutateAsync(row.original.rootProductId)

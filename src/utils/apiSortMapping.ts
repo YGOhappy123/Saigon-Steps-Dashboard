@@ -13,6 +13,8 @@ export const SORT_MAPPING = {
     '+productId': { rootProductId: 'asc' },
     '-orderId': { orderId: 'desc' },
     '+orderId': { orderId: 'asc' },
+    '-promotionId': { promotionId: 'desc' },
+    '+promotionId': { promotionId: 'asc' },
 
     '-createdAt': { createdAt: 'desc' },
     '+createdAt': { createdAt: 'asc' },
@@ -20,6 +22,8 @@ export const SORT_MAPPING = {
     '+totalAmount': { totalAmount: 'asc' },
     '-price': { price: 'desc' },
     '+price': { price: 'asc' },
+    '-discountRate': { discountRate: 'desc' },
+    '+discountRate': { discountRate: 'asc' },
     '-cost': { totalCost: 'desc' },
     '+cost': { totalCost: 'asc' }
 }

@@ -88,7 +88,7 @@ const RoleTable = ({
                 if (!roleType) return null
 
                 return (
-                    <div className="flex w-[200px] items-center">
+                    <div className="flex items-center">
                         {roleType.icon && <roleType.icon className="text-muted-foreground mr-2 h-4 w-4" />}
                         <span>{roleType.label}</span>
                     </div>
@@ -142,7 +142,7 @@ const RoleTable = ({
                             <DropdownMenuSeparator />
                             <ConfirmationDialog
                                 title="Bạn có chắc muốn xóa vai trò này?"
-                                description="Không thể hoàn tác hành động này. Thao tác này sẽ xóa vĩnh viễn vai trò khỏi hệ thốngSaigon Steps."
+                                description="Không thể hoàn tác hành động này. Thao tác này sẽ xóa vĩnh viễn vai trò khỏi hệ thống Saigon Steps."
                                 onConfirm={async () => {
                                     if (!row.original.isImmutable && hasDeletePermission) {
                                         removeRoleMutation.mutateAsync(row.original.roleId)

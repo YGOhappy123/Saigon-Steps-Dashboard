@@ -94,7 +94,7 @@ const CustomerTable = ({
                 if (!customerType) return null
 
                 return (
-                    <div className="flex w-[150px] items-center">
+                    <div className="flex items-center">
                         {customerType.icon && <customerType.icon className="text-muted-foreground mr-2 h-4 w-4" />}
                         <span>{customerType.label}</span>
                     </div>

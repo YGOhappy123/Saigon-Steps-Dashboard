@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { StaffSortAndFilterParams } from '@/features/personnel/services/staffService'
 import { DateRange } from 'react-day-picker'
+import { StaffSortAndFilterParams } from '@/features/personnel/services/staffService'
 import { PopoverContent } from '@/components/ui/popover'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { ArrowDown10, ArrowUp10, CircleCheck, CircleStar, CircleX } from 'lucide-react'
@@ -103,7 +103,7 @@ const StaffFilter = ({ setHavingFilters, onChange, onSearch, onReset, roles }: S
                 <DateRangePicker
                     date={date}
                     setDate={setDate}
-                    placeHolder="Lọc theo ngày đăng ký..."
+                    placeHolder="Lọc theo ngày tạo tài khoản..."
                     triggerClassName="text-card-foreground h-10 text-sm"
                 />
 
