@@ -1,19 +1,7 @@
-import { useState } from 'react'
-import { useSelector } from 'react-redux'
-import { useQuery } from '@tanstack/react-query'
-import { RootState } from '@/store'
 import { Check } from 'lucide-react'
 import { twMerge } from 'tailwind-merge'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Avatar, AvatarImage } from '@/components/ui/avatar'
-// import FirstStepForm, { FirstStepData } from '@/pages/DashboardProduct/AddProductPage/FirstStepForm'
-// import SecondStepForm, { SecondStepData } from '@/pages/DashboardProduct/AddProductPage/SecondStepForm'
-// import FinalStepForm from '@/pages/DashboardProduct/AddProductPage/FinalStepForm'
-import useAxiosIns from '@/hooks/useAxiosIns'
-import productService from '@/features/product/services/productService'
-import fileService from '@/services/fileService'
 
-type AddProductStepsProps = {
+type MultistepsFormStepsProps = {
     formSteps: {
         title: string
         description: string
@@ -21,7 +9,7 @@ type AddProductStepsProps = {
     currentStep: number
 }
 
-const AddProductSteps = ({ formSteps, currentStep }: AddProductStepsProps) => {
+const MultistepsFormSteps = ({ formSteps, currentStep }: MultistepsFormStepsProps) => {
     return (
         <ol className="flex w-full max-w-4xl items-center rounded-xl border-2">
             {formSteps.map((item, index) => (
@@ -84,4 +72,4 @@ const AddProductSteps = ({ formSteps, currentStep }: AddProductStepsProps) => {
     )
 }
 
-export default AddProductSteps
+export default MultistepsFormSteps

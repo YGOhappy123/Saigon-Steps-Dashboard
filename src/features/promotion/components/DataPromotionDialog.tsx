@@ -170,6 +170,7 @@ const DataPromotionDialog = ({
                                     )}
                                 />
                             </div>
+
                             <FormField
                                 control={form.control}
                                 name="description"
@@ -189,6 +190,7 @@ const DataPromotionDialog = ({
                                     </FormItem>
                                 )}
                             />
+
                             <div className="grid grid-cols-2 items-start gap-4">
                                 <FormField
                                     control={form.control}
@@ -202,7 +204,7 @@ const DataPromotionDialog = ({
                                                         <Button
                                                             disabled
                                                             variant="outline"
-                                                            className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2"
+                                                            className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2 font-semibold"
                                                         >
                                                             {field.value ? (
                                                                 format(field.value, 'dd LLL, y', { locale: vi })
@@ -244,7 +246,7 @@ const DataPromotionDialog = ({
                                                         <Button
                                                             disabled={mode === 'view'}
                                                             variant="outline"
-                                                            className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2"
+                                                            className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2 font-semibold"
                                                         >
                                                             {field.value ? (
                                                                 format(field.value, 'dd LLL, y', { locale: vi })
@@ -275,6 +277,7 @@ const DataPromotionDialog = ({
                                     )}
                                 />
                             </div>
+
                             <FormField
                                 control={form.control}
                                 name="products"

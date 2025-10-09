@@ -69,7 +69,7 @@ const ProductPriceForm = ({ product, hasModifyItemPermission, onUpdateSuccess }:
                                     type="number"
                                     disabled={!hasModifyItemPermission || mode === 'view'}
                                     placeholder="Đơn giá..."
-                                    className="caret-card-foreground text-card-foreground h-12 rounded border-2"
+                                    className="caret-card-foreground text-card-foreground h-12 rounded border-2 font-semibold"
                                     {...field}
                                 />
                             </FormControl>

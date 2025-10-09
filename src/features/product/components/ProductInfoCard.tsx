@@ -206,7 +206,7 @@ const ProductInfoCard = ({
                                             <Input
                                                 disabled={!hasModifyInfoPermission || mode === 'view'}
                                                 placeholder="Tên sản phẩm..."
-                                                className="caret-card-foreground text-card-foreground h-12 rounded border-2"
+                                                className="caret-card-foreground text-card-foreground h-12 rounded border-2 font-semibold"
                                                 {...field}
                                             />
                                         </FormControl>
@@ -221,7 +221,7 @@ const ProductInfoCard = ({
                                     disabled
                                     name="slug"
                                     placeholder="Chuỗi slug..."
-                                    className="caret-card-foreground text-card-foreground h-12 rounded border-2"
+                                    className="caret-card-foreground text-card-foreground h-12 rounded border-2 font-semibold"
                                     value={getProductSlug(form.watch('name'))}
                                 />
                             </div>
@@ -239,7 +239,7 @@ const ProductInfoCard = ({
                                                 disabled={!hasModifyInfoPermission || mode === 'view'}
                                             >
                                                 <FormControl>
-                                                    <SelectTrigger className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2">
+                                                    <SelectTrigger className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2 font-semibold">
                                                         <SelectValue placeholder="Thương hiệu..." />
                                                     </SelectTrigger>
                                                 </FormControl>
@@ -265,7 +265,7 @@ const ProductInfoCard = ({
                                         defaultValue={product.isAccessory ? 'accessory' : 'shoe'}
                                         disabled
                                     >
-                                        <SelectTrigger className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2">
+                                        <SelectTrigger className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2 font-semibold">
                                             <SelectValue placeholder="Chọn loại sản phẩm..." />
                                         </SelectTrigger>
                                         <SelectContent>
@@ -359,7 +359,7 @@ const ProductInfoCard = ({
                                                     disabled={!hasModifyInfoPermission || mode === 'view'}
                                                 >
                                                     <FormControl>
-                                                        <SelectTrigger className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2">
+                                                        <SelectTrigger className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2 font-semibold">
                                                             <SelectValue placeholder="Danh mục..." />
                                                         </SelectTrigger>
                                                     </FormControl>
@@ -390,7 +390,7 @@ const ProductInfoCard = ({
                                                     disabled={!hasModifyInfoPermission || mode === 'view'}
                                                 >
                                                     <FormControl>
-                                                        <SelectTrigger className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2">
+                                                        <SelectTrigger className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2 font-semibold">
                                                             <SelectValue placeholder="Danh mục..." />
                                                         </SelectTrigger>
                                                     </FormControl>
@@ -434,7 +434,7 @@ const ProductInfoCard = ({
                                                         <Input
                                                             disabled={!hasModifyInfoPermission || mode === 'view'}
                                                             placeholder={`${feature.label}...`}
-                                                            className="caret-card-foreground text-card-foreground h-12 rounded border-2"
+                                                            className="caret-card-foreground text-card-foreground h-12 rounded border-2 font-semibold"
                                                             type={feature.type}
                                                             {...field}
                                                         />
@@ -459,7 +459,7 @@ const ProductInfoCard = ({
                                                                         !hasModifyInfoPermission || mode === 'view'
                                                                     }
                                                                     placeholder="Màu sắc phụ..."
-                                                                    className="caret-card-foreground text-card-foreground h-12 rounded border-2"
+                                                                    className="caret-card-foreground text-card-foreground h-12 rounded border-2 font-semibold"
                                                                     type="color"
                                                                     {...field}
                                                                 />

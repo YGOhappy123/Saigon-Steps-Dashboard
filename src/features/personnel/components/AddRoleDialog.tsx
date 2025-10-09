@@ -98,7 +98,7 @@ const AddRoleDialog = ({ permissions, addNewRoleMutation }: AddRoleDialogProps) 
                                         <FormLabel className="text-card-foreground">Loại vai trò</FormLabel>
                                         <Select onValueChange={() => {}} defaultValue={field.value?.toString()}>
                                             <FormControl>
-                                                <SelectTrigger className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2">
+                                                <SelectTrigger className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2 font-semibold">
                                                     <SelectValue placeholder="Chọn loại vai trò..." />
                                                 </SelectTrigger>
                                             </FormControl>

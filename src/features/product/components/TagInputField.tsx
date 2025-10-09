@@ -67,7 +67,7 @@ export default function TagInputField({
                 <div className="flex items-center gap-2">
                     <Input
                         placeholder={placeholder}
-                        className="caret-card-foreground text-card-foreground h-12 rounded border-2"
+                        className="caret-card-foreground text-card-foreground h-12 rounded border-2 font-semibold"
                         value={input}
                         onChange={e => setInput(e.target.value)}
                         onKeyDown={e => e.key === 'Enter' && (e.preventDefault(), handleAdd())}

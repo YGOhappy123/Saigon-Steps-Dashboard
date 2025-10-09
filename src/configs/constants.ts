@@ -37,6 +37,18 @@ export const COUPON_TYPE_MAP: { [key in CouponType]: string } = {
 
 export const COUPON_TYPE_OPTIONS = Object.entries(COUPON_TYPE_MAP).map(([value, label]) => ({ value, label }))
 
+export const INVENTORY_DAMAGE_REASON_MAP: { [key in InventoryDamageReason]: string } = {
+    LOST: 'Bị thất lạc',
+    BROKEN: 'Hư hỏng tại cửa hàng',
+    DEFECTIVE: 'Lỗi từ nhà sản xuất',
+    OTHER: 'Nguyên nhân khác'
+}
+
+export const INVENTORY_DAMAGE_REASON_OPTIONS = Object.entries(INVENTORY_DAMAGE_REASON_MAP).map(([value, label]) => ({
+    value,
+    label
+}))
+
 export const ORDER_STATUS_MAP: { [key in OrderStatus]: string } = {
     PENDING: 'Chờ xử lý',
     ACCEPTED: 'Đã xác nhận',

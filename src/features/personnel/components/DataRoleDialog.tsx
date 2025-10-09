@@ -127,7 +127,7 @@ const DataRoleDialog = ({
                                                 disabled
                                             >
                                                 <FormControl>
-                                                    <SelectTrigger className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2">
+                                                    <SelectTrigger className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2 font-semibold">
                                                         <SelectValue placeholder="Chọn loại vai trò..." />
                                                     </SelectTrigger>
                                                 </FormControl>

@@ -17,6 +17,10 @@ export const SORT_MAPPING = {
     '+promotionId': { promotionId: 'asc' },
     '-couponId': { couponId: 'desc' },
     '+couponId': { couponId: 'asc' },
+    '-importId': { importId: 'desc' },
+    '+importId': { importId: 'asc' },
+    '-reportId': { reportId: 'desc' },
+    '+reportId': { reportId: 'asc' },
 
     '-createdAt': { createdAt: 'desc' },
     '+createdAt': { createdAt: 'asc' },
@@ -27,7 +31,9 @@ export const SORT_MAPPING = {
     '-discountRate': { discountRate: 'desc' },
     '+discountRate': { discountRate: 'asc' },
     '-cost': { totalCost: 'desc' },
-    '+cost': { totalCost: 'asc' }
+    '+cost': { totalCost: 'asc' },
+    '-expectedCost': { totalExpectedCost: 'desc' },
+    '+expectedCost': { totalExpectedCost: 'asc' }
 }
 
 export const getMappedSort = (sort: string) => {

@@ -127,7 +127,7 @@ const AddProductFormFirstStep = ({ defaultValues, brands, categories, onNext }: 
                                 <FormControl>
                                     <Input
                                         placeholder="Tên sản phẩm..."
-                                        className="caret-card-foreground text-card-foreground h-12 rounded border-2"
+                                        className="caret-card-foreground text-card-foreground h-12 rounded border-2 font-semibold"
                                         {...field}
                                     />
                                 </FormControl>
@@ -142,7 +142,7 @@ const AddProductFormFirstStep = ({ defaultValues, brands, categories, onNext }: 
                             disabled
                             name="slug"
                             placeholder="Chuỗi slug..."
-                            className="caret-card-foreground text-card-foreground h-12 rounded border-2"
+                            className="caret-card-foreground text-card-foreground h-12 rounded border-2 font-semibold"
                             value={getProductSlug(form.watch('name'))}
                         />
                     </div>
@@ -159,7 +159,7 @@ const AddProductFormFirstStep = ({ defaultValues, brands, categories, onNext }: 
                                         value={field.value.toString()}
                                     >
                                         <FormControl>
-                                            <SelectTrigger className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2">
+                                            <SelectTrigger className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2 font-semibold">
                                                 <SelectValue placeholder="Thương hiệu..." />
                                             </SelectTrigger>
                                         </FormControl>
@@ -181,7 +181,7 @@ const AddProductFormFirstStep = ({ defaultValues, brands, categories, onNext }: 
                                 onValueChange={value => form.setValue('type', value as 'accessory' | 'shoe')}
                                 defaultValue="shoe"
                             >
-                                <SelectTrigger className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2">
+                                <SelectTrigger className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2 font-semibold">
                                     <SelectValue placeholder="Chọn loại sản phẩm..." />
                                 </SelectTrigger>
                                 <SelectContent>
@@ -202,7 +202,7 @@ const AddProductFormFirstStep = ({ defaultValues, brands, categories, onNext }: 
                                     <Input
                                         type="number"
                                         placeholder="Đơn giá..."
-                                        className="caret-card-foreground text-card-foreground h-12 rounded border-2"
+                                        className="caret-card-foreground text-card-foreground h-12 rounded border-2 font-semibold"
                                         {...field}
                                     />
                                 </FormControl>
@@ -242,7 +242,7 @@ const AddProductFormFirstStep = ({ defaultValues, brands, categories, onNext }: 
                                             value={field.value.toString()}
                                         >
                                             <FormControl>
-                                                <SelectTrigger className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2">
+                                                <SelectTrigger className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2 font-semibold">
                                                     <SelectValue placeholder="Danh mục..." />
                                                 </SelectTrigger>
                                             </FormControl>
@@ -269,7 +269,7 @@ const AddProductFormFirstStep = ({ defaultValues, brands, categories, onNext }: 
                                         <FormLabel className="text-card-foreground">Giới tính</FormLabel>
                                         <Select onValueChange={field.onChange} value={field.value}>
                                             <FormControl>
-                                                <SelectTrigger className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2">
+                                                <SelectTrigger className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2 font-semibold">
                                                     <SelectValue placeholder="Danh mục..." />
                                                 </SelectTrigger>
                                             </FormControl>
@@ -310,7 +310,7 @@ const AddProductFormFirstStep = ({ defaultValues, brands, categories, onNext }: 
                                             <FormControl>
                                                 <Input
                                                     placeholder={`${feature.label}...`}
-                                                    className="caret-card-foreground text-card-foreground h-12 rounded border-2"
+                                                    className="caret-card-foreground text-card-foreground h-12 rounded border-2 font-semibold"
                                                     type={feature.type}
                                                     {...field}
                                                 />
@@ -332,7 +332,7 @@ const AddProductFormFirstStep = ({ defaultValues, brands, categories, onNext }: 
                                                     <>
                                                         <Input
                                                             placeholder="Màu sắc phụ..."
-                                                            className="caret-card-foreground text-card-foreground h-12 rounded border-2"
+                                                            className="caret-card-foreground text-card-foreground h-12 rounded border-2 font-semibold"
                                                             type="color"
                                                             {...field}
                                                         />

@@ -4,12 +4,12 @@ import ErrorPage from '@/pages/ErrorPage'
 import AuthProtector from '@/components/container/AuthProtector'
 import PermissionProtector from '@/components/container/PermissionProtector'
 import permissions from '@/configs/permissions'
-import ImportManagementPage from '@/features/productImport/pages/ImportManagementPage'
-import AddImportPage from '@/features/productImport/pages/AddImportPage'
+import DamageManagementPage from '@/features/damageReport/pages/DamageManagementPage'
+import AddDamagePage from '@/features/damageReport/pages/AddDamagePage'
 
-const ProductImportRoutes = [
+const DamageReportRoutes = [
     {
-        path: '/product-imports',
+        path: '/damage-reports',
         element: (
             <Suspense>
                 <AuthProtector children={<DashboardLayout />} redirect="/auth" />
@@ -21,17 +21,19 @@ const ProductImportRoutes = [
                 path: '',
                 element: (
                     <PermissionProtector
-                        children={<ImportManagementPage />}
-                        permission={permissions.accessImportDashboardPage}
+                        children={<DamageManagementPage />}
+                        permission={permissions.accessDamageReportDashboardPage}
                     />
                 )
             },
             {
                 path: 'add',
-                element: <PermissionProtector children={<AddImportPage />} permission={permissions.addNewImport} />
+                element: (
+                    <PermissionProtector children={<AddDamagePage />} permission={permissions.addNewDamageReport} />
+                )
             }
         ]
     }
 ]
 
-export default ProductImportRoutes
+export default DamageReportRoutes

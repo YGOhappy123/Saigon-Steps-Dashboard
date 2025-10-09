@@ -152,7 +152,7 @@ const DataCouponDialog = ({ coupon, open, setOpen }: DataCouponDialogProps) => {
                                             <FormLabel className="text-card-foreground">Loại phiếu giảm giá</FormLabel>
                                             <Select onValueChange={field.onChange} value={field.value} disabled>
                                                 <FormControl>
-                                                    <SelectTrigger className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2">
+                                                    <SelectTrigger className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2 font-semibold">
                                                         <SelectValue placeholder="Danh mục..." />
                                                     </SelectTrigger>
                                                 </FormControl>
@@ -206,7 +206,7 @@ const DataCouponDialog = ({ coupon, open, setOpen }: DataCouponDialogProps) => {
                                                         <Button
                                                             disabled
                                                             variant="outline"
-                                                            className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2"
+                                                            className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2 font-semibold"
                                                         >
                                                             {field.value ? (
                                                                 format(field.value, 'dd LLL, y', { locale: vi })

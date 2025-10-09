@@ -17,17 +17,14 @@ export type ImportSortAndFilterParams = {
 }
 
 export type CreateImportDto = {
-    brandId: number
-    invoice: string
-    description: string
-    price: number
-    isAccessory: boolean
-    images: string[]
-    sizes?: string[]
-    features?: Partial<IShoeFeature>
+    invoiceNumber: string
+    importDate: string
+    items: {
+        productItemId: number
+        cost: number
+        quantity: number
+    }[]
 }
-
-export type UpdateImportInfoDto = Omit<CreateImportDto, 'isAccessory' | 'price' | 'sizes'>
 
 const importService = ({ enableFetching }: { enableFetching: boolean }) => {
     const queryClient = useQueryClient()
@@ -50,8 +47,8 @@ const importService = ({ enableFetching }: { enableFetching: boolean }) => {
     }: ImportSortAndFilterParams) => {
         const query: any = {}
         if (searchInvoice) query.invoiceNumber = searchInvoice.trim()
-        if (searchMinCost) query.minCost = Number(searchMinCost)
-        if (searchMaxCost) query.maxCost = Number(searchMaxCost)
+        if (searchMinCost) query.minTotalCost = Number(searchMinCost)
+        if (searchMaxCost) query.maxTotalCost = Number(searchMaxCost)
         if (searchRange) {
             if (searchRange[0]) query.startImportDate = dayjs(searchRange[0]).format('YYYY-MM-DD')
             if (searchRange[1]) query.endImportDate = dayjs(searchRange[1]).format('YYYY-MM-DD')
@@ -129,7 +126,7 @@ const importService = ({ enableFetching }: { enableFetching: boolean }) => {
         enabled: false
     })
 
-    const addNewImportMutation = useMutation({
+    const trackNewImportMutation = useMutation({
         mutationFn: (data: CreateImportDto) => axios.post<IResponseData<any>>('/reports/imports', data),
         onError: onError,
         onSuccess: res => {
@@ -154,7 +151,7 @@ const importService = ({ enableFetching }: { enableFetching: boolean }) => {
         onResetFilterSearch,
         buildQuery,
         getCsvImportsQuery,
-        addNewImportMutation
+        trackNewImportMutation
     }
 }
 

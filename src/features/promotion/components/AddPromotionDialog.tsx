@@ -143,6 +143,7 @@ const AddPromotionDialog = ({ products, addNewPromotionMutation }: AddPromotionD
                                     )}
                                 />
                             </div>
+
                             <FormField
                                 control={form.control}
                                 name="description"
@@ -161,6 +162,7 @@ const AddPromotionDialog = ({ products, addNewPromotionMutation }: AddPromotionD
                                     </FormItem>
                                 )}
                             />
+
                             <div className="grid grid-cols-2 items-start gap-4">
                                 <FormField
                                     control={form.control}
@@ -173,7 +175,7 @@ const AddPromotionDialog = ({ products, addNewPromotionMutation }: AddPromotionD
                                                     <FormControl>
                                                         <Button
                                                             variant="outline"
-                                                            className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2"
+                                                            className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2 font-semibold"
                                                         >
                                                             {field.value ? (
                                                                 format(field.value, 'dd LLL, y', { locale: vi })
@@ -214,7 +216,7 @@ const AddPromotionDialog = ({ products, addNewPromotionMutation }: AddPromotionD
                                                     <FormControl>
                                                         <Button
                                                             variant="outline"
-                                                            className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2"
+                                                            className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2 font-semibold"
                                                         >
                                                             {field.value ? (
                                                                 format(field.value, 'dd LLL, y', { locale: vi })
@@ -245,6 +247,7 @@ const AddPromotionDialog = ({ products, addNewPromotionMutation }: AddPromotionD
                                     )}
                                 />
                             </div>
+
                             <FormField
                                 control={form.control}
                                 name="products"

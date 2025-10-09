@@ -8,9 +8,9 @@ import productService, { CreateProductDto } from '@/features/product/services/pr
 import AddProductFormFirstStep, { FirstStepData } from '@/features/product/components/AddProductFormFirstStep'
 import AddProductFormSecondStep, { SecondStepData } from '@/features/product/components/AddProductFormSecondStep'
 import AddProductFormFinalStep from '@/features/product/components/AddProductFormFinalStep'
+import MultistepsFormSteps from '@/components/common/MultistepsFormSteps'
 import useAxiosIns from '@/hooks/useAxiosIns'
 import fileService from '@/services/fileService'
-import AddProductSteps from '@/features/product/components/AddProductSteps'
 
 export type AddProductData = FirstStepData & SecondStepData
 
@@ -107,7 +107,7 @@ const AddProductPage = () => {
                 </div>
             </div>
             <div className="flex flex-col items-center gap-6">
-                <AddProductSteps formSteps={formSteps} currentStep={step} />
+                <MultistepsFormSteps formSteps={formSteps} currentStep={step} />
 
                 <Card className="w-full max-w-4xl">
                     <CardHeader className="text-center">

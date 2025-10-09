@@ -151,7 +151,7 @@ const AddCouponDialog = ({ addNewCouponMutation }: AddCouponDialogProps) => {
                                             <FormLabel className="text-card-foreground">Loại phiếu giảm giá</FormLabel>
                                             <Select onValueChange={field.onChange} value={field.value}>
                                                 <FormControl>
-                                                    <SelectTrigger className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2">
+                                                    <SelectTrigger className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2 font-semibold">
                                                         <SelectValue placeholder="Danh mục..." />
                                                     </SelectTrigger>
                                                 </FormControl>
@@ -203,7 +203,7 @@ const AddCouponDialog = ({ addNewCouponMutation }: AddCouponDialogProps) => {
                                                     <FormControl>
                                                         <Button
                                                             variant="outline"
-                                                            className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2"
+                                                            className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2 font-semibold"
                                                         >
                                                             {field.value ? (
                                                                 format(field.value, 'dd LLL, y', { locale: vi })

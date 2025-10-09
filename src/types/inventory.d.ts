@@ -25,9 +25,8 @@ declare global {
         }[]
     }
 
-    interface InventoryDamageReport {
+    interface IInventoryDamageReport {
         reportId: number
-        reportDate: string
         totalExpectedCost: number
         reason: InventoryDamageReason
         note?: string

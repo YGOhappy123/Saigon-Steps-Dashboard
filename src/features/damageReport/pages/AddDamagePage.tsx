@@ -4,45 +4,50 @@ import { useQuery } from '@tanstack/react-query'
 import { RootState } from '@/store'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Avatar, AvatarImage } from '@/components/ui/avatar'
-import importService from '@/features/productImport/services/importService'
-import AddImportFormFirstStep, { FirstStepData } from '@/features/productImport/components/AddImportFormFirstStep'
-import AddImportFormSecondStep, { SecondStepData } from '@/features/productImport/components/AddImportFormSecondStep'
-import AddImportFormFinalStep from '@/features/productImport/components/AddImportFormFinalStep'
+import damageService, { CreateDamageDto } from '@/features/damageReport/services/damageService'
+import AddDamageFormFirstStep, { FirstStepData } from '@/features/damageReport/components/AddDamageFormFirstStep'
+import AddDamageFormSecondStep, { SecondStepData } from '@/features/damageReport/components/AddDamageFormSecondStep'
+import AddDamageFormFinalStep from '@/features/damageReport/components/AddDamageFormFinalStep'
 import MultistepsFormSteps from '@/components/common/MultistepsFormSteps'
 import useAxiosIns from '@/hooks/useAxiosIns'
-import dayjs from 'dayjs'
 
-export type AddImportData = FirstStepData & SecondStepData
+export type AddDamageData = FirstStepData & SecondStepData
 
 export const formSteps = [
     {
         title: 'Thông tin cơ bản',
-        description: 'Định nghĩa các thông tin cơ bản cho đơn nhập hàng.'
+        description: 'Định nghĩa các thông tin cơ bản cho báo cáo thiệt hại.'
     },
     {
         title: 'Thông tin sản phẩm',
-        description: 'Định nghĩa các thông tin sản phẩm cho đơn nhập hàng.'
+        description: 'Định nghĩa các thông tin sản phẩm cho báo cáo thiệt hại.'
     },
     {
         title: 'Kiểm tra',
-        description: 'Tổng hợp thông tin trước khi tiến hành tạo đơn nhập hàng.'
+        description: 'Tổng hợp thông tin trước khi tiến hành tạo báo cáo thiệt hại.'
     }
 ]
 
-const AddImportPage = () => {
+const AddDamagePage = () => {
     const user = useSelector((state: RootState) => state.auth.user)
     const axios = useAxiosIns()
     const [step, setStep] = useState(0)
     const [firstStepData, setFirstStepData] = useState<FirstStepData | null>(null)
     const [secondStepData, setSecondStepData] = useState<SecondStepData | null>(null)
-    const { trackNewImportMutation } = importService({ enableFetching: false })
+    const { reportNewDamageMutation } = damageService({ enableFetching: false })
 
-    const handleSubmit = async (values: AddImportData) => {
-        await trackNewImportMutation.mutateAsync({
+    const handleSubmit = async (values: AddDamageData) => {
+        const data: CreateDamageDto = {
             ...values,
-            importDate: dayjs(values.importDate).format('YYYY-MM-DD HH:mm:ss'),
-            items: values.items.map(ii => ({ productItemId: ii.productItemId, cost: ii.cost, quantity: ii.quantity }))
-        })
+            items: values.items.map(ii => ({
+                productItemId: ii.productItemId,
+                expectedCost: ii.expectedCost,
+                quantity: ii.quantity
+            }))
+        }
+        if (!data.note) delete data.note
+
+        await reportNewDamageMutation.mutateAsync(data)
 
         setFirstStepData(null)
         setSecondStepData(null)
@@ -63,7 +68,7 @@ const AddImportPage = () => {
                 <div>
                     <h2 className="text-2xl font-bold tracking-tight">Xin chào, {user!.name}!</h2>
                     <p className="text-muted-foreground">
-                        Đây là các bước cần thiết để tạo một đơn nhập hàng mới trên hệ thống Saigon Steps.
+                        Đây là các bước cần thiết để tạo một báo cáo thiệt hại mới trên hệ thống Saigon Steps.
                     </p>
                 </div>
                 <div className="flex items-center space-x-2">
@@ -77,12 +82,12 @@ const AddImportPage = () => {
 
                 <Card className="w-full max-w-4xl">
                     <CardHeader className="text-center">
-                        <CardTitle className="text-xl">Tạo đơn nhập hàng mới</CardTitle>
+                        <CardTitle className="text-xl">Tạo báo cáo thiệt hại mới</CardTitle>
                         <CardDescription>{formSteps[step].description}</CardDescription>
                     </CardHeader>
                     <CardContent>
                         {step === 0 && (
-                            <AddImportFormFirstStep
+                            <AddDamageFormFirstStep
                                 defaultValues={firstStepData}
                                 onNext={values => {
                                     setFirstStepData(values)
@@ -91,7 +96,7 @@ const AddImportPage = () => {
                             />
                         )}
                         {step === 1 && (
-                            <AddImportFormSecondStep
+                            <AddDamageFormSecondStep
                                 defaultValues={secondStepData}
                                 rootProducts={products}
                                 onNext={values => {
@@ -102,7 +107,7 @@ const AddImportPage = () => {
                             />
                         )}
                         {step === 2 && firstStepData != null && secondStepData != null && (
-                            <AddImportFormFinalStep
+                            <AddDamageFormFinalStep
                                 data={{ ...firstStepData, ...secondStepData }}
                                 rootProducts={products}
                                 onConfirm={async values => handleSubmit(values)}
@@ -117,4 +122,4 @@ const AddImportPage = () => {
     )
 }
 
-export default AddImportPage
+export default AddDamagePage
