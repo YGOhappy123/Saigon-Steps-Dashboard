@@ -38,17 +38,17 @@ const PromotionsTableToolbar = ({
     const exportCsvFile = () => {
         getCsvPromotionsQuery.refetch().then(res => {
             const csvPromotions = res.data?.data?.data ?? []
-            const formattedPromotions = csvPromotions.map((promotions: IPromotion) => ({
-                ['Mã khuyến mãi']: promotions.promotionId,
-                ['Tên khuyến mãi']: promotions.name,
-                ['Mô tả']: promotions.description,
-                ['Phần trăm giảm giá (%)']: promotions.discountRate,
-                ['Trạng thái']: promotions.isActive ? 'Chưa bị khóa' : 'Đã bị khóa',
-                ['Thời gian bắt đầu']: dayjs(promotions.startDate).format('DD/MM/YYYY'),
-                ['Thời gian kết thúc']: dayjs(promotions.endDate).format('DD/MM/YYYY'),
-                ['Người tạo']: (promotions.createdByStaff as IStaff | null)?.name ?? '(Không có)',
-                ['Thời gian tạo']: dayjs(promotions.createdAt).format('DD/MM/YYYY HH:mm:ss'),
-                ['Danh sách sản phẩm']: (promotions.products ?? [])
+            const formattedPromotions = csvPromotions.map((promotion: IPromotion) => ({
+                ['Mã khuyến mãi']: promotion.promotionId,
+                ['Tên khuyến mãi']: promotion.name,
+                ['Mô tả']: promotion.description,
+                ['Phần trăm giảm giá (%)']: promotion.discountRate,
+                ['Trạng thái']: promotion.isActive ? 'Chưa bị khóa' : 'Đã bị khóa',
+                ['Thời gian bắt đầu']: dayjs(promotion.startDate).format('DD/MM/YYYY'),
+                ['Thời gian kết thúc']: dayjs(promotion.endDate).format('DD/MM/YYYY'),
+                ['Người tạo']: (promotion.createdByStaff as IStaff | null)?.name ?? '(Không có)',
+                ['Thời gian tạo']: dayjs(promotion.createdAt).format('DD/MM/YYYY HH:mm:ss'),
+                ['Danh sách sản phẩm']: (promotion.products ?? [])
                     .map(product => (product as IRootProduct).name)
                     .join(', ')
             }))

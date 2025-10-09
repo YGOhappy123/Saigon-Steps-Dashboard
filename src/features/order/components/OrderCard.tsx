@@ -101,7 +101,7 @@ const OrderCard = ({ order, hasPermission, updateStatusMutation }: OrderCardProp
                                 </span>
                             </div>
                         </AccordionTrigger>
-                        <AccordionContent className="py-4">
+                        <AccordionContent className="p-4">
                             <OrderCardItemTable orderItems={order.orderItems} />
                         </AccordionContent>
                     </AccordionItem>

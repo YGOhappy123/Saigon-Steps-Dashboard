@@ -4,11 +4,11 @@ import ErrorPage from '@/pages/ErrorPage'
 import AuthProtector from '@/components/container/AuthProtector'
 import PermissionProtector from '@/components/container/PermissionProtector'
 import permissions from '@/configs/permissions'
-import OrderManagementPage from '@/features/order/pages/OrderManagementPage'
+import ImportManagementPage from '@/features/productImport/pages/ImportManagement'
 
-const OrderRoutes = [
+const ProductImportRoutes = [
     {
-        path: '/orders',
+        path: '/product-imports',
         element: (
             <Suspense>
                 <AuthProtector children={<DashboardLayout />} redirect="/auth" />
@@ -20,13 +20,17 @@ const OrderRoutes = [
                 path: '',
                 element: (
                     <PermissionProtector
-                        children={<OrderManagementPage />}
-                        permission={permissions.accessOrderDashboardPage}
+                        children={<ImportManagementPage />}
+                        permission={permissions.accessImportDashboardPage}
                     />
                 )
             }
+            // {
+            //     path: 'add',
+            //     element: <PermissionProtector children={<AddImportPage />} permission={permissions.addNewImport} />
+            // }
         ]
     }
 ]
 
-export default OrderRoutes
+export default ProductImportRoutes

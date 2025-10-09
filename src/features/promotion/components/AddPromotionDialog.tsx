@@ -30,10 +30,10 @@ const addPromotionFormSchema = z
         name: z.string().min(1, { message: 'Tên chương trình khuyến mãi không được để trống.' }),
         description: z.string().min(1, { message: 'Mô tả chương trình khuyến mãi không được để trống.' }),
         discountRate: z
-            .number('Giá trị giảm giá phải là số')
-            .int('Giá trị giảm giá phải là số nguyên')
-            .min(1, { message: 'Giá trị giảm giá phải lớn hơn hoặc bằng 1.' })
-            .max(100, { message: 'Giá trị giảm giá phải nhỏ hơn hoặc bằng 100.' }),
+            .number()
+            .int('Giá trị giảm phải là số nguyên')
+            .min(1, { message: 'Giá trị giảm phải lớn hơn hoặc bằng 1.' })
+            .max(100, { message: 'Giá trị giảm phải nhỏ hơn hoặc bằng 100.' }),
         startDate: z
             .date({ error: 'Ngày bắt đầu không được để trống.' })
             .refine(date => date >= dayjs().startOf('day').toDate(), {
@@ -172,7 +172,7 @@ const AddPromotionDialog = ({ products, addNewPromotionMutation }: AddPromotionD
                                                 <PopoverTrigger asChild>
                                                     <FormControl>
                                                         <Button
-                                                            variant={'outline'}
+                                                            variant="outline"
                                                             className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2"
                                                         >
                                                             {field.value ? (
@@ -213,7 +213,7 @@ const AddPromotionDialog = ({ products, addNewPromotionMutation }: AddPromotionD
                                                 <PopoverTrigger asChild>
                                                     <FormControl>
                                                         <Button
-                                                            variant={'outline'}
+                                                            variant="outline"
                                                             className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2"
                                                         >
                                                             {field.value ? (

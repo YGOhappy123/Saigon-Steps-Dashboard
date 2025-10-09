@@ -105,11 +105,11 @@ const DataBrandDialog = ({
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogContent className="min-w-2xl md:min-w-3xl">
                 <DialogHeader>
-                    <DialogTitle>{mode === 'view' ? 'Thông tin danh mục' : 'Cập nhật danh mục'}</DialogTitle>
+                    <DialogTitle>{mode === 'view' ? 'Thông tin thương hiệu' : 'Cập nhật thương hiệu'}</DialogTitle>
                     <DialogDescription>
                         {mode === 'view'
-                            ? 'Thông tin chi tiết về tên danh mục.'
-                            : 'Chỉnh sửa các thông tin của danh mục. Ấn "Xác nhận" sau khi hoàn tất.'}
+                            ? 'Thông tin chi tiết về tên và mô tả thương hiệu.'
+                            : 'Chỉnh sửa các thông tin của thương hiệu. Ấn "Xác nhận" sau khi hoàn tất.'}
                     </DialogDescription>
                 </DialogHeader>
                 <Separator />

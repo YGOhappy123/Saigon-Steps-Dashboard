@@ -112,7 +112,7 @@ export const sidebarGroups: SidebarGroupData[] = [
             {
                 title: 'Phiếu giảm giá',
                 icon: TicketCheck,
-                url: '/coupons',
+                url: '/promotions/coupons',
                 accessRequirement: permissions.accessCouponDashboardPage
             }
         ]

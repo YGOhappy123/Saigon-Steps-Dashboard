@@ -30,10 +30,10 @@ const dataPromotionFormSchema = z
         name: z.string().min(1, { message: 'Tên chương trình khuyến mãi không được để trống.' }),
         description: z.string().min(1, { message: 'Mô tả chương trình khuyến mãi không được để trống.' }),
         discountRate: z
-            .number('Giá trị giảm giá phải là số')
-            .int('Giá trị giảm giá phải là số nguyên')
-            .min(1, { message: 'Giá trị giảm giá phải lớn hơn hoặc bằng 1.' })
-            .max(100, { message: 'Giá trị giảm giá phải nhỏ hơn hoặc bằng 100.' }),
+            .number()
+            .int('Giá trị giảm phải là số nguyên')
+            .min(1, { message: 'Giá trị giảm phải lớn hơn hoặc bằng 1.' })
+            .max(100, { message: 'Giá trị giảm phải nhỏ hơn hoặc bằng 100.' }),
         startDate: z.date({ error: 'Ngày bắt đầu không được để trống.' }),
         endDate: z.date({ error: 'Ngày kết thúc không được để trống.' }),
         products: z.array(z.number()).min(1, { message: 'Vui lòng chọn ít nhất một sản phẩm.' })
@@ -117,7 +117,7 @@ const DataPromotionDialog = ({
                     </DialogTitle>
                     <DialogDescription>
                         {mode === 'view'
-                            ? 'Thông tin chi tiết về tên, loại và tất cả các quyền truy cập của chương trình khuyến mãi.'
+                            ? 'Thông tin chi tiết về tên, mô tả và các sản phẩm của chương trình khuyến mãi.'
                             : 'Chỉnh sửa các thông tin của chương trình khuyến mãi. Ấn "Xác nhận" sau khi hoàn tất.'}
                     </DialogDescription>
                 </DialogHeader>
@@ -201,7 +201,7 @@ const DataPromotionDialog = ({
                                                     <FormControl>
                                                         <Button
                                                             disabled
-                                                            variant={'outline'}
+                                                            variant="outline"
                                                             className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2"
                                                         >
                                                             {field.value ? (
@@ -243,7 +243,7 @@ const DataPromotionDialog = ({
                                                     <FormControl>
                                                         <Button
                                                             disabled={mode === 'view'}
-                                                            variant={'outline'}
+                                                            variant="outline"
                                                             className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2"
                                                         >
                                                             {field.value ? (

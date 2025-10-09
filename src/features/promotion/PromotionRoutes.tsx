@@ -3,9 +3,9 @@ import DashboardLayout from '@/layouts/DashboardLayout'
 import ErrorPage from '@/pages/ErrorPage'
 import AuthProtector from '@/components/container/AuthProtector'
 import PermissionProtector from '@/components/container/PermissionProtector'
-import PromotionManagementPage from '@/features/promotion/pages/PromotionManagementPage'
-// import CouponManagementPage from '@/pages/DashboardPromotion/CouponManagementPage'
+import CouponManagementPage from '@/features/promotion/pages/CouponManagementPage'
 import permissions from '@/configs/permissions'
+import PromotionManagementPage from '@/features/promotion/pages/PromotionManagementPage'
 
 const PromotionRoutes = [
     {
@@ -20,29 +20,18 @@ const PromotionRoutes = [
             {
                 path: '',
                 element: <PromotionManagementPage />
+            },
+            {
+                path: 'coupons',
+                element: (
+                    <PermissionProtector
+                        children={<CouponManagementPage />}
+                        permission={permissions.accessCouponDashboardPage}
+                    />
+                )
             }
         ]
     }
-    // {
-    //     path: '/coupons',
-    //     element: (
-    //         <Suspense>
-    //             <AuthProtector children={<DashboardLayout />} redirect="/auth" />
-    //         </Suspense>
-    //     ),
-    //     errorElement: <ErrorPage />,
-    //     children: [
-    //         {
-    //             path: '',
-    //             element: (
-    //                 <PermissionProtector
-    //                     children={<CouponManagementPage />}
-    //                     permission={permissions.accessCouponDashboardPage}
-    //                 />
-    //             )
-    //         }
-    //     ]
-    // }
 ]
 
 export default PromotionRoutes

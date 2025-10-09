@@ -39,13 +39,14 @@ const CategoryTableToolbar = ({
             const formattedCategories = csvCategories.map((category: IShoeCategory) => ({
                 ['Mã danh mục']: category.categoryId,
                 ['Tên danh mục']: category.name,
-                ['Người tạo']: (category.createdByStaff as IStaff | null)?.name
+                ['Người tạo']: (category.createdByStaff as IStaff | null)?.name,
+                ['Thời gian tạo']: dayjs(category.createdAt).format('DD/MM/YYYY HH:mm:ss')
             }))
 
             exportToCSV(
                 formattedCategories,
                 `SS_danh_sach_danh_muc ${dayjs(Date.now()).format('DD/MM/YYYY HH:mm:ss')}`,
-                [{ wch: 15 }, { wch: 30 }, { wch: 30 }]
+                [{ wch: 15 }, { wch: 30 }, { wch: 30 }, { wch: 30 }]
             )
         })
     }

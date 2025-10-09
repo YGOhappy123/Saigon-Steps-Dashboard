@@ -92,6 +92,7 @@ const ProductFilter = ({ setHavingFilters, onChange, onSearch, onReset, brands, 
         setSearchInStock(undefined)
         setSearchRange([])
         setSort('-productId')
+        setDate(undefined)
 
         setHavingFilters(false)
         onReset()

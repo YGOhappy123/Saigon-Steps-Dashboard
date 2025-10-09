@@ -15,6 +15,8 @@ export const SORT_MAPPING = {
     '+orderId': { orderId: 'asc' },
     '-promotionId': { promotionId: 'desc' },
     '+promotionId': { promotionId: 'asc' },
+    '-couponId': { couponId: 'desc' },
+    '+couponId': { couponId: 'asc' },
 
     '-createdAt': { createdAt: 'desc' },
     '+createdAt': { createdAt: 'asc' },

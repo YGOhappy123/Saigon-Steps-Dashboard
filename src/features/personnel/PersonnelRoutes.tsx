@@ -3,9 +3,9 @@ import DashboardLayout from '@/layouts/DashboardLayout'
 import ErrorPage from '@/pages/ErrorPage'
 import AuthProtector from '@/components/container/AuthProtector'
 import PermissionProtector from '@/components/container/PermissionProtector'
+import permissions from '@/configs/permissions'
 import RoleManagementPage from '@/features/personnel/pages/RoleManagementPage'
 import StaffManagementPage from '@/features/personnel/pages/StaffManagementPage'
-import permissions from '@/configs/permissions'
 
 const PersonnelRoutes = [
     {

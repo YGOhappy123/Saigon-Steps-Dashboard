@@ -30,6 +30,13 @@ export const SHOE_GENDER_MAP: { [key in ShoeGender]: string } = {
 
 export const SHOE_GENDER_OPTIONS = Object.entries(SHOE_GENDER_MAP).map(([value, label]) => ({ value, label }))
 
+export const COUPON_TYPE_MAP: { [key in CouponType]: string } = {
+    PERCENTAGE: 'Giảm theo phần trăm',
+    FIXED: 'Giảm theo số tiền cố định'
+}
+
+export const COUPON_TYPE_OPTIONS = Object.entries(COUPON_TYPE_MAP).map(([value, label]) => ({ value, label }))
+
 export const ORDER_STATUS_MAP: { [key in OrderStatus]: string } = {
     PENDING: 'Chờ xử lý',
     ACCEPTED: 'Đã xác nhận',
