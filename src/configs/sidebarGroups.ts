@@ -144,11 +144,6 @@ export const sidebarGroups: SidebarGroupData[] = [
                 accessRequirement: permissions.accessImportDashboardPage
             },
             {
-                title: 'Hàng tồn kho',
-                icon: ScanBarcode,
-                url: '/inventories'
-            },
-            {
                 title: 'Báo cáo thiệt hại',
                 icon: ClipboardType,
                 url: '/damage-reports',

@@ -53,11 +53,16 @@ export default function TagInputField({
                 {value.map(tag => (
                     <div
                         key={tag}
-                        className={`flex items-center gap-2 rounded-full px-4 py-1 select-none ${tagBackgroundColor}`}
+                        className={twMerge(
+                            `flex items-center gap-2 rounded-full px-4 py-1 select-none ${tagBackgroundColor}`
+                        )}
                     >
-                        <span className={`font-semibold ${tagTextColor}`}>{tag}</span>
+                        <span className={twMerge(`font-semibold ${tagTextColor}`)}>{tag}</span>
                         {editable && (
-                            <CircleX className={`cursor-pointer ${tagTextColor}`} onClick={() => handleRemove(tag)} />
+                            <CircleX
+                                className={twMerge(`cursor-pointer ${tagTextColor}`)}
+                                onClick={() => handleRemove(tag)}
+                            />
                         )}
                     </div>
                 ))}
