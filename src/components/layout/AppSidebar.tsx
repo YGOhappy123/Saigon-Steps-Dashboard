@@ -20,7 +20,7 @@ import {
 } from '@/components/ui/sidebar'
 import { sidebarGroups, SidebarGroupData } from '@/configs/sidebarGroups'
 import { RootState } from '@/store'
-import SidebarUserButton from '@/components/common/SidebarUserButton'
+import SidebarUserButton from '@/components/layout/SidebarUserButton'
 import AppLogo from '@/components/common/AppLogo'
 import verifyPermission from '@/utils/verifyPermission'
 

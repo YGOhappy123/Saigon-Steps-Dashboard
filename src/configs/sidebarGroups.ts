@@ -11,7 +11,6 @@ import {
     LucideIcon,
     MessageCircleMore,
     Package,
-    ScanBarcode,
     ShieldUser,
     ShoppingCart,
     TicketCheck,
@@ -43,7 +42,6 @@ export const sidebarGroups: SidebarGroupData[] = [
             {
                 title: 'Thông tin cá nhân',
                 icon: UserIcon,
-
                 url: '/profile'
             },
             {

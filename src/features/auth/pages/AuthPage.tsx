@@ -8,7 +8,7 @@ import { RootState } from '@/store'
 import useTitle from '@/hooks/useTitle'
 import toastConfig from '@/configs/toast'
 import SignInForm from '@/features/auth/components/SignInForm'
-import AuthCarousel from '@/components/common/AuthCarousel'
+import AuthCarousel from '@/features/auth/components/AuthCarousel'
 
 export type FormType = 'login' | 'register' | 'forgot' | 'reset'
 

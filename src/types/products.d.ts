@@ -36,6 +36,7 @@ declare global {
         productItemId: number
         size: string
         stock: number
+        availableStock?: number
     }
 
     interface IShoeFeature {

@@ -1,10 +1,8 @@
 import { ColumnDef } from '@tanstack/react-table'
-import { BadgeDollarSign } from 'lucide-react'
 import { DataTable } from '@/components/ui/data-table'
 import { Badge } from '@/components/ui/badge'
-import formatCurrency from '@/utils/formatCurrency'
-import dayjs from '@/libs/dayjs'
 import { ORDER_STATUS_MAP } from '@/configs/constants'
+import dayjs from '@/libs/dayjs'
 
 type OrderCardUpdateLogTableProps = {
     statusUpdateLogs: IOrder['statusUpdateLogs']

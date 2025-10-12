@@ -1,6 +1,7 @@
 import { ColumnDef } from '@tanstack/react-table'
-import { ScanBarcode } from 'lucide-react'
+import { CircleQuestionMark, ScanBarcode } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { DataTable } from '@/components/ui/data-table'
 import { Badge } from '@/components/ui/badge'
 import { sections } from '@/features/product/components/TableOfContents'
@@ -32,6 +33,33 @@ const ProductVariantsCard = ({ product, hasModifyItemPermission, onUpdateSuccess
                 <div className="flex justify-center">
                     <Badge variant="secondary" className="bg-blue-500 text-white dark:bg-blue-600">
                         <ScanBarcode /> {row.original.stock?.toString().padStart(2, '0')}
+                    </Badge>
+                </div>
+            )
+        },
+        {
+            accessorKey: 'availableStock',
+            header: () => (
+                <div className="flex items-center justify-center gap-2">
+                    Số lượng có thể đặt
+                    <Tooltip>
+                        <TooltipTrigger className="text-primary cursor-pointer">
+                            <CircleQuestionMark size="20" />
+                        </TooltipTrigger>
+                        <TooltipContent className="max-w-[250px]">
+                            <p className="text-center">
+                                Một số sản phẩm có thể đã được đặt trong các đơn hàng đang chờ xử lý. Vì thế số lượng có
+                                thể đặt sẽ tạm thời loại trừ các sản phẩm này để tránh tình trạng khách hàng đặt quá số
+                                lượng tồn kho.
+                            </p>
+                        </TooltipContent>
+                    </Tooltip>
+                </div>
+            ),
+            cell: ({ row }) => (
+                <div className="flex justify-center">
+                    <Badge>
+                        <ScanBarcode /> {row.original.availableStock?.toString().padStart(2, '0')}
                     </Badge>
                 </div>
             )

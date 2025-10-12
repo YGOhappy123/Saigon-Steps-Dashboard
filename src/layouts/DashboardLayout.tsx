@@ -3,7 +3,7 @@ import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
 import { useIsMobile } from '@/hooks/useMobile'
 import AppSidebar from '@/components/layout/AppSidebar'
 import MobileSidebar from '@/components/layout/MobileSidebar'
-import PageBreadcrumb from '@/components/common/PageBreadcrumb'
+import PageBreadcrumb from '@/components/layout/PageBreadcrumb'
 
 const DashboardLayout = () => {
     const isMobile = useIsMobile()

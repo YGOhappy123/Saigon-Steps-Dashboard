@@ -7,7 +7,6 @@ import { Separator } from '@/components/ui/separator'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { StatisticCriteria, statisticTypes } from '@/features/statistic/pages/RevenueStatisticPage'
-import { BADGE_COLORS } from '@/configs/constants'
 import formatCurrency from '@/utils/formatCurrency'
 import striptags from 'striptags'
 

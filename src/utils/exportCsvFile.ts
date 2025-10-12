@@ -1,5 +1,5 @@
-import FileSaver from 'file-saver'
 import { utils, write } from 'xlsx'
+import FileSaver from 'file-saver'
 
 export const exportToCSV = (csvData: any, fileName: string, columnsWidth?: any) => {
     const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8'

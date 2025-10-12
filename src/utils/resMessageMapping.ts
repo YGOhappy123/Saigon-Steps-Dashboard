@@ -4,7 +4,7 @@ const ERROR_MESSAGES = {
     USERNAME_EXISTED: 'Tên đăng nhập đã tồn tại.',
     INCORRECT_PASSWORD: 'Mật khẩu không chính xác.',
     INCORRECT_USERNAME_OR_PASSWORD: 'Tên đăng nhập hoặc mật khẩu không chính xác.',
-    GOOGLE_AUTH_FAILED: 'Xác thực Google thất bại.',
+    GOOGLE_AUTH_FAILED: 'Xác thực bằng tài khoản Google thất bại.',
     NO_CREDENTIALS: 'Không có thông tin xác thực.',
     NO_PERMISSION: 'Bạn không có quyền thực hiện hành động này.',
 
@@ -31,19 +31,19 @@ const ERROR_MESSAGES = {
 
     // Categories related
     CATEGORY_NOT_FOUND: 'Không tìm thấy danh mục.',
-    CATEGORY_EXISTED: 'Tên danh mục đã tồn tại.',
-    CATEGORY_BEING_USED: 'Danh mục đang được sử dụng.',
+    CATEGORY_EXISTED: 'Tên danh mục đã được sử dụng.',
+    CATEGORY_BEING_USED: 'Danh mục đang được sử dụng, tạm thời không thể xóa.',
 
     // Brands related
     BRAND_NOT_FOUND: 'Không tìm thấy thương hiệu.',
-    BRAND_EXISTED: 'Tên thương hiệu đã tồn tại.',
-    BRAND_BEING_USED: 'Thương hiệu đang được sử dụng.',
+    BRAND_EXISTED: 'Tên thương hiệu đã được sử dụng.',
+    BRAND_BEING_USED: 'Thương hiệu đang được sử dụng, tạm thời không thể xóa.',
 
     // Products related
     PRODUCT_NOT_FOUND: 'Không tìm thấy sản phẩm.',
-    PRODUCT_EXISTED: 'Tên sản phẩm hoặc chuỗi slug đã tồn tại.',
+    PRODUCT_EXISTED: 'Tên sản phẩm hoặc chuỗi slug đã được sử dụng.',
     PRODUCT_ITEM_NOT_FOUND: 'Không tìm thấy chi tiết sản phẩm.',
-    PRODUCT_BEING_USED: 'Sản phẩm đang được sử dụng.',
+    PRODUCT_BEING_USED: 'Sản phẩm đang được sử dụng, tạm thời không thể xóa.',
 
     // Orders and carts related
     QUANTITY_EXCEED_CURRENT_STOCK: 'Số lượng vượt quá tồn kho hiện tại.',
@@ -51,14 +51,13 @@ const ERROR_MESSAGES = {
     CART_NOT_FOUND: 'Không tìm thấy giỏ hàng.',
     CART_ITEM_NOT_FOUND: 'Không tìm thấy sản phẩm trong giỏ hàng.',
     ORDER_NOT_FOUND: 'Không tìm thấy đơn hàng.',
-    INVALID_STATUS_SELECTED: 'Trạng thái không hợp lệ.',
+    INVALID_STATUS_SELECTED: 'Không thể chuyển đổi sang trạng thái này.',
 
     // Promotions and coupons related
     PROMOTION_NOT_FOUND: 'Không tìm thấy chương trình khuyến mãi.',
-    PROMOTION_EXISTED: 'Tên chương trình khuyến mãi đã tồn tại.',
-    COUPON_EXISTED: 'Tên phiếu giảm giá đã tồn tại.',
+    PROMOTION_EXISTED: 'Tên chương trình khuyến mãi đã được sử dụng.',
+    COUPON_EXISTED: 'Mã code của phiếu giảm giá đã được sử dụng.',
     COUPON_NOT_FOUND: 'Không tìm thấy phiếu giảm giá.',
-    COUPON_BEING_USED: 'Phiếu giảm giá đang được sử dụng.',
     COUPON_NO_LONGER_AVAILABLE: 'Phiếu giảm giá không còn hiệu lực.',
     COUPON_REACH_MAX_USAGE: 'Phiếu giảm giá đã đạt giới hạn sử dụng.',
     YOU_HAVE_USED_COUPON: 'Bạn đã sử dụng phiếu giảm giá này rồi.'
@@ -70,9 +69,8 @@ const SUCCESS_MESSAGES = {
     SIGN_UP_SUCCESSFULLY: 'Đăng ký thành công.',
     REFRESH_TOKEN_SUCCESSFULLY: 'Làm mới token thành công.',
     DEACTIVATE_ACCOUNT_SUCCESSFULLY: 'Hủy kích hoạt tài khoản thành công.',
-    REACTIVATE_ACCOUNT_SUCCESSFULLY: 'Kích hoạt tài khoản thành công.',
     RESET_PASSWORD_EMAIL_SENT: 'Email đặt lại mật khẩu đã được gửi.',
-    GOOGLE_AUTH_SUCCESSFULLY: 'Xác thực Google thành công.',
+    GOOGLE_AUTH_SUCCESSFULLY: 'Xác thực bằng tài khoản Google thành công.',
     RESET_PASSWORD_SUCCESSFULLY: 'Đặt lại mật khẩu thành công.',
     VERIFY_PERMISSION_SUCCESSFULLY: 'Xác thực quyền thành công.',
 

@@ -105,7 +105,7 @@ const AddProductFormFinalStep = ({
                                 </div>
                                 <div className="text-justify">
                                     <span className="text-card-foreground font-medium">3.2. Giới tính: </span>
-                                    {SHOE_GENDER_MAP[data.features.gender as keyof typeof SHOE_GENDER_MAP]}
+                                    {SHOE_GENDER_MAP[data.features.gender]}
                                 </div>
                                 {[
                                     { name: 'upperMaterial', label: 'Chất liệu thân' },

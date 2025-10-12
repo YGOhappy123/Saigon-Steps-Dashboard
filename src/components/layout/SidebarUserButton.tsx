@@ -14,6 +14,7 @@ import {
 import { RootState } from '@/store'
 import { useTheme } from '@/hooks/useTheme'
 import { signOut } from '@/slices/authSlice'
+import { getNameInitials } from '@/utils/getNameInitials'
 
 const SidebarUserButton = () => {
     const { isMobile, setOpenMobile } = useSidebar()
@@ -80,19 +81,13 @@ type UserInfoProps = {
 const UserInfo = ({ user }: UserInfoProps) => {
     if (user == null) return null
 
-    // Use the first letters of the last 2 words in name
-    // Eg: "Nguyễn Văn A" => "VA"
-    const nameInitials = user.name
-        .split(' ')
-        .slice(0, 2)
-        .map(str => str[0])
-        .join('')
-
     return (
         <div className="flex items-center gap-2 overflow-hidden">
             <Avatar className="size-8 rounded-lg">
                 <AvatarImage src={user.avatar} alt={user.name} />
-                <AvatarFallback className="bg-primary text-primary-foreground uppercase">{nameInitials}</AvatarFallback>
+                <AvatarFallback className="bg-primary text-primary-foreground uppercase">
+                    {getNameInitials(user.name)}
+                </AvatarFallback>
             </Avatar>
             <div className="flex min-w-0 flex-1 flex-col leading-tight group-data-[state=collapsed]:hidden">
                 <span className="truncate text-sm font-semibold">{user.name}</span>

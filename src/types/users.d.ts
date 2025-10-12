@@ -5,6 +5,7 @@ declare global {
         createdAt: string
         email?: string
         avatar?: string
+
         isActive?: boolean
     }
 
@@ -14,11 +15,11 @@ declare global {
         createdAt: string
         email?: string
         avatar?: string
-        isActive?: boolean
         roleId: number
-        permissions: string[]
         createdBy?: number
 
+        isActive?: boolean
+        permissions?: string[]
         role: Partial<IStaffRole> | string
         createdByStaff?: Partial<IStaff> | string
     }
@@ -27,6 +28,7 @@ declare global {
         roleId: number
         name: string
         isImmutable: boolean
+
         permissions?: (string | number | IPermission)[]
     }
 

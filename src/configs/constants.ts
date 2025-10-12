@@ -20,8 +20,6 @@ export const INTRODUCTION_VIDEO_URL = 'https://youtube.com'
 
 export const AUTH_CAROUSEL_IMAGES = ['https://i.pinimg.com/originals/18/e9/a9/18e9a95be92d5f3d01dd8d2b78744cf3.gif']
 
-export const BADGE_COLORS = ['#9b5de5', '#f15bb5', '#f18701', '#00bbf9', '#00f5d4']
-
 export const SHOE_GENDER_MAP: { [key in ShoeGender]: string } = {
     MALE: 'Nam',
     FEMALE: 'Nữ',
