@@ -2,7 +2,7 @@ import { ReactNode, useEffect, useState } from 'react'
 import { Navigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
-import { useQuery } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 import { RootState } from '@/store'
 import permissions from '@/configs/permissions'
 import useAxiosIns from '@/hooks/useAxiosIns'
@@ -19,27 +19,27 @@ const PermissionProtector = ({ redirect = '/', permission, children }: Permissio
     const user = useSelector((state: RootState) => state.auth.user)
     const [shouldRedirect, setShouldRedirect] = useState(false)
 
-    const verifyPermissionQuery = useQuery({
-        queryKey: ['auth-permission', user?.staffId, permission],
-        queryFn: () => axios.get<IResponseData<any>>(`/roles/verify-permission?permission=${permission}`),
-        enabled: true,
-        select: (res) => res.data
-    })
-
-    useEffect(() => {
-        if (verifyPermissionQuery.isError) {
+    const verifyPermissionMutation = useMutation({
+        mutationFn: () => axios.post<IResponseData<any>>('/roles/verify-permission', { permission }),
+        onError: () => {
             toast('Tài khoản của bạn không có quyền truy cập trang.', toastConfig('info'))
             setShouldRedirect(true)
         }
-    }, [verifyPermissionQuery.isError])
+    })
 
-    if (verifyPermissionQuery.isPending) {
+    useEffect(() => {
+        if (user?.staffId) {
+            verifyPermissionMutation.mutate()
+        }
+    }, [user?.staffId, permission])
+
+    if (verifyPermissionMutation.isPending) {
         return (
-            <div className="flex flex-col justify-center items-center h-full gap-2">
+            <div className="flex h-full flex-col items-center justify-center gap-2">
                 <div role="status">
                     <svg
                         aria-hidden="true"
-                        className="inline w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-primary"
+                        className="fill-primary inline h-12 w-12 animate-spin text-gray-200 dark:text-gray-600"
                         viewBox="0 0 100 101"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
@@ -54,7 +54,7 @@ const PermissionProtector = ({ redirect = '/', permission, children }: Permissio
                         />
                     </svg>
                 </div>
-                <p className="font-semibold mt-2">Đang kiểm tra quyền truy cập</p>
+                <p className="mt-2 font-semibold">Đang kiểm tra quyền truy cập</p>
                 <p className="font-semibold">Xin vui lòng chờ đợi trong giây lát...</p>
             </div>
         )
