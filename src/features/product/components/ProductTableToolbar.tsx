@@ -49,7 +49,7 @@ const ProductTableToolbar = ({
                 ['Thương hiệu']: (product.brand as IProductBrand)?.name,
                 ['Danh mục']: (product.shoeFeature?.category as IShoeCategory)?.name || 'Phụ kiện',
                 ['Giá gốc (VNĐ)']: formatCurrency(product.price),
-                ['Người tạo']: (product.createdByStaff as IStaff | null)?.name ?? '(Không có)',
+                ['Người tạo']: product.createdByStaff?.name ?? '(Không có)',
                 ['Thời gian tạo']: dayjs(product.createdAt).format('DD/MM/YYYY HH:mm:ss'),
                 ['Số lượng tồn kho']:
                     (product.productItems ?? [])

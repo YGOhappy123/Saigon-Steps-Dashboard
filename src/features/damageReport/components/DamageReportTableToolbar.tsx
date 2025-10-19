@@ -42,7 +42,7 @@ const DamageReportTableToolbar = ({
                 ['Phân loại thiệt hại']: INVENTORY_DAMAGE_REASON_MAP[damageReport.reason],
                 ['Tổng thiệt hại ước tính (VNĐ)']: formatCurrency(damageReport.totalExpectedCost),
                 ['Ghi chú']: damageReport.note || '(Không có)',
-                ['Người tạo báo cáo']: (damageReport.reportedByStaff as IStaff | null)?.name,
+                ['Người tạo báo cáo']: damageReport.reportedByStaff?.name,
                 ['Thời gian tạo báo cáo']: dayjs(damageReport.reportedAt).format('DD/MM/YYYY HH:mm:ss')
             }))
 

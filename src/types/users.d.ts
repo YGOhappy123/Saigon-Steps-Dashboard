@@ -20,8 +20,8 @@ declare global {
 
         isActive?: boolean
         permissions?: string[]
-        role: Partial<IStaffRole> | string
-        createdByStaff?: Partial<IStaff> | string
+        role: Partial<IStaffRole>
+        createdByStaff?: Partial<IStaff>
     }
 
     interface IStaffRole {

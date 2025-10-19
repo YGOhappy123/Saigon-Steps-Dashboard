@@ -1,7 +1,10 @@
 import * as React from 'react'
 import { cn } from '@/libs/shadcn-ui'
+import { useAudioContext } from '@/components/container/AudioProvider'
 
 function Input({ className, type, ...props }: React.ComponentProps<'input'>) {
+    const { playRandomKeyStrokeSound } = useAudioContext()
+
     return (
         <input
             type={type}
@@ -14,6 +17,7 @@ function Input({ className, type, ...props }: React.ComponentProps<'input'>) {
                 'text-primary caret-primary',
                 className
             )}
+            onKeyDown={() => playRandomKeyStrokeSound()}
             {...props}
         />
     )

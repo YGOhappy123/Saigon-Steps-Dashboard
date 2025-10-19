@@ -4,6 +4,7 @@ import { SidebarTrigger } from '@/components/ui/sidebar'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { getNameInitials } from '@/utils/getNameInitials'
 import ThemeToggler from '@/components/common/ThemeToggler'
+import AudioToggler from '@/components/common/AudioToggler'
 
 const MobileSidebar = () => {
     const user = useSelector((state: RootState) => state.auth.user)
@@ -14,6 +15,7 @@ const MobileSidebar = () => {
             <div className="-ml-2 flex items-center">
                 <SidebarTrigger />
                 <ThemeToggler />
+                <AudioToggler />
             </div>
 
             <div className="flex h-10 items-center gap-2 overflow-hidden">

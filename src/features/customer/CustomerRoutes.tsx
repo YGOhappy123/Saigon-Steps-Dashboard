@@ -5,6 +5,7 @@ import AuthProtector from '@/components/container/AuthProtector'
 import PermissionProtector from '@/components/container/PermissionProtector'
 import permissions from '@/configs/permissions'
 import CustomerListPage from '@/features/customer/pages/CustomerListPage'
+import CustomerChatPage from '@/features/customer/pages/CustomerChatPage'
 
 const CustomerRoutes = [
     {
@@ -22,6 +23,15 @@ const CustomerRoutes = [
                     <PermissionProtector
                         children={<CustomerListPage />}
                         permission={permissions.accessCustomerDashboardPage}
+                    />
+                )
+            },
+            {
+                path: 'chat',
+                element: (
+                    <PermissionProtector
+                        children={<CustomerChatPage />}
+                        permission={permissions.accessAdvisoryDashboardPage}
                     />
                 )
             }

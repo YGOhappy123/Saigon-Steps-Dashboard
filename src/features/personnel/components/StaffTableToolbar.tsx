@@ -42,8 +42,8 @@ const StaffTableToolbar = ({
                 ['Mã nhân viên']: staff.staffId,
                 ['Họ và tên']: staff.name,
                 ['Email']: staff.email ?? '(Chưa cập nhật)',
-                ['Vai trò']: (staff.role as IStaffRole).name,
-                ['Người tạo']: (staff.createdByStaff as IStaff | null)?.name ?? '(Không có)',
+                ['Vai trò']: staff.role.name,
+                ['Người tạo']: staff.createdByStaff?.name ?? '(Không có)',
                 ['Thời gian tạo']: dayjs(staff.createdAt).format('DD/MM/YYYY HH:mm:ss'),
                 ['Trạng thái']: staff.isActive ? 'Đang hoạt động' : 'Đã bị khóa'
             }))

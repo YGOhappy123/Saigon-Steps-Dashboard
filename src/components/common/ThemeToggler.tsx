@@ -1,9 +1,9 @@
-import { Button } from '@/components/ui/button'
-import { useTheme } from '@/hooks/useTheme'
 import { Moon, Sun } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { useThemeContext } from '@/components/container/ThemeProvider'
 
 const ThemeToggler = () => {
-    const { theme, toggleTheme } = useTheme()
+    const { theme, toggleTheme } = useThemeContext()
 
     return (
         <Button variant="ghost" size="icon" onClick={toggleTheme}>

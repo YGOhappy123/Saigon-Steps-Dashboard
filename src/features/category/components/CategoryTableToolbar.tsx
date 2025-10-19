@@ -39,7 +39,7 @@ const CategoryTableToolbar = ({
             const formattedCategories = csvCategories.map((category: IShoeCategory) => ({
                 ['Mã danh mục']: category.categoryId,
                 ['Tên danh mục']: category.name,
-                ['Người tạo']: (category.createdByStaff as IStaff | null)?.name,
+                ['Người tạo']: category.createdByStaff?.name,
                 ['Thời gian tạo']: dayjs(category.createdAt).format('DD/MM/YYYY HH:mm:ss')
             }))
 

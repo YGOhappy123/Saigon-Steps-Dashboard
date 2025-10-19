@@ -224,6 +224,12 @@ input:-webkit-autofill:active {
     font-family: 'Oswald', sans-serif;
 }
 
-.bg-muted {
-    background-color: hsl(240 3.7% 15.9%);
+/* Hide Scrollbar But Keep Functionality */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }

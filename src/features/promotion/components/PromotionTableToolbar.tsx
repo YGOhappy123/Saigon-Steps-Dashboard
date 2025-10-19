@@ -46,7 +46,7 @@ const PromotionsTableToolbar = ({
                 ['Trạng thái']: promotion.isActive ? 'Chưa bị khóa' : 'Đã bị khóa',
                 ['Thời gian bắt đầu']: dayjs(promotion.startDate).format('DD/MM/YYYY'),
                 ['Thời gian kết thúc']: dayjs(promotion.endDate).format('DD/MM/YYYY'),
-                ['Người tạo']: (promotion.createdByStaff as IStaff | null)?.name ?? '(Không có)',
+                ['Người tạo']: promotion.createdByStaff?.name ?? '(Không có)',
                 ['Thời gian tạo']: dayjs(promotion.createdAt).format('DD/MM/YYYY HH:mm:ss'),
                 ['Danh sách sản phẩm']: (promotion.products ?? [])
                     .map(product => (product as IRootProduct).name)

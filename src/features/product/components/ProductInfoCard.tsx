@@ -16,10 +16,21 @@ import RichTextEditor from '@/components/common/RichTextEditor'
 import ProductImageUploader from '@/features/product/components/ProductImageUploader'
 import TagInputField from '@/features/product/components/TagInputField'
 import fileService from '@/services/fileService'
+import striptags from 'striptags'
 
 const baseInfoFormSchema = z.object({
-    name: z.string().min(1, { message: 'Tên sản phẩm không được để trống.' }),
-    description: z.string().min(1, { message: 'Mô tả sản phẩm không được để trống.' }),
+    name: z
+        .string()
+        .min(1, { message: 'Tên sản phẩm không được để trống.' })
+        .refine(val => getProductSlug(val).length > 0, {
+            message: 'Tên sản phẩm không hợp lệ vì làm chuỗi slug bị trống.'
+        }),
+    description: z
+        .string()
+        .min(1, { message: 'Mô tả sản phẩm không được để trống.' })
+        .refine(val => striptags(val).length > 0, {
+            message: 'Mô tả sản phẩm không được để trống.'
+        }),
     brandId: z.number().min(1, { message: 'Vui lòng chọn thương hiệu.' }),
     images: z.array(z.string()).min(1, { message: 'Vui lòng chọn ít nhất một ảnh sản phẩm.' })
 })

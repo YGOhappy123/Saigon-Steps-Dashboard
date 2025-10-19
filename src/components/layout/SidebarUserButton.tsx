@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { ChevronsUpDown, LogOutIcon, Moon, Sun, UserIcon } from 'lucide-react'
+import { ChevronsUpDown, LogOutIcon, Moon, Sun, UserIcon, Volume2, VolumeOff } from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { SidebarMenuButton, useSidebar } from '@/components/ui/sidebar'
 import {
@@ -12,13 +12,15 @@ import {
     DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 import { RootState } from '@/store'
-import { useTheme } from '@/hooks/useTheme'
 import { signOut } from '@/slices/authSlice'
 import { getNameInitials } from '@/utils/getNameInitials'
+import { useAudioContext } from '@/components/container/AudioProvider'
+import { useThemeContext } from '@/components/container/ThemeProvider'
 
 const SidebarUserButton = () => {
     const { isMobile, setOpenMobile } = useSidebar()
-    const { theme, toggleTheme } = useTheme()
+    const { enableAudio, toggleEnableAudio } = useAudioContext()
+    const { theme, toggleTheme } = useThemeContext()
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const user = useSelector((state: RootState) => state.auth.user)
@@ -62,6 +64,17 @@ const SidebarUserButton = () => {
                     ) : (
                         <>
                             <Moon className="mr-1" /> Chuyển sang dark mode
+                        </>
+                    )}
+                </DropdownMenuItem>
+                <DropdownMenuItem className="cursor-pointer" onClick={toggleEnableAudio}>
+                    {enableAudio === 'off' ? (
+                        <>
+                            <Volume2 className="mr-1" /> Bật âm thanh
+                        </>
+                    ) : (
+                        <>
+                            <VolumeOff className="mr-1" /> Tắt âm thanh
                         </>
                     )}
                 </DropdownMenuItem>

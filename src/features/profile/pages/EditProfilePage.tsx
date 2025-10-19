@@ -6,7 +6,7 @@ import permissions from '@/configs/permissions'
 import EditProfileForm from '@/features/profile/components/EditProfileForm'
 
 const EditProfilePage = () => {
-    const user = useSelector((state: RootState) => state.auth.user) as IStaff
+    const user = useSelector((state: RootState) => state.auth.user)!
     const hasModifyPermission =
         verifyPermission(user, permissions.modifyPersonalInformation) ||
         verifyPermission(user, permissions.updateStaffInformation)

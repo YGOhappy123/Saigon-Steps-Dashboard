@@ -7,7 +7,7 @@ declare global {
         trackedAt: string
         trackedBy: number
 
-        trackedByStaff?: Partial<IStaff> | string
+        trackedByStaff?: Partial<IStaff>
         importItems: {
             productItemId: number
             cost: number
@@ -33,7 +33,7 @@ declare global {
         reportedAt: string
         reportedBy: number
 
-        reportedByStaff?: Partial<IStaff> | string
+        reportedByStaff?: Partial<IStaff>
         reportItems: {
             productItemId: number
             expectedCost: number

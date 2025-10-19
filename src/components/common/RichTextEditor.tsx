@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useEditor, EditorContent } from '@tiptap/react'
 import { twMerge } from 'tailwind-merge'
+import { useAudioContext } from '@/components/container/AudioProvider'
 import StarterKit from '@tiptap/starter-kit'
 import TextAlign from '@tiptap/extension-text-align'
 import RichTextMenubar from '@/components/common/RichTextMenubar'
@@ -20,6 +21,8 @@ const RichTextEditor = ({
     containerClassName,
     editorClassName
 }: RichTextEditorProps) => {
+    const { playRandomKeyStrokeSound } = useAudioContext()
+
     const editor = useEditor({
         extensions: [
             StarterKit.configure({
@@ -73,6 +76,7 @@ const RichTextEditor = ({
                     disabled ? 'pointer-events-none cursor-not-allowed opacity-50' : '',
                     editorClassName
                 )}
+                onKeyDown={() => playRandomKeyStrokeSound()}
             />
         </div>
     )

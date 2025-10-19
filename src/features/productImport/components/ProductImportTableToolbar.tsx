@@ -41,7 +41,7 @@ const ProductImportTableToolbar = ({
                 ['Mã hóa đơn']: productImport.invoiceNumber,
                 ['Tổng tiền (VNĐ)']: formatCurrency(productImport.totalCost),
                 ['Ngày nhập hàng']: dayjs(productImport.importDate).format('DD/MM/YYYY HH:mm:ss'),
-                ['Người ghi nhận']: (productImport.trackedByStaff as IStaff | null)?.name,
+                ['Người ghi nhận']: productImport.trackedByStaff?.name,
                 ['Thời gian ghi nhận']: dayjs(productImport.trackedAt).format('DD/MM/YYYY HH:mm:ss')
             }))
 

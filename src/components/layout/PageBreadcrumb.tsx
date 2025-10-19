@@ -12,6 +12,7 @@ import { Separator } from '@/components/ui/separator'
 import { SidebarTrigger } from '@/components/ui/sidebar'
 import { sidebarGroups } from '@/configs/sidebarGroups'
 import { useIsMobile } from '@/hooks/useMobile'
+import AudioToggler from '@/components/common/AudioToggler'
 import ThemeToggler from '@/components/common/ThemeToggler'
 import useTitle from '@/hooks/useTitle'
 
@@ -75,7 +76,12 @@ const PageBreadcrumb = () => {
                 </Breadcrumb>
             </div>
 
-            {!isMobile && <ThemeToggler />}
+            {!isMobile && (
+                <div className="flex items-center">
+                    <AudioToggler />
+                    <ThemeToggler />
+                </div>
+            )}
         </div>
     )
 }

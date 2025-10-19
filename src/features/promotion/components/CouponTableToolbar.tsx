@@ -53,7 +53,7 @@ const CouponsTableToolbar = ({
                 ['Thời gian kết thúc']: coupon.expiredAt
                     ? dayjs(coupon.expiredAt).format('DD/MM/YYYY')
                     : '(Không giới hạn)',
-                ['Người tạo']: (coupon.createdByStaff as IStaff | null)?.name ?? '(Không có)',
+                ['Người tạo']: coupon.createdByStaff?.name ?? '(Không có)',
                 ['Thời gian tạo']: dayjs(coupon.createdAt).format('DD/MM/YYYY HH:mm:ss')
             }))
 

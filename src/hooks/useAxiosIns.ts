@@ -3,7 +3,7 @@ import axios from 'axios'
 import cookies from '@/libs/cookies'
 import useRefreshTokenFn from '@/hooks/useRefreshTokenFn'
 
-const axiosIns = axios.create({
+export const axiosIns = axios.create({
     baseURL: import.meta.env.VITE_SERVER_URL,
     headers: {
         'Content-Type': 'application/json',

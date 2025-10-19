@@ -14,7 +14,12 @@ import TagInputField from '@/features/product/components/TagInputField'
 
 const baseInfoFormSchema = z
     .object({
-        name: z.string().min(1, { message: 'Tên sản phẩm không được để trống.' }),
+        name: z
+            .string()
+            .min(1, { message: 'Tên sản phẩm không được để trống.' })
+            .refine(val => getProductSlug(val).length > 0, {
+                message: 'Tên sản phẩm không hợp lệ vì làm chuỗi slug bị trống.'
+            }),
         description: z
             .string()
             .min(1, { message: 'Mô tả sản phẩm không được để trống.' })

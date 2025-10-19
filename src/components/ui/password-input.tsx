@@ -3,6 +3,7 @@ import { EyeIcon, EyeOffIcon } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/libs/shadcn-ui'
+import { useAudioContext } from '@/components/container/AudioProvider'
 
 interface PasswordInputProps extends React.ComponentProps<'input'> {
     iconClassname?: string
@@ -10,6 +11,7 @@ interface PasswordInputProps extends React.ComponentProps<'input'> {
 
 const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputProps>(
     ({ className, iconClassname, ...props }, ref) => {
+        const { playRandomKeyStrokeSound } = useAudioContext()
         const [showPassword, setShowPassword] = React.useState(false)
         const disabled = props.value === '' || props.value === undefined || props.disabled
 
@@ -19,6 +21,7 @@ const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputProps>(
                     type={showPassword ? 'text' : 'password'}
                     className={cn('hide-password-toggle pr-10', className)}
                     ref={ref}
+                    onKeyDown={() => playRandomKeyStrokeSound()}
                     {...props}
                 />
                 <Button

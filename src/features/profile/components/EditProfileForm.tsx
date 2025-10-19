@@ -27,7 +27,7 @@ type EditProfileFormProps = {
 }
 
 const EditProfileForm = ({ hasModifyPermission }: EditProfileFormProps) => {
-    const user = useSelector((state: RootState) => state.auth.user) as IStaff
+    const user = useSelector((state: RootState) => state.auth.user)!
 
     const [avatar, setAvatar] = useState(user?.avatar)
     const { uploadBase64Mutation } = fileService()
@@ -130,15 +130,15 @@ const EditProfileForm = ({ hasModifyPermission }: EditProfileFormProps) => {
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel className="text-card-foreground">Vai trò</FormLabel>
-                                    <Select onValueChange={value => {}} value={field.value?.toString() ?? ''} disabled>
+                                    <Select onValueChange={() => {}} value={field.value?.toString() ?? ''} disabled>
                                         <FormControl>
                                             <SelectTrigger className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2 font-semibold">
                                                 <SelectValue placeholder="Vai trò..." />
                                             </SelectTrigger>
                                         </FormControl>
                                         <SelectContent>
-                                            {[user.role as IStaffRole].map(role => (
-                                                <SelectItem key={role.roleId} value={role.roleId.toString()} disabled>
+                                            {[user.role].map(role => (
+                                                <SelectItem key={role.roleId} value={role.roleId!.toString()} disabled>
                                                     {role.name}
                                                 </SelectItem>
                                             ))}

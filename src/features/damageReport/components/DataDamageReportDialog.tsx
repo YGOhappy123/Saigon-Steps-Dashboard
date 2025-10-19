@@ -143,14 +143,14 @@ const DataDamageReportDialog = ({ damageReport, open, setOpen }: DataDamageRepor
                                 <div className="flex items-start gap-2">
                                     <div className="border-primary flex w-[70px] items-center justify-center overflow-hidden rounded-full border-3 p-1">
                                         <img
-                                            src={(damageReport?.reportedByStaff as IStaff)?.avatar as string}
+                                            src={damageReport?.reportedByStaff?.avatar as string}
                                             alt="product image"
                                             className="aspect-square h-full w-full rounded-full object-cover"
                                         />
                                     </div>
                                     <div className="flex flex-1 flex-col">
                                         <p className="text-base font-medium break-words whitespace-normal">
-                                            {(damageReport?.reportedByStaff as IStaff)?.name}
+                                            {damageReport?.reportedByStaff?.name}
                                         </p>
                                         <p className="text-muted-foreground break-words whitespace-normal">
                                             <span className="font-medium">Mã nhân viên: </span>
@@ -158,7 +158,7 @@ const DataDamageReportDialog = ({ damageReport, open, setOpen }: DataDamageRepor
                                         </p>
                                         <p className="text-muted-foreground break-words whitespace-normal">
                                             <span className="font-medium">Email: </span>
-                                            {(damageReport?.reportedByStaff as IStaff)?.email}
+                                            {damageReport?.reportedByStaff?.email}
                                         </p>
                                     </div>
                                 </div>

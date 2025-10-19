@@ -62,8 +62,8 @@ const OrderGrid = ({
                         <RadixAvatar className="w-[30%] xl:w-[20%]">
                             <RadixAvatarImage src="/images/happy-emoji.png" alt="empty cart"></RadixAvatarImage>
                         </RadixAvatar>
-                        <p className="mt-2 font-semibold">Không có đơn hàng</p>
-                        <p className="font-semibold">
+                        <p className="mt-2 text-center font-semibold">Không có đơn hàng</p>
+                        <p className="text-center font-semibold">
                             Hệ thống Saigon Steps không tìm thấy đơn hàng nào theo các tiêu chí bạn đã chọn!
                         </p>
                     </div>

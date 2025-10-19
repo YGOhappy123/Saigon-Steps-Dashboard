@@ -63,7 +63,7 @@ const NoButtonImageUploader = ({
                 </label>
 
                 {hasPermission && (
-                    <div className="pointer-events-none absolute top-0 left-0 hidden h-full w-full flex-col items-center justify-center bg-black/30 text-white group-hover:flex">
+                    <div className="pointer-events-none absolute inset-0 hidden flex-col items-center justify-center bg-black/30 text-white group-hover:flex">
                         <Upload />
                         <span>Tải ảnh lên</span>
                     </div>

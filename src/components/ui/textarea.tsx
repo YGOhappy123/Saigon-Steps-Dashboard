@@ -1,7 +1,10 @@
 import * as React from 'react'
 import { cn } from '@/libs/shadcn-ui'
+import { useAudioContext } from '@/components/container/AudioProvider'
 
 function Textarea({ className, ...props }: React.ComponentProps<'textarea'>) {
+    const { playRandomKeyStrokeSound } = useAudioContext()
+
     return (
         <textarea
             data-slot="textarea"
@@ -11,6 +14,7 @@ function Textarea({ className, ...props }: React.ComponentProps<'textarea'>) {
                 'text-primary caret-primary',
                 className
             )}
+            onKeyDown={() => playRandomKeyStrokeSound()}
             {...props}
         />
     )

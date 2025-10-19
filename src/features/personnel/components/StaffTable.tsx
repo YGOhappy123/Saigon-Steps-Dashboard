@@ -115,7 +115,7 @@ const StaffTable = ({
         {
             accessorKey: 'role',
             header: () => <div>Vai trò</div>,
-            cell: ({ row }) => <div>{(row.original.role as IStaffRole).name}</div>
+            cell: ({ row }) => <div>{row.original.role.name}</div>
         },
         {
             accessorKey: 'isActive',

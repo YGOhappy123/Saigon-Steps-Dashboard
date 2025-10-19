@@ -43,7 +43,6 @@ const AuthPage = () => {
                             autoplayDuration={2000}
                         />
                     </div>
-
                     <div className="h-[620px] w-[500px]">
                         <SignInForm />
                     </div>

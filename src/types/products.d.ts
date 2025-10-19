@@ -11,9 +11,9 @@ declare global {
         createdBy: number
 
         discountRate?: number
-        brand?: Partial<IProductBrand> | string
+        brand?: Partial<IProductBrand>
         images?: Partial<IProductImage>[] | string[]
-        createdByStaff?: Partial<IStaff> | string
+        createdByStaff?: Partial<IStaff>
         productItems?: Partial<IProductItem>[]
         promotions?: Partial<IPromotion>[]
         shoeFeature?: Partial<IShoeFeature>
@@ -61,7 +61,7 @@ declare global {
         occasionTags?: string[]
         designTags?: string[]
 
-        category?: Partial<IShoeCategory> | string
+        category?: Partial<IShoeCategory>
     }
 
     interface IShoeCategory {
@@ -70,7 +70,7 @@ declare global {
         createdAt: string
         createdBy: string
 
-        createdByStaff?: Partial<IStaff> | string
+        createdByStaff?: Partial<IStaff>
     }
 
     interface IPromotion {
@@ -84,7 +84,7 @@ declare global {
         createdAt: string
         createdBy: number
 
-        createdByStaff?: Partial<IStaff> | string
+        createdByStaff?: Partial<IStaff>
         products?: Partial<IRootProduct>[] | number[]
     }
 
@@ -99,7 +99,7 @@ declare global {
         createdAt: string
         createdBy: number
 
-        createdByStaff?: Partial<IStaff> | string
+        createdByStaff?: Partial<IStaff>
     }
 
     type ShoeGender = 'MALE' | 'FEMALE' | 'UNISEX'

@@ -140,14 +140,14 @@ const DataProductImportDialog = ({ productImport, open, setOpen }: DataProductIm
                                 <div className="flex items-start gap-2">
                                     <div className="border-primary flex w-[70px] items-center justify-center overflow-hidden rounded-full border-3 p-1">
                                         <img
-                                            src={(productImport?.trackedByStaff as IStaff)?.avatar as string}
+                                            src={productImport?.trackedByStaff?.avatar as string}
                                             alt="product image"
                                             className="aspect-square h-full w-full rounded-full object-cover"
                                         />
                                     </div>
                                     <div className="flex flex-1 flex-col">
                                         <p className="text-base font-medium break-words whitespace-normal">
-                                            {(productImport?.trackedByStaff as IStaff)?.name}
+                                            {productImport?.trackedByStaff?.name}
                                         </p>
                                         <p className="text-muted-foreground break-words whitespace-normal">
                                             <span className="font-medium">Mã nhân viên: </span>
@@ -155,7 +155,7 @@ const DataProductImportDialog = ({ productImport, open, setOpen }: DataProductIm
                                         </p>
                                         <p className="text-muted-foreground break-words whitespace-normal">
                                             <span className="font-medium">Email: </span>
-                                            {(productImport?.trackedByStaff as IStaff)?.email}
+                                            {productImport?.trackedByStaff?.email}
                                         </p>
                                     </div>
                                 </div>
