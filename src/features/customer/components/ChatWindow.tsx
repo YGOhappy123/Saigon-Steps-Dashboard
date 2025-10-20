@@ -76,7 +76,7 @@ const ChatWindow = ({ selectedConversationId, setSelectedConversationId, hasChat
         return () => {
             socket?.off('message:new', handleNewMessage)
         }
-    }, [socket])
+    }, [socket, selectedConversationId])
 
     if (!selectedConversationId) {
         return (
@@ -124,7 +124,7 @@ const ChatWindow = ({ selectedConversationId, setSelectedConversationId, hasChat
     }
 
     return (
-        <Card className="flex h-full flex-1 flex-col gap-0 py-0">
+        <Card className="flex h-full flex-1 flex-col gap-0 overflow-hidden py-0">
             {conversation != null && (
                 <>
                     <div className="flex items-center justify-between border-b p-4 lg:p-6">
@@ -151,7 +151,7 @@ const ChatWindow = ({ selectedConversationId, setSelectedConversationId, hasChat
                     </CardContent>
 
                     {hasChatPermission && (
-                        <div className="border-t p-4 lg:p-6">
+                        <div className="border-t">
                             <SendMessageForm
                                 conversationId={conversation.conversationId}
                                 onOptimisticDisplay={message => {

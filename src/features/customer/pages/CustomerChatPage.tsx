@@ -38,6 +38,15 @@ const CustomerChatPageInner = () => {
             socket?.emit('joinConversations', ids)
         }
 
+        return () => {
+            if (conversations.length > 0) {
+                const ids = conversations.map(c => c.conversationId)
+                socket?.emit('leaveConversations', ids)
+            }
+        }
+    }, [socket, conversations])
+
+    useEffect(() => {
         const handleNewConversation = (newConversation: IConversation) => {
             setConversations(prev => [newConversation, ...prev])
         }
@@ -67,13 +76,8 @@ const CustomerChatPageInner = () => {
         return () => {
             socket?.off('conversation:new', handleNewConversation)
             socket?.off('message:new', handleNewMessage)
-
-            if (conversations.length > 0) {
-                const ids = conversations.map(c => c.conversationId)
-                socket?.emit('leaveConversations', ids)
-            }
         }
-    }, [socket, conversations])
+    }, [socket])
 
     return (
         <div

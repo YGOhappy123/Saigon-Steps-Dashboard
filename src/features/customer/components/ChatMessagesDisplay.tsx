@@ -1,6 +1,7 @@
 import { useMemo, RefObject } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { Avatar, AvatarImage } from '@/components/ui/avatar'
+import ChatImageContentDisplay from '@/features/customer/components/ChatImageContentDisplay'
 import dayjs from '@/libs/dayjs'
 
 type ChatMessagesDisplayProps = {
@@ -86,13 +87,7 @@ const MessageGroup = ({ group, customer }: MessageGroupProps) => {
                                     : 'bg-primary text-primary-foreground ml-auto items-end rounded-tr-none'
                             )}
                         >
-                            {message.imageContent && (
-                                <img
-                                    src={message.imageContent}
-                                    alt="Message content"
-                                    className="max-h-[300px] max-w-[300px] rounded-lg object-contain"
-                                />
-                            )}
+                            {message.imageContent && <ChatImageContentDisplay src={message.imageContent} />}
                             {message.textContent && <p>{message.textContent}</p>}
                             <span
                                 className={twMerge(
