@@ -210,8 +210,9 @@ const OrderCard = ({ order, hasPermission, updateStatusMutation }: OrderCardProp
 
                 {hasPermission && (
                     <div className="grid grid-cols-1 gap-4 p-4 xl:grid-cols-2">
-                        {buttons.map(btn => (
+                        {buttons.map((btn, index) => (
                             <ConfirmationDialog
+                                key={index}
                                 title="Bạn có chắc muốn cập nhật trạng thái này?"
                                 description="Không thể hoàn tác hành động này."
                                 onConfirm={() => handleProcessOrder(btn.status)}

@@ -15,7 +15,7 @@ import ChatImageUploader from '@/features/customer/components/ChatImageUploader'
 import useAxiosIns from '@/hooks/useAxiosIns'
 import fileService from '@/services/fileService'
 
-const sendMessageFormSchema = z
+const chatMessageFormSchema = z
     .object({
         textContent: z.string().max(1000, 'Nội dung tin nhắn không được vượt quá 1000 ký tự.').optional(),
         imageContent: z.string().optional()
@@ -24,14 +24,15 @@ const sendMessageFormSchema = z
         message: 'Vui lòng nhập nội dung tin nhắn hoặc chọn ảnh để gửi.'
     })
 
-type SendMessageFormProps = {
+type chatMessageFormProps = {
     conversationId: number
+    customerId: number
     onOptimisticDisplay: (message: IChatMessage) => void
 }
 
-const SendMessageForm = ({ conversationId, onOptimisticDisplay }: SendMessageFormProps) => {
-    const form = useForm<z.infer<typeof sendMessageFormSchema>>({
-        resolver: zodResolver(sendMessageFormSchema),
+const chatMessageForm = ({ conversationId, customerId, onOptimisticDisplay }: chatMessageFormProps) => {
+    const form = useForm<z.infer<typeof chatMessageFormSchema>>({
+        resolver: zodResolver(chatMessageFormSchema),
         defaultValues: {
             textContent: '',
             imageContent: ''
@@ -43,17 +44,12 @@ const SendMessageForm = ({ conversationId, onOptimisticDisplay }: SendMessageFor
     const axios = useAxiosIns()
     const user = useSelector((state: RootState) => state.auth.user)!
     const sendMessageMutation = useMutation({
-        mutationFn: ({
-            conversationId,
-            data
-        }: {
-            conversationId: number
-            data: Partial<IChatMessage> & { tempId: number }
-        }) => axios.post<IResponseData<any>>(`/chats/${conversationId}`, data),
+        mutationFn: ({ customerId, data }: { customerId: number; data: Partial<IChatMessage> & { tempId: number } }) =>
+            axios.post<IResponseData<any>>(`/chats/${customerId}`, data),
         onError: onError
     })
 
-    const onSubmit = async (values: z.infer<typeof sendMessageFormSchema>) => {
+    const onSubmit = async (values: z.infer<typeof chatMessageFormSchema>) => {
         // Show temp message immediately
         const tempId = new Date().getTime()
         const tempMessage: IChatMessage = {
@@ -82,7 +78,7 @@ const SendMessageForm = ({ conversationId, onOptimisticDisplay }: SendMessageFor
         }
 
         await sendMessageMutation.mutateAsync({
-            conversationId: conversationId,
+            customerId: customerId,
             data: data
         })
     }
@@ -179,4 +175,4 @@ const SendMessageForm = ({ conversationId, onOptimisticDisplay }: SendMessageFor
     )
 }
 
-export default SendMessageForm
+export default chatMessageForm

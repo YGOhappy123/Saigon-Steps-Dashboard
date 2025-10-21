@@ -2,7 +2,13 @@ import { UseMutationResult, UseQueryResult } from '@tanstack/react-query'
 import { ColumnDef } from '@tanstack/react-table'
 import { DataTable } from '@/components/ui/data-table'
 import { CircleCheck, CircleX, MoreHorizontal } from 'lucide-react'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu'
 import { CustomerSortAndFilterParams } from '@/features/customer/services/customerService'
 import { Button } from '@/components/ui/button'
 import CustomerTableToolbar from '@/features/customer/components/CustomerTableToolbar'
@@ -20,7 +26,9 @@ type CustomerTableProps = {
     buildQuery: (params: CustomerSortAndFilterParams) => void
     onFilterSearch: () => void
     onResetFilterSearch: () => void
+    hasSendMessagePermission: boolean
     hasDeactivateCustomerPermission: boolean
+    onSendMessage: (value: ICustomer) => void
     getCsvCustomersQuery: UseQueryResult<any, any>
     deactivateCustomerMutation: UseMutationResult<any, any, number, any>
 }
@@ -48,7 +56,9 @@ const CustomerTable = ({
     buildQuery,
     onFilterSearch,
     onResetFilterSearch,
+    hasSendMessagePermission,
     hasDeactivateCustomerPermission,
+    onSendMessage,
     getCsvCustomersQuery,
     deactivateCustomerMutation
 }: CustomerTableProps) => {
@@ -114,6 +124,18 @@ const CustomerTable = ({
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="center" className="w-[160px]">
+                            <DropdownMenuItem
+                                disabled={!row.original.isActive || !hasSendMessagePermission}
+                                className="cursor-pointer"
+                                onClick={() => {
+                                    if (row.original.isActive && hasSendMessagePermission) {
+                                        onSendMessage(row.original)
+                                    }
+                                }}
+                            >
+                                Gửi tin nhắn
+                            </DropdownMenuItem>
+                            <DropdownMenuSeparator />
                             <ConfirmationDialog
                                 title="Bạn có chắc muốn khóa tài khoản khách hàng này?"
                                 description="Không thể hoàn tác hành động này. Thao tác này sẽ khóa tài khoản khách hàng vĩnh viễn trong hệ thống Saigon Steps."

@@ -5,7 +5,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Avatar, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { useSocketContext } from '@/components/container/SocketProvider'
-import SendMessageForm from '@/features/customer/components/SendMessageForm'
+import ChatMessageForm from '@/features/customer/components/ChatMessageForm'
 import ChatMessagesDisplay from '@/features/customer/components/ChatMessagesDisplay'
 import useAxiosIns from '@/hooks/useAxiosIns'
 
@@ -152,16 +152,26 @@ const ChatWindow = ({ selectedConversationId, setSelectedConversationId, hasChat
 
                     {hasChatPermission && (
                         <div className="border-t">
-                            <SendMessageForm
-                                conversationId={conversation.conversationId}
-                                onOptimisticDisplay={message => {
-                                    setConversation(prev =>
-                                        prev
-                                            ? { ...prev, messages: [...(prev.messages as IChatMessage[]), message] }
-                                            : prev
-                                    )
-                                }}
-                            />
+                            {conversation.customer?.isActive ? (
+                                <ChatMessageForm
+                                    conversationId={conversation.conversationId}
+                                    customerId={conversation.customer!.customerId!}
+                                    onOptimisticDisplay={message => {
+                                        setConversation(prev =>
+                                            prev
+                                                ? { ...prev, messages: [...(prev.messages as IChatMessage[]), message] }
+                                                : prev
+                                        )
+                                    }}
+                                />
+                            ) : (
+                                <div className="flex justify-center p-4 lg:p-6">
+                                    <p className="text-muted-foreground max-w-[70%] text-center text-sm font-medium lg:max-w-[60%]">
+                                        Tài khoản này hiện đã bị khóa hoặc không còn hoạt động.
+                                        <br /> Bạn không thể gửi tin nhắn cho tài khoản này.
+                                    </p>
+                                </div>
+                            )}
                         </div>
                     )}
                 </>
