@@ -2,6 +2,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 type PaginationProps = {
+    maxVisible?: number
     currentPage: number
     totalPages: number
     onPageChange: (page: number) => void
@@ -9,26 +10,25 @@ type PaginationProps = {
 
 const ELLIPSES = '...'
 
-const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) => {
+const Pagination = ({ maxVisible = 7, currentPage, totalPages, onPageChange }: PaginationProps) => {
     const getPageNumbers = () => {
         const pages: (number | string)[] = []
-        const maxVisible = 5
 
         if (totalPages <= maxVisible) {
             for (let i = 1; i <= totalPages; i++) {
                 pages.push(i)
             }
         } else {
-            pages.push(1)
+            pages.push(1, 2)
 
-            let start = Math.max(2, currentPage - 1)
-            let end = Math.min(totalPages - 1, currentPage + 1)
+            let start = Math.max(3, currentPage - 1)
+            let end = Math.min(totalPages - 2, currentPage + 1)
 
-            if (start > 2) pages.push(ELLIPSES)
+            if (start > 3) pages.push(ELLIPSES)
             for (let i = start; i <= end; i++) pages.push(i)
-            if (end < totalPages - 1) pages.push(ELLIPSES)
+            if (end < totalPages - 2) pages.push(ELLIPSES)
 
-            pages.push(totalPages)
+            pages.push(totalPages - 1, totalPages)
         }
 
         return pages
@@ -52,7 +52,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) 
                     </span>
                 ) : (
                     <Button
-                        key={p}
+                        key={idx}
                         variant={p === currentPage ? 'default' : 'outline'}
                         className="h-10 w-10"
                         onClick={() => onPageChange(p as number)}
