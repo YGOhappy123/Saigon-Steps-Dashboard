@@ -36,7 +36,7 @@ const OrderCard = ({ order, hasPermission, updateStatusMutation }: OrderCardProp
             variant: 'destructive',
             disabled: !!order.deliveredAt
         },
-        { label: 'Hoàn hàng trả tiền', status: 'RETURNED', variant: 'destructive', disabled: !order.deliveredAt },
+        { label: 'Xác nhận đổi trả', status: 'RETURNED', variant: 'destructive', disabled: !order.deliveredAt },
         { label: 'Từ chối đơn hàng', status: 'CANCELLED', variant: 'destructive' }
     ]
 
