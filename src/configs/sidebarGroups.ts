@@ -63,7 +63,7 @@ export const sidebarGroups: SidebarGroupData[] = [
             {
                 title: 'Trò chuyện trực tuyến',
                 icon: MessageCircleMore,
-                url: '/customers/chat',
+                url: '/chat',
                 accessRequirement: permissions.accessAdvisoryDashboardPage
             }
         ]
@@ -72,7 +72,7 @@ export const sidebarGroups: SidebarGroupData[] = [
         title: 'Đơn hàng và vận chuyển',
         items: [
             {
-                title: 'Đơn hàng',
+                title: 'Quản lý đơn hàng',
                 icon: ShoppingCart,
                 url: '/orders',
                 accessRequirement: permissions.accessOrderDashboardPage
@@ -83,12 +83,12 @@ export const sidebarGroups: SidebarGroupData[] = [
         title: 'Sản phẩm và thuơng hiệu',
         items: [
             {
-                title: 'Thương hiệu',
+                title: 'Danh sách thương hiệu',
                 icon: Crown,
                 url: '/brands'
             },
             {
-                title: 'Danh mục hàng hóa',
+                title: 'Danh mục giày dép',
                 icon: Album,
                 url: '/categories'
             },
@@ -110,7 +110,7 @@ export const sidebarGroups: SidebarGroupData[] = [
             {
                 title: 'Phiếu giảm giá',
                 icon: TicketCheck,
-                url: '/promotions/coupons',
+                url: '/coupons',
                 accessRequirement: permissions.accessCouponDashboardPage
             }
         ]

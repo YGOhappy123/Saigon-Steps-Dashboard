@@ -37,7 +37,6 @@ const RevenueChart = () => {
         queryKey: ['revenue-chart', type],
         queryFn: () => axios.get<IResponseData<any>>(`/statistics/revenues?type=${type}`),
         enabled: true,
-        refetchOnWindowFocus: false,
         refetchIntervalInBackground: true,
         refetchInterval: 20000,
         select: res => res.data

@@ -130,10 +130,10 @@ const CustomerFilter = ({ setHavingFilters, onChange, onSearch, onReset }: Custo
                     </SelectTrigger>
                     <SelectContent side="top">
                         {[
-                            { value: '-createdAt', label: 'Xếp theo ngày đăng ký giảm dần', Icon: ArrowDown10 },
-                            { value: '+createdAt', label: 'Xếp theo ngày đăng ký tăng dần', Icon: ArrowUp10 },
                             { value: '-customerId', label: 'Xếp theo mã khách hàng giảm dần', Icon: ArrowDown10 },
-                            { value: '+customerId', label: 'Xếp theo mã khách hàng tăng dần', Icon: ArrowUp10 }
+                            { value: '+customerId', label: 'Xếp theo mã khách hàng tăng dần', Icon: ArrowUp10 },
+                            { value: '-createdAt', label: 'Xếp theo ngày đăng ký giảm dần', Icon: ArrowDown10 },
+                            { value: '+createdAt', label: 'Xếp theo ngày đăng ký tăng dần', Icon: ArrowUp10 }
                         ].map(sortOption => (
                             <SelectItem key={sortOption.value} value={sortOption.value}>
                                 <sortOption.Icon /> {sortOption.label}

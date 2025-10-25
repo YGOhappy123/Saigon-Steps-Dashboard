@@ -43,7 +43,6 @@ const brandService = ({ enableFetching }: { enableFetching: boolean }) => {
             return null
         },
         enabled: enableFetching,
-        refetchOnWindowFocus: false,
         refetchIntervalInBackground: true,
         refetchInterval: 30000
     })

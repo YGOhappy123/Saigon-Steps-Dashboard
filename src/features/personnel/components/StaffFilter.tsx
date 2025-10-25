@@ -151,10 +151,10 @@ const StaffFilter = ({ setHavingFilters, onChange, onSearch, onReset, roles }: S
                     </SelectTrigger>
                     <SelectContent side="top">
                         {[
-                            { value: '-createdAt', label: 'Xếp theo ngày tạo giảm dần', Icon: ArrowDown10 },
-                            { value: '+createdAt', label: 'Xếp theo ngày tạo tăng dần', Icon: ArrowUp10 },
                             { value: '-staffId', label: 'Xếp theo mã nhân viên giảm dần', Icon: ArrowDown10 },
-                            { value: '+staffId', label: 'Xếp theo mã nhân viên tăng dần', Icon: ArrowUp10 }
+                            { value: '+staffId', label: 'Xếp theo mã nhân viên tăng dần', Icon: ArrowUp10 },
+                            { value: '-createdAt', label: 'Xếp theo ngày tạo giảm dần', Icon: ArrowDown10 },
+                            { value: '+createdAt', label: 'Xếp theo ngày tạo tăng dần', Icon: ArrowUp10 }
                         ].map(sortOption => (
                             <SelectItem key={sortOption.value} value={sortOption.value}>
                                 <sortOption.Icon /> {sortOption.label}

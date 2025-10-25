@@ -141,10 +141,10 @@ const OrderFilter = ({ setHavingFilters, onChange, onSearch, onReset }: OrderFil
                     </SelectTrigger>
                     <SelectContent side="top">
                         {[
-                            { value: '-createdAt', label: 'Xếp theo ngày đặt hàng giảm dần', Icon: ArrowDown10 },
-                            { value: '+createdAt', label: 'Xếp theo ngày đặt hàng tăng dần', Icon: ArrowUp10 },
                             { value: '-orderId', label: 'Xếp theo mã đơn hàng giảm dần', Icon: ArrowDown10 },
                             { value: '+orderId', label: 'Xếp theo mã đơn hàng tăng dần', Icon: ArrowUp10 },
+                            { value: '-createdAt', label: 'Xếp theo ngày đặt hàng giảm dần', Icon: ArrowDown10 },
+                            { value: '+createdAt', label: 'Xếp theo ngày đặt hàng tăng dần', Icon: ArrowUp10 },
                             { value: '-amount', label: 'Xếp theo tổng giá trị đơn hàng giảm dần', Icon: ArrowDown10 },
                             { value: '+amount', label: 'Xếp theo tổng giá trị đơn hàng tăng dần', Icon: ArrowUp10 }
                         ].map(sortOption => (

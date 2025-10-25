@@ -26,7 +26,6 @@ const SummaryCards = () => {
         queryKey: ['summary', type],
         queryFn: () => axios.get<IResponseData<StatisticsResponse>>(`/statistics/summary?type=${type}`),
         enabled: true,
-        refetchOnWindowFocus: false,
         refetchIntervalInBackground: true,
         refetchInterval: 20000,
         select: res => res.data

@@ -22,7 +22,6 @@ const KeyCustomers = () => {
         queryKey: ['key-customers', type],
         queryFn: () => axios.get<IResponseData<KeyCustomers>>(`/statistics/key-customers?type=${type}`),
         enabled: true,
-        refetchOnWindowFocus: false,
         refetchIntervalInBackground: true,
         refetchInterval: 20000,
         select: res => res.data

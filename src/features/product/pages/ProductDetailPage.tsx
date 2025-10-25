@@ -23,8 +23,6 @@ const ProductDetailPage = () => {
         queryKey: ['product-detail', slug],
         queryFn: () => axios.get<IResponseData<IRootProduct>>(`/products/slug/${slug}`),
         enabled: true,
-        refetchOnWindowFocus: false,
-        refetchIntervalInBackground: true,
         select: res => res.data
     })
     const product = getProductDetailQuery.data?.data
@@ -33,8 +31,6 @@ const ProductDetailPage = () => {
         queryKey: ['brands-all'],
         queryFn: () => axios.get<IResponseData<IProductBrand[]>>('/brands'),
         enabled: true,
-        refetchOnWindowFocus: false,
-        refetchIntervalInBackground: true,
         select: res => res.data
     })
     const brands = getBrandsQuery.data?.data ?? []
@@ -43,8 +39,6 @@ const ProductDetailPage = () => {
         queryKey: ['categories-all'],
         queryFn: () => axios.get<IResponseData<IShoeCategory[]>>('/categories'),
         enabled: true,
-        refetchOnWindowFocus: false,
-        refetchIntervalInBackground: true,
         select: res => res.data
     })
     const categories = getCategoriesQuery.data?.data ?? []

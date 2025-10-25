@@ -148,6 +148,7 @@ const DataBrandDialog = ({
                                             <FormLabel className="text-card-foreground">Tên thương hiệu</FormLabel>
                                             <FormControl>
                                                 <Input
+                                                    disabled={mode === 'view'}
                                                     placeholder="Tên thương hiệu..."
                                                     className="caret-card-foreground text-card-foreground h-12 rounded border-2 font-semibold"
                                                     {...field}
@@ -165,6 +166,7 @@ const DataBrandDialog = ({
                                             <FormLabel className="text-card-foreground">Mô tả thương hiệu</FormLabel>
                                             <FormControl>
                                                 <RichTextEditor
+                                                    disabled={mode === 'view'}
                                                     content={field.value}
                                                     onChange={field.onChange}
                                                     containerClassName="rounded border-2"
