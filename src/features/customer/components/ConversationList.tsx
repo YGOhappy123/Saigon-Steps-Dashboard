@@ -1,5 +1,5 @@
 import { makeIntlFormatter } from 'react-timeago/defaultFormatter'
-import { Avatar as RadixAvatar, AvatarImage as RadixAvatarImage } from '@radix-ui/react-avatar'
+import { MessageCircleIcon } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Avatar, AvatarImage } from '@/components/ui/avatar'
 import { Separator } from '@/components/ui/separator'
@@ -46,9 +46,9 @@ const ConversationList = ({ isLoading, conversations, setSelectedConversationId 
 
                 {!isLoading && conversations.length === 0 && (
                     <div className="flex flex-1 flex-col items-center justify-center gap-2 py-20">
-                        <RadixAvatar className="w-[60%] xl:w-[50%]">
-                            <RadixAvatarImage src="/images/happy-emoji.png" alt="empty cart"></RadixAvatarImage>
-                        </RadixAvatar>
+                        <div className="flex size-20 items-center justify-center rounded-full bg-cyan-500/20">
+                            <MessageCircleIcon className="size-10 text-cyan-400" />
+                        </div>
                         <p className="mt-2 text-center font-semibold">Chưa có cuộc trò chuyện</p>
                         <p className="text-muted-foreground text-center">
                             Hệ thống Saigon Steps chưa ghi nhận cuộc trò chuyện nào với khách hàng!

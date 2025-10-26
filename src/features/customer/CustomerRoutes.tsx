@@ -25,20 +25,9 @@ const CustomerRoutes = [
                         permission={permissions.accessCustomerDashboardPage}
                     />
                 )
-            }
-        ]
-    },
-    {
-        path: '/chat',
-        element: (
-            <Suspense>
-                <AuthProtector children={<DashboardLayout />} redirect="/auth" />
-            </Suspense>
-        ),
-        errorElement: <ErrorPage />,
-        children: [
+            },
             {
-                path: '',
+                path: 'chat',
                 element: (
                     <PermissionProtector
                         children={<CustomerChatPage />}

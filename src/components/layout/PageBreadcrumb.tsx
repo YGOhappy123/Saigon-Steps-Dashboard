@@ -24,20 +24,28 @@ const PageBreadcrumb = () => {
     const { pathname } = useLocation()
     const isMobile = useIsMobile()
 
-    const pathMatches = (path?: string) => {
-        if (!path) return false
-        return pathname === path || pathname.startsWith(`${path}/`)
-    }
+    const isExactMatch = (path?: string) => !!path && pathname === path
+    const isPrefixMatch = (path?: string) => !!path && pathname.startsWith(path)
 
-    const matchingGroup = sidebarGroups.find(group =>
-        group.items.some(item => pathMatches(item.url) || item.children?.some(child => pathMatches(child.url)))
-    )
+    const matchingGroup =
+        sidebarGroups.find(group =>
+            group.items.some(item => isExactMatch(item.url) || item.children?.some(child => isExactMatch(child.url)))
+        ) ||
+        sidebarGroups.find(group =>
+            group.items.some(item => isPrefixMatch(item.url) || item.children?.some(child => isPrefixMatch(child.url)))
+        )
 
-    const matchingItem = matchingGroup?.items.find(
-        item => pathMatches(item.url) || item.children?.some(child => pathMatches(child.url))
-    )
+    const matchingItem =
+        matchingGroup?.items.find(
+            item => isExactMatch(item.url) || item.children?.some(child => isExactMatch(child.url))
+        ) ||
+        matchingGroup?.items.find(
+            item => isPrefixMatch(item.url) || item.children?.some(child => isPrefixMatch(child.url))
+        )
 
-    const matchingChild = matchingItem?.children?.find(child => pathMatches(child.url))
+    const matchingChild =
+        matchingItem?.children?.find(child => isExactMatch(child.url)) ||
+        matchingItem?.children?.find(child => isPrefixMatch(child.url))
 
     useTitle(`Saigon Steps Dashboard | ${matchingChild ? matchingChild.title : matchingItem?.title}`)
 

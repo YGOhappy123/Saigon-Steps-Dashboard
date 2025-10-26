@@ -63,7 +63,7 @@ export const sidebarGroups: SidebarGroupData[] = [
             {
                 title: 'Trò chuyện trực tuyến',
                 icon: MessageCircleMore,
-                url: '/chat',
+                url: '/customers/chat',
                 accessRequirement: permissions.accessAdvisoryDashboardPage
             }
         ]
@@ -110,7 +110,7 @@ export const sidebarGroups: SidebarGroupData[] = [
             {
                 title: 'Phiếu giảm giá',
                 icon: TicketCheck,
-                url: '/coupons',
+                url: '/promotions/coupons',
                 accessRequirement: permissions.accessCouponDashboardPage
             }
         ]

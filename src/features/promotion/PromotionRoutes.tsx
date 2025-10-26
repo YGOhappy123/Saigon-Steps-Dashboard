@@ -20,20 +20,9 @@ const PromotionRoutes = [
             {
                 path: '',
                 element: <PromotionManagementPage />
-            }
-        ]
-    },
-    {
-        path: '/coupons',
-        element: (
-            <Suspense>
-                <AuthProtector children={<DashboardLayout />} redirect="/auth" />
-            </Suspense>
-        ),
-        errorElement: <ErrorPage />,
-        children: [
+            },
             {
-                path: '',
+                path: 'coupons',
                 element: (
                     <PermissionProtector
                         children={<CouponManagementPage />}
