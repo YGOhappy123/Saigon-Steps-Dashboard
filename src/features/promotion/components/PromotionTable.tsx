@@ -181,7 +181,7 @@ const PromotionTable = ({
                                     onUpdatePromotion(row.original)
                                 }}
                             >
-                                Chỉnh sửa thông tin
+                                Chỉnh sửa
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />
                             <ConfirmationDialog

@@ -63,7 +63,7 @@ const shoeProductSchema = baseInfoFormSchema.safeExtend({
         primaryColor: z.string().min(1, { message: 'Màu sắc chủ đạo không được để trống.' }),
         secondaryColor: z.string().optional(),
         occasionTags: z.array(z.string()).min(1, { message: 'Vui lòng chọn ít nhất một thẻ dịp sử dụng.' }),
-        designTags: z.array(z.string()).min(1, { message: 'Vui lòng chọn ít nhất một thẻ thiết kế.' })
+        designTags: z.array(z.string()).min(1, { message: 'Vui lòng chọn ít nhất một thẻ phong cách thiết kế.' })
     })
 })
 
@@ -226,7 +226,7 @@ const AddProductFormFirstStep = ({ defaultValues, brands, categories, onNext }: 
                                         content={field.value}
                                         onChange={field.onChange}
                                         containerClassName="rounded border-2"
-                                        editorClassName="caret-card-foreground text-card-foreground"
+                                        editorClassName="caret-card-foreground text-card-foreground font-semibold"
                                     />
                                 </FormControl>
                                 <FormMessage />
@@ -391,7 +391,7 @@ const AddProductFormFirstStep = ({ defaultValues, brands, categories, onNext }: 
                                 errorMessage={
                                     Object.keys(form.formState.errors).length > 0 &&
                                     form.watch('features.designTags').length === 0
-                                        ? 'Vui lòng chọn ít nhất một thẻ thiết kế.'
+                                        ? 'Vui lòng chọn ít nhất một thẻ phong cách thiết kế.'
                                         : undefined
                                 }
                             />

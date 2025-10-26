@@ -21,7 +21,7 @@ const CategoryManagementPage = () => {
                 <div>
                     <h2 className="text-2xl font-bold tracking-tight">Xin chào, {user!.name}!</h2>
                     <p className="text-muted-foreground">
-                        Đây là danh sách danh mục hàng hóa của hệ thống Saigon Steps.
+                        Đây là danh sách danh mục giày dép của hệ thống Saigon Steps.
                     </p>
                 </div>
                 <div className="flex items-center space-x-2">
