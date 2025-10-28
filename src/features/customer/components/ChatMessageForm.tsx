@@ -4,13 +4,15 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { twMerge } from 'tailwind-merge'
-import { SendIcon, Trash2 } from 'lucide-react'
+import { SendIcon, Smile, Trash2 } from 'lucide-react'
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useMutation } from '@tanstack/react-query'
 import { onError } from '@/utils/errorsHandler'
 import { RootState } from '@/store'
+import { useThemeContext } from '@/components/container/ThemeProvider'
+import { EmojiPicker } from '@/components/common/EmojiPicker'
 import ChatImageUploader from '@/features/customer/components/ChatImageUploader'
 import useAxiosIns from '@/hooks/useAxiosIns'
 import fileService from '@/services/fileService'
@@ -40,7 +42,9 @@ const chatMessageForm = ({ conversationId, customerId, onOptimisticDisplay }: ch
     })
 
     const { uploadBase64Mutation } = fileService()
+    const { theme } = useThemeContext()
     const [isDragging, setIsDragging] = useState(false)
+    const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false)
     const axios = useAxiosIns()
     const user = useSelector((state: RootState) => state.auth.user)!
     const sendMessageMutation = useMutation({
@@ -142,6 +146,7 @@ const chatMessageForm = ({ conversationId, customerId, onOptimisticDisplay }: ch
                             </Button>
                         </div>
                     )}
+
                     <div className="flex items-center gap-4">
                         <FormField
                             control={form.control}
@@ -160,6 +165,26 @@ const chatMessageForm = ({ conversationId, customerId, onOptimisticDisplay }: ch
                                 </FormItem>
                             )}
                         />
+                        <div className="relative">
+                            <Button
+                                type="button"
+                                variant="outline"
+                                className="size-12"
+                                onClick={() => setIsEmojiPickerOpen(prev => !prev)}
+                            >
+                                <Smile />
+                            </Button>
+                            {isEmojiPickerOpen && (
+                                <EmojiPicker
+                                    theme={theme}
+                                    onSelect={emoji => {
+                                        const currentText = form.getValues('textContent') || ''
+                                        form.setValue('textContent', `${currentText} ${emoji}`.trim())
+                                        setIsEmojiPickerOpen(false)
+                                    }}
+                                />
+                            )}
+                        </div>
                         <ChatImageUploader setImage={image => form.setValue('imageContent', image)} />
                         <Button
                             type="submit"

@@ -1,8 +1,9 @@
-import { ClipboardEvent } from 'react'
+import { ClipboardEvent, useState } from 'react'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { Trash2 } from 'lucide-react'
+import { toast } from 'react-toastify'
+import { Smile, Trash2 } from 'lucide-react'
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -17,9 +18,13 @@ import {
 import { Separator } from '@/components/ui/separator'
 import { useMutation } from '@tanstack/react-query'
 import { onError } from '@/utils/errorsHandler'
+import { useThemeContext } from '@/components/container/ThemeProvider'
+import { EmojiPicker } from '@/components/common/EmojiPicker'
+import { getMappedMessage } from '@/utils/resMessageMapping'
 import ChatImageUploader from '@/features/customer/components/ChatImageUploader'
 import useAxiosIns from '@/hooks/useAxiosIns'
 import fileService from '@/services/fileService'
+import toastConfig from '@/configs/toast'
 
 const chatMessageFormSchema = z
     .object({
@@ -46,11 +51,16 @@ const SendMessageDialog = ({ customer, open, setOpen }: SendMessageDialogProps) 
     })
 
     const { uploadBase64Mutation } = fileService()
+    const { theme } = useThemeContext()
+    const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false)
     const axios = useAxiosIns()
     const sendMessageMutation = useMutation({
         mutationFn: ({ customerId, data }: { customerId: number; data: Partial<IChatMessage> & { tempId: number } }) =>
             axios.post<IResponseData<any>>(`/chats/${customerId}`, data),
-        onError: onError
+        onError: onError,
+        onSuccess: res => {
+            toast(getMappedMessage(res.data.message), toastConfig('success'))
+        }
     })
 
     const onSubmit = async (values: z.infer<typeof chatMessageFormSchema>) => {
@@ -124,6 +134,7 @@ const SendMessageDialog = ({ customer, open, setOpen }: SendMessageDialogProps) 
                                 </Button>
                             </div>
                         )}
+
                         <div className="flex items-center gap-4">
                             <FormField
                                 control={form.control}
@@ -142,6 +153,26 @@ const SendMessageDialog = ({ customer, open, setOpen }: SendMessageDialogProps) 
                                     </FormItem>
                                 )}
                             />
+                            <div className="relative">
+                                <Button
+                                    type="button"
+                                    variant="outline"
+                                    className="size-12"
+                                    onClick={() => setIsEmojiPickerOpen(prev => !prev)}
+                                >
+                                    <Smile />
+                                </Button>
+                                {isEmojiPickerOpen && (
+                                    <EmojiPicker
+                                        theme={theme}
+                                        onSelect={emoji => {
+                                            const currentText = form.getValues('textContent') || ''
+                                            form.setValue('textContent', `${currentText} ${emoji}`.trim())
+                                            setIsEmojiPickerOpen(false)
+                                        }}
+                                    />
+                                )}
+                            </div>
                             <ChatImageUploader setImage={image => form.setValue('imageContent', image)} />
                         </div>
                         <Separator />
