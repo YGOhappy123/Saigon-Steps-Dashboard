@@ -42,12 +42,12 @@ export const sidebarGroups: SidebarGroupData[] = [
             {
                 title: 'Thông tin cá nhân',
                 icon: UserIcon,
-                url: '/profile'
+                url: '/cap-nhat-thong-tin'
             },
             {
                 title: 'Đổi mật khẩu',
                 icon: LockKeyhole,
-                url: '/change-password'
+                url: '/doi-mat-khau'
             }
         ]
     },
@@ -57,13 +57,13 @@ export const sidebarGroups: SidebarGroupData[] = [
             {
                 title: 'Danh sách khách hàng',
                 icon: Users,
-                url: '/customers',
+                url: '/khach-hang',
                 accessRequirement: permissions.accessCustomerDashboardPage
             },
             {
                 title: 'Trò chuyện trực tuyến',
                 icon: MessageCircleMore,
-                url: '/customers/chat',
+                url: '/khach-hang/tro-chuyen',
                 accessRequirement: permissions.accessAdvisoryDashboardPage
             }
         ]
@@ -74,7 +74,7 @@ export const sidebarGroups: SidebarGroupData[] = [
             {
                 title: 'Quản lý đơn hàng',
                 icon: ShoppingCart,
-                url: '/orders',
+                url: '/don-hang',
                 accessRequirement: permissions.accessOrderDashboardPage
             }
         ]
@@ -85,17 +85,17 @@ export const sidebarGroups: SidebarGroupData[] = [
             {
                 title: 'Danh sách thương hiệu',
                 icon: Crown,
-                url: '/brands'
+                url: '/thuong-hieu'
             },
             {
                 title: 'Danh mục giày dép',
                 icon: Album,
-                url: '/categories'
+                url: '/danh-muc'
             },
             {
                 title: 'Danh sách sản phẩm',
                 icon: Footprints,
-                url: '/products'
+                url: '/san-pham'
             }
         ]
     },
@@ -105,12 +105,12 @@ export const sidebarGroups: SidebarGroupData[] = [
             {
                 title: 'Chương trình khuyến mãi',
                 icon: ArrowDown10,
-                url: '/promotions'
+                url: '/khuyen-mai'
             },
             {
                 title: 'Phiếu giảm giá',
                 icon: TicketCheck,
-                url: '/promotions/coupons',
+                url: '/khuyen-mai/phieu-giam-gia',
                 accessRequirement: permissions.accessCouponDashboardPage
             }
         ]
@@ -121,13 +121,13 @@ export const sidebarGroups: SidebarGroupData[] = [
             {
                 title: 'Quản lý nhân viên',
                 icon: ShieldUser,
-                url: '/personnel/staffs',
+                url: '/nhan-su/nhan-vien',
                 accessRequirement: permissions.accessStaffDashboardPage
             },
             {
                 title: 'Vai trò và quyền hạn',
                 icon: KeyRound,
-                url: '/personnel/staff-roles',
+                url: '/nhan-su/vai-tro',
                 accessRequirement: permissions.accessRoleDashboardPage
             }
         ]
@@ -138,13 +138,13 @@ export const sidebarGroups: SidebarGroupData[] = [
             {
                 title: 'Đơn nhập hàng',
                 icon: Package,
-                url: '/product-imports',
+                url: '/don-nhap-hang',
                 accessRequirement: permissions.accessImportDashboardPage
             },
             {
                 title: 'Báo cáo thiệt hại',
                 icon: ClipboardType,
-                url: '/damage-reports',
+                url: '/bao-cao-thiet-hai',
                 accessRequirement: permissions.accessDamageReportDashboardPage
             }
         ]
@@ -155,13 +155,13 @@ export const sidebarGroups: SidebarGroupData[] = [
             {
                 title: 'Thống kê sản phẩm',
                 icon: CircleDollarSignIcon,
-                url: '/statistics/product',
+                url: '/thong-ke/san-pham',
                 accessRequirement: permissions.accessProductStatisticPage
             },
             {
                 title: 'Thống kê doanh thu',
                 icon: ChartLine,
-                url: '/statistics/revenue',
+                url: '/thong-ke/doanh-thu',
                 accessRequirement: permissions.accessRevenueStatisticPage
             }
         ]

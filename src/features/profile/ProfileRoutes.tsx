@@ -11,21 +11,21 @@ const ProfileRoutes = [
         path: '/',
         element: (
             <Suspense>
-                <AuthProtector children={<DashboardLayout />} redirect="/auth" />
+                <AuthProtector children={<DashboardLayout />} redirect="/xac-thuc" />
             </Suspense>
         ),
         errorElement: <ErrorPage />,
         children: [
             {
                 path: '',
-                element: <Navigate to="/profile" replace />
+                element: <Navigate to="/cap-nhat-thong-tin" replace />
             },
             {
-                path: 'profile',
+                path: 'cap-nhat-thong-tin',
                 element: <EditProfilePage />
             },
             {
-                path: 'change-password',
+                path: 'doi-mat-khau',
                 element: <ChangePasswordPage />
             }
         ]

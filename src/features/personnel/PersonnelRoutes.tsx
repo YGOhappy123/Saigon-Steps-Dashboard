@@ -9,16 +9,16 @@ import StaffManagementPage from '@/features/personnel/pages/StaffManagementPage'
 
 const PersonnelRoutes = [
     {
-        path: '/personnel',
+        path: '/nhan-su',
         element: (
             <Suspense>
-                <AuthProtector children={<DashboardLayout />} redirect="/auth" />
+                <AuthProtector children={<DashboardLayout />} redirect="/xac-thuc" />
             </Suspense>
         ),
         errorElement: <ErrorPage />,
         children: [
             {
-                path: 'staff-roles',
+                path: 'vai-tro',
                 element: (
                     <PermissionProtector
                         children={<RoleManagementPage />}
@@ -27,7 +27,7 @@ const PersonnelRoutes = [
                 )
             },
             {
-                path: 'staffs',
+                path: 'nhan-vien',
                 element: (
                     <PermissionProtector
                         children={<StaffManagementPage />}

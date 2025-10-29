@@ -78,7 +78,7 @@ const DamageReportTableToolbar = ({
                 </Popover>
 
                 {hasAddPermission && (
-                    <Button variant="lighter" onClick={() => navigate('/damage-reports/add')}>
+                    <Button variant="lighter" onClick={() => navigate('/bao-cao-thiet-hai/them')}>
                         <PencilLine />
                         Tạo báo cáo
                     </Button>

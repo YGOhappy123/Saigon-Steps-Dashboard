@@ -10,10 +10,10 @@ import AddProductPage from '@/features/product/pages/AddProductPage'
 
 const ProductRoutes = [
     {
-        path: '/products',
+        path: '/san-pham',
         element: (
             <Suspense>
-                <AuthProtector children={<DashboardLayout />} redirect="/auth" />
+                <AuthProtector children={<DashboardLayout />} redirect="/xac-thuc" />
             </Suspense>
         ),
         errorElement: <ErrorPage />,
@@ -27,7 +27,7 @@ const ProductRoutes = [
                 element: <ProductDetailPage />
             },
             {
-                path: 'add',
+                path: 'them',
                 element: <PermissionProtector children={<AddProductPage />} permission={permissions.addNewProduct} />
             }
         ]

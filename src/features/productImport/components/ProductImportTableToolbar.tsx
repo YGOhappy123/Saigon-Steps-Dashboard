@@ -77,7 +77,7 @@ const ProductImportTableToolbar = ({
                 </Popover>
 
                 {hasAddPermission && (
-                    <Button variant="lighter" onClick={() => navigate('/product-imports/add')}>
+                    <Button variant="lighter" onClick={() => navigate('/don-nhap-hang/them')}>
                         <PencilLine />
                         Ghi nhận đơn nhập hàng
                     </Button>

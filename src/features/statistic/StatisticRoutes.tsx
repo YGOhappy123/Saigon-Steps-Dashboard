@@ -9,16 +9,16 @@ import RevenueStatisticPage from '@/features/statistic/pages/RevenueStatisticPag
 
 const StatisticRoutes = [
     {
-        path: '/statistics',
+        path: '/thong-ke',
         element: (
             <Suspense>
-                <AuthProtector children={<DashboardLayout />} redirect="/auth" />
+                <AuthProtector children={<DashboardLayout />} redirect="/xac-thuc" />
             </Suspense>
         ),
         errorElement: <ErrorPage />,
         children: [
             {
-                path: 'product',
+                path: 'san-pham',
                 element: (
                     <PermissionProtector
                         children={<ProductStatisticPage />}
@@ -27,7 +27,7 @@ const StatisticRoutes = [
                 )
             },
             {
-                path: 'revenue',
+                path: 'doanh-thu',
                 element: (
                     <PermissionProtector
                         children={<RevenueStatisticPage />}

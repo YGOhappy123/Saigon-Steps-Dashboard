@@ -9,10 +9,10 @@ import AddDamagePage from '@/features/damageReport/pages/AddDamagePage'
 
 const DamageReportRoutes = [
     {
-        path: '/damage-reports',
+        path: '/bao-cao-thiet-hai',
         element: (
             <Suspense>
-                <AuthProtector children={<DashboardLayout />} redirect="/auth" />
+                <AuthProtector children={<DashboardLayout />} redirect="/xac-thuc" />
             </Suspense>
         ),
         errorElement: <ErrorPage />,
@@ -27,7 +27,7 @@ const DamageReportRoutes = [
                 )
             },
             {
-                path: 'add',
+                path: 'them',
                 element: (
                     <PermissionProtector children={<AddDamagePage />} permission={permissions.addNewDamageReport} />
                 )

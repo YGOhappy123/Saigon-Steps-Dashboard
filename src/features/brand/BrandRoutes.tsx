@@ -6,10 +6,10 @@ import BrandManagementPage from '@/features/brand/pages/BrandManagementPage'
 
 const BrandRoutes = [
     {
-        path: '/brands',
+        path: '/thuong-hieu',
         element: (
             <Suspense>
-                <AuthProtector children={<DashboardLayout />} redirect="/auth" />
+                <AuthProtector children={<DashboardLayout />} redirect="/xac-thuc" />
             </Suspense>
         ),
         errorElement: <ErrorPage />,

@@ -3,9 +3,9 @@ import { ArrowLeftFromLine } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 export const sections = {
-    information: { id: 'information', title: 'Thông tin cơ bản' },
-    variants: { id: 'variants', title: 'Kích thước và giá cả' },
-    promotions: { id: 'promotions', title: 'Thông tin khuyến mãi' }
+    information: { id: 'thong-tin', title: 'Thông tin cơ bản' },
+    variants: { id: 'gia-ca', title: 'Kích thước và giá cả' },
+    promotions: { id: 'khuyen-mai', title: 'Thông tin khuyến mãi' }
 }
 
 const TableOfContents = () => {
@@ -24,7 +24,7 @@ const TableOfContents = () => {
                     </li>
                 ))}
             </ul>
-            <Button size="sm" className="mt-4 flex items-center" onClick={() => navigate('/products')}>
+            <Button size="sm" className="mt-4 flex items-center" onClick={() => navigate('/san-pham')}>
                 <ArrowLeftFromLine className="hidden xl:block" />
                 Xem danh sách sản phẩm
             </Button>

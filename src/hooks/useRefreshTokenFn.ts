@@ -17,7 +17,7 @@ const useRefreshTokenFn = (axiosIns: AxiosInstance) => {
     const handleError = () => {
         toast(LOGIN_SESSION_EXPIRED_MESSAGE, toastConfig('info'))
         dispatch(signOut())
-        navigate('/auth')
+        navigate('/xac-thuc')
     }
 
     const refreshTokenFn = async (refreshToken: string) =>

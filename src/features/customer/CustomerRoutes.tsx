@@ -9,10 +9,10 @@ import CustomerChatPage from '@/features/customer/pages/CustomerChatPage'
 
 const CustomerRoutes = [
     {
-        path: '/customers',
+        path: '/khach-hang',
         element: (
             <Suspense>
-                <AuthProtector children={<DashboardLayout />} redirect="/auth" />
+                <AuthProtector children={<DashboardLayout />} redirect="/xac-thuc" />
             </Suspense>
         ),
         errorElement: <ErrorPage />,
@@ -27,7 +27,7 @@ const CustomerRoutes = [
                 )
             },
             {
-                path: 'chat',
+                path: 'tro-chuyen',
                 element: (
                     <PermissionProtector
                         children={<CustomerChatPage />}

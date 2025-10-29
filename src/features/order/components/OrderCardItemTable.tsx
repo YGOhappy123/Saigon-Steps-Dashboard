@@ -27,7 +27,7 @@ const OrderCardItemTable = ({ orderItems }: OrderCardItemTableProps) => {
                         <div className="flex flex-1 flex-col">
                             <a
                                 className="line-clamp-1 text-base font-medium break-words whitespace-normal"
-                                href={`/products/${productItem?.rootProduct.slug}`}
+                                href={`/san-pham/${productItem?.rootProduct.slug}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >

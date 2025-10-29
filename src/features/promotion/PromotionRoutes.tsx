@@ -9,10 +9,10 @@ import PromotionManagementPage from '@/features/promotion/pages/PromotionManagem
 
 const PromotionRoutes = [
     {
-        path: '/promotions',
+        path: '/khuyen-mai',
         element: (
             <Suspense>
-                <AuthProtector children={<DashboardLayout />} redirect="/auth" />
+                <AuthProtector children={<DashboardLayout />} redirect="/xac-thuc" />
             </Suspense>
         ),
         errorElement: <ErrorPage />,
@@ -22,7 +22,7 @@ const PromotionRoutes = [
                 element: <PromotionManagementPage />
             },
             {
-                path: 'coupons',
+                path: 'phieu-giam-gia',
                 element: (
                     <PermissionProtector
                         children={<CouponManagementPage />}

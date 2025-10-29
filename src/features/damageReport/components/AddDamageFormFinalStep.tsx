@@ -121,7 +121,7 @@ const ProductReviewTable = ({ rootProducts, reportItems }: ProductReviewTablePro
                         <div className="flex flex-1 flex-col">
                             <a
                                 className="line-clamp-1 text-base font-medium break-words whitespace-normal"
-                                href={`/products/${product?.slug}`}
+                                href={`/san-pham/${product?.slug}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >

@@ -66,7 +66,7 @@ const SummaryCards = () => {
                         prevValue={summaryData?.customers.previousCount ?? 0}
                         label="Khách hàng mới"
                         unit="tài khoản"
-                        to="/customers"
+                        to="/khach-hang"
                     />
                     <StatisticSummaryCard
                         loading={getSummaryStatisticQuery.isLoading}
@@ -74,7 +74,7 @@ const SummaryCards = () => {
                         prevValue={summaryData?.revenues.previousCount ?? 0}
                         label="Doanh thu đơn hàng"
                         unit="vnđ"
-                        to="/orders"
+                        to="/don-hang"
                     />
                     <StatisticSummaryCard
                         loading={getSummaryStatisticQuery.isLoading}
@@ -82,7 +82,7 @@ const SummaryCards = () => {
                         prevValue={summaryData?.orders.previousCount ?? 0}
                         label="Đơn hàng được đặt"
                         unit="đơn"
-                        to="/orders"
+                        to="/don-hang"
                     />
                 </div>
             </CardContent>

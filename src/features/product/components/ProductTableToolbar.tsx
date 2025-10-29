@@ -99,7 +99,7 @@ const ProductTableToolbar = ({
                 </Popover>
 
                 {hasAddPermission && (
-                    <Button variant="lighter" onClick={() => navigate('/products/add')}>
+                    <Button variant="lighter" onClick={() => navigate('/san-pham/them')}>
                         <PencilLine />
                         Thêm sản phẩm
                     </Button>

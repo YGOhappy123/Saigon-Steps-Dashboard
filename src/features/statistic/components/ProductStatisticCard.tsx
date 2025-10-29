@@ -56,7 +56,7 @@ const ProductStatisticCard = ({ axios, product }: ProductStatisticCardProps) => 
                 <div className="flex flex-col gap-4 break-words whitespace-normal">
                     <a
                         className="line-clamp-1 text-xl font-semibold break-words whitespace-normal"
-                        href={`/products/${product.slug}`}
+                        href={`/san-pham/${product.slug}`}
                         target="_blank"
                         rel="noopener noreferrer"
                     >

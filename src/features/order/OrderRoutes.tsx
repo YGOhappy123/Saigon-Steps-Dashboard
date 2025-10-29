@@ -8,10 +8,10 @@ import OrderManagementPage from '@/features/order/pages/OrderManagementPage'
 
 const OrderRoutes = [
     {
-        path: '/orders',
+        path: '/don-hang',
         element: (
             <Suspense>
-                <AuthProtector children={<DashboardLayout />} redirect="/auth" />
+                <AuthProtector children={<DashboardLayout />} redirect="/xac-thuc" />
             </Suspense>
         ),
         errorElement: <ErrorPage />,

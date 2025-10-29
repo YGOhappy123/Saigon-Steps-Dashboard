@@ -6,10 +6,10 @@ import CategoryManagementPage from '@/features/category/pages/CategoryManagement
 
 const CategoryRoutes = [
     {
-        path: '/categories',
+        path: '/danh-muc',
         element: (
             <Suspense>
-                <AuthProtector children={<DashboardLayout />} redirect="/auth" />
+                <AuthProtector children={<DashboardLayout />} redirect="/xac-thuc" />
             </Suspense>
         ),
         errorElement: <ErrorPage />,

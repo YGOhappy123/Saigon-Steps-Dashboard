@@ -73,7 +73,7 @@ const ProductDetailPage = () => {
     if (!getProductDetailQuery.isPending && !product) {
         return (
             <div className="flex h-full flex-col items-center justify-center gap-2">
-                <Button size="sm" className="flex items-center" onClick={() => navigate('/products')}>
+                <Button size="sm" className="flex items-center" onClick={() => navigate('/san-pham')}>
                     <ArrowLeftFromLine />
                     Trở về trang danh sách sản phẩm
                 </Button>

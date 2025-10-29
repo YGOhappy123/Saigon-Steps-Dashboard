@@ -4,7 +4,7 @@ import ErrorPage from '@/pages/ErrorPage'
 
 const AuthRoutes = [
     {
-        path: '/auth',
+        path: '/xac-thuc',
         element: (
             <Suspense>
                 <AuthPage />

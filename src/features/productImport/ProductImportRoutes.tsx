@@ -9,10 +9,10 @@ import AddImportPage from '@/features/productImport/pages/AddImportPage'
 
 const ProductImportRoutes = [
     {
-        path: '/product-imports',
+        path: '/don-nhap-hang',
         element: (
             <Suspense>
-                <AuthProtector children={<DashboardLayout />} redirect="/auth" />
+                <AuthProtector children={<DashboardLayout />} redirect="/xac-thuc" />
             </Suspense>
         ),
         errorElement: <ErrorPage />,
@@ -27,7 +27,7 @@ const ProductImportRoutes = [
                 )
             },
             {
-                path: 'add',
+                path: 'them',
                 element: <PermissionProtector children={<AddImportPage />} permission={permissions.addNewImport} />
             }
         ]

@@ -49,7 +49,7 @@ const SidebarUserButton = () => {
                 <DropdownMenuSeparator />
                 <DropdownMenuItem
                     onClick={() => {
-                        navigate('/profile')
+                        navigate('/cap-nhat-thong-tin')
                         setOpenMobile(false)
                     }}
                     className="cursor-pointer"

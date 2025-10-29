@@ -62,9 +62,9 @@ const ProductManagementPage = () => {
                 hasUpdateInfoPermission={verifyPermission(user, permissions.updateProductInformation)}
                 hasUpdatePricePermission={verifyPermission(user, permissions.updateProductPrice)}
                 hasDeletePermission={verifyPermission(user, permissions.deleteProduct)}
-                onViewProduct={product => navigate(`/products/${getProductSlug(product.name)}`)}
-                onUpdateProductInfo={product => navigate(`/products/${getProductSlug(product.name)}`)}
-                onUpdateProductPrice={product => navigate(`/products/${getProductSlug(product.name)}`)}
+                onViewProduct={product => navigate(`/san-pham/${getProductSlug(product.name)}`)}
+                onUpdateProductInfo={product => navigate(`/san-pham/${getProductSlug(product.name)}`)}
+                onUpdateProductPrice={product => navigate(`/san-pham/${getProductSlug(product.name)}`)}
                 getCsvProductsQuery={productServiceData.getCsvProductsQuery}
                 deleteProductMutation={productServiceData.deleteProductMutation}
             />
