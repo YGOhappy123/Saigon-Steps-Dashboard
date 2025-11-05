@@ -10,7 +10,7 @@ import dayjs from '@/libs/dayjs'
 
 export type OrderSortAndFilterParams = {
     searchName: string
-    searchStatus: OrderStatus | undefined
+    searchStatus: number
     searchMinPrice: string
     searchMaxPrice: string
     searchRange: string[] | any[] | undefined
@@ -39,7 +39,7 @@ const orderService = ({ enableFetching }: { enableFetching: boolean }) => {
     }: OrderSortAndFilterParams) => {
         const query: any = {}
         if (searchName) query.customerName = searchName.trim()
-        if (searchStatus) query.status = searchStatus
+        if (searchStatus) query.statusId = searchStatus
         if (searchMinPrice) query.minTotalAmount = Number(searchMinPrice)
         if (searchMaxPrice) query.maxTotalAmount = Number(searchMaxPrice)
         if (searchRange) {
@@ -119,7 +119,7 @@ const orderService = ({ enableFetching }: { enableFetching: boolean }) => {
     })
 
     const updateOrderStatusMutation = useMutation({
-        mutationFn: ({ orderId, data }: { orderId: number; data: { status: OrderStatus } }) =>
+        mutationFn: ({ orderId, data }: { orderId: number; data: { statusId: number } }) =>
             axios.patch<IResponseData<any>>(`/orders/${orderId}/status`, data),
         onError: onError,
         onSuccess: res => {

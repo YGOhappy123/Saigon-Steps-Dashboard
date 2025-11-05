@@ -1,49 +1,32 @@
+import { useState } from 'react'
 import { UseMutationResult } from '@tanstack/react-query'
 import { TicketCheck } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { AVAILABLE_TRANSITIONS, ORDER_STATUS_MAP } from '@/configs/constants'
+import ConfirmationDialog from '@/components/common/ConfirmationDialog'
 import OrderCardItemTable from '@/features/order/components/OrderCardItemTable'
 import OrderCardUpdateLogTable from '@/features/order/components/OrderCardUpdateLogTable'
+import ScanBarcodeDialog from '@/features/order/components/ScanBarcodeDialog'
 import formatCurrency from '@/utils/formatCurrency'
 import dayjs from '@/libs/dayjs'
-import ConfirmationDialog from '@/components/common/ConfirmationDialog'
 
 type OrderCardProps = {
     order: IOrder
     hasPermission: boolean
-    updateStatusMutation: UseMutationResult<any, any, { orderId: number; data: { status: OrderStatus } }, any>
+    updateStatusMutation: UseMutationResult<any, any, { orderId: number; data: { statusId: number } }, any>
 }
 
 const OrderCard = ({ order, hasPermission, updateStatusMutation }: OrderCardProps) => {
     const isDelivery = order.deliveryAddress != null
-    const buttons: {
-        label: string
-        status: OrderStatus
-        variant: 'default' | 'destructive' | 'success'
-        disabled?: boolean
-    }[] = [
-        { label: 'Chấp nhận đơn hàng', status: 'ACCEPTED', variant: 'default' },
-        { label: 'Đóng gói đơn hàng', status: 'PACKED', variant: 'default' },
-        { label: 'Bàn giao cho đơn vị vận chuyển', status: 'DISPATCHED', variant: 'default' },
-        { label: 'Giao hàng thành công', status: 'DELIVERY_SUCCESS', variant: 'success' },
-        { label: 'Giao hàng thất bại', status: 'DELIVERY_FAILED', variant: 'destructive' },
-        {
-            label: 'Nhận lại từ đơn vị vận chuyển',
-            status: 'RETURNED',
-            variant: 'destructive',
-            disabled: !!order.deliveredAt
-        },
-        { label: 'Xác nhận đổi trả', status: 'RETURNED', variant: 'destructive', disabled: !order.deliveredAt },
-        { label: 'Từ chối đơn hàng', status: 'CANCELLED', variant: 'destructive' }
-    ]
+    const [selectedStatusId, setSelectedStatusId] = useState<number | null>(null)
+    const [scanDialogOpen, setScanDialogOpen] = useState(false)
 
-    const handleProcessOrder = async (newStatus: OrderStatus) => {
+    const handleProcessOrder = async (newStatus: number) => {
         await updateStatusMutation.mutateAsync({
             orderId: order.orderId,
-            data: { status: newStatus }
+            data: { statusId: newStatus }
         })
     }
 
@@ -55,7 +38,7 @@ const OrderCard = ({ order, hasPermission, updateStatusMutation }: OrderCardProp
             </CardHeader>
             <CardContent>
                 <div className="bg-primary-foreground border-primary mx-auto mb-2 flex w-fit items-center justify-center gap-6 rounded-full border-4 px-6">
-                    <span className="text-primary py-2 text-xl font-semibold">{ORDER_STATUS_MAP[order.status]}</span>
+                    <span className="text-primary py-2 text-xl font-semibold">{order.status.name}</span>
                     <div className="border-primary h-12 border-l-4"></div>
                     <span className="text-primary py-2 text-xl font-semibold">{formatCurrency(order.totalAmount)}</span>
                 </div>
@@ -208,27 +191,65 @@ const OrderCard = ({ order, hasPermission, updateStatusMutation }: OrderCardProp
                     </AccordionItem>
                 </Accordion>
 
-                {hasPermission && (
+                {hasPermission && order.availableTransitions.length > 0 && (
                     <div className="grid grid-cols-1 gap-4 p-4 xl:grid-cols-2">
-                        {buttons.map((btn, index) => (
-                            <ConfirmationDialog
-                                key={index}
-                                title="Bạn có chắc muốn cập nhật trạng thái này?"
-                                description="Không thể hoàn tác hành động này."
-                                onConfirm={() => handleProcessOrder(btn.status)}
-                                trigger={
+                        <ScanBarcodeDialog
+                            selectedStatusId={selectedStatusId}
+                            open={scanDialogOpen}
+                            setOpen={setScanDialogOpen}
+                            onSubmit={handleProcessOrder}
+                            isLoading={updateStatusMutation.isPending}
+                            orderItems={order.orderItems}
+                        />
+
+                        {order.availableTransitions.map(item => {
+                            if (item.isScanningRequired) {
+                                return (
                                     <Button
-                                        key={btn.status}
-                                        disabled={
-                                            !AVAILABLE_TRANSITIONS[order.status]?.includes(btn.status) || btn.disabled
+                                        key={item.toStatusId}
+                                        size="lg"
+                                        className="rounded"
+                                        variant={
+                                            item.toStatus?.shouldMarkAsRefunded
+                                                ? 'destructive'
+                                                : item.toStatus?.shouldMarkAsDelivered
+                                                  ? 'success'
+                                                  : 'default'
                                         }
-                                        variant={btn.variant}
+                                        onClick={() => {
+                                            setSelectedStatusId(item.toStatusId)
+                                            setScanDialogOpen(true)
+                                        }}
                                     >
-                                        {btn.label}
+                                        {item.label}
                                     </Button>
-                                }
-                            />
-                        ))}
+                                )
+                            } else {
+                                return (
+                                    <ConfirmationDialog
+                                        key={item.toStatusId}
+                                        title="Bạn có chắc muốn cập nhật trạng thái này?"
+                                        description="Không thể hoàn tác hành động này."
+                                        onConfirm={() => handleProcessOrder(item.toStatusId)}
+                                        trigger={
+                                            <Button
+                                                size="lg"
+                                                className="rounded"
+                                                variant={
+                                                    item.toStatus?.shouldMarkAsRefunded
+                                                        ? 'destructive'
+                                                        : item.toStatus?.shouldMarkAsDelivered
+                                                          ? 'success'
+                                                          : 'default'
+                                                }
+                                            >
+                                                {item.label}
+                                            </Button>
+                                        }
+                                    />
+                                )
+                            }
+                        })}
                     </div>
                 )}
             </CardContent>

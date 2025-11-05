@@ -1,7 +1,6 @@
 import { ColumnDef } from '@tanstack/react-table'
 import { DataTable } from '@/components/ui/data-table'
 import { Badge } from '@/components/ui/badge'
-import { ORDER_STATUS_MAP } from '@/configs/constants'
 import dayjs from '@/libs/dayjs'
 
 type OrderCardUpdateLogTableProps = {
@@ -48,7 +47,7 @@ const OrderCardUpdateLogTable = ({ statusUpdateLogs }: OrderCardUpdateLogTablePr
             header: () => <div className="text-center">Trạng thái mới</div>,
             cell: ({ row }) => (
                 <div className="flex justify-center">
-                    <Badge>{ORDER_STATUS_MAP[row.original.status]}</Badge>
+                    <Badge>{row.original.status.name}</Badge>
                 </div>
             )
         }

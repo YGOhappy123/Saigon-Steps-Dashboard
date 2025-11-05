@@ -5,7 +5,6 @@ import { Popover, PopoverTrigger } from '@/components/ui/popover'
 import { Button } from '@/components/ui/button'
 import { exportToCSV } from '@/utils/exportCsvFile'
 import { OrderSortAndFilterParams } from '@/features/order/services/orderService'
-import { ORDER_STATUS_MAP } from '@/configs/constants'
 import PageLimitSelect from '@/components/common/PageLimitSelect'
 import OrderFilter from '@/features/order/components/OrderFilter'
 import formatCurrency from '@/utils/formatCurrency'
@@ -18,6 +17,7 @@ type OrderGridToolbarProps = {
     buildQuery: (params: OrderSortAndFilterParams) => void
     onFilterSearch: () => void
     onResetFilterSearch: () => void
+    orderStatuses: IOrderStatus[]
 }
 
 const OrderGridToolbar = ({
@@ -26,7 +26,8 @@ const OrderGridToolbar = ({
     setLimit,
     buildQuery,
     onFilterSearch,
-    onResetFilterSearch
+    onResetFilterSearch,
+    orderStatuses
 }: OrderGridToolbarProps) => {
     const [havingFilters, setHavingFilters] = useState(false)
 
@@ -36,7 +37,7 @@ const OrderGridToolbar = ({
             const formattedOrders = csvOrders.map((order: IOrder) => ({
                 ['Mã đơn hàng']: order.orderId,
                 ['Khách hàng']: order.customer.name,
-                ['Trạng thái hiện tại']: ORDER_STATUS_MAP[order.status],
+                ['Trạng thái hiện tại']: order.status?.name,
                 ['Tổng giá trị (VNĐ)']: formatCurrency(order.totalAmount),
                 ['Thời gian đặt hàng']: dayjs(order.createdAt).format('DD/MM/YYYY HH:mm:ss'),
                 ['Thời gian giao hàng']: order.deliveredAt
@@ -79,6 +80,7 @@ const OrderGridToolbar = ({
                         onChange={buildQuery}
                         onSearch={onFilterSearch}
                         onReset={onResetFilterSearch}
+                        orderStatuses={orderStatuses}
                     />
                 </Popover>
 

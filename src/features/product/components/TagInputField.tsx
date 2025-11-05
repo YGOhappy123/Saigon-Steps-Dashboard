@@ -36,8 +36,10 @@ export default function TagInputField({
     const handleAdd = () => {
         const trimmed = input.trim()
         if (!trimmed) return
+
         const exists = value.some(tag => tag.toLowerCase() === trimmed.toLowerCase())
         if (!exists) onChange([...value, trimmed])
+
         setInput('')
     }
 
@@ -79,8 +81,9 @@ export default function TagInputField({
                     />
                     <Button
                         type="button"
+                        disabled={!input.trim()}
                         onClick={handleAdd}
-                        className="aspect-square h-12 rounded text-base capitalize xl:col-span-2"
+                        className="aspect-square h-12 rounded text-base capitalize"
                     >
                         <CirclePlus />
                     </Button>

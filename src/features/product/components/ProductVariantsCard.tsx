@@ -5,6 +5,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 import { DataTable } from '@/components/ui/data-table'
 import { Badge } from '@/components/ui/badge'
 import { sections } from '@/features/product/components/TableOfContents'
+import Barcode from 'react-barcode'
 import ProductPriceForm from '@/features/product/components/ProductPriceForm'
 
 type ProductVariantsCardProps = {
@@ -18,8 +19,18 @@ const ProductVariantsCard = ({ product, hasModifyItemPermission, onUpdateSuccess
     const columns: ColumnDef<Partial<IProductItem>>[] = [
         {
             accessorKey: 'productItemId',
-            header: () => <div className="text-center">Mã chi tiết sản phẩm</div>,
+            header: () => <div className="text-center">Mã sản phẩm</div>,
             cell: ({ row }) => <div>{row.original.productItemId}</div>
+        },
+
+        {
+            accessorKey: 'barcode',
+            header: () => <div className="text-center">Mã vạch</div>,
+            cell: ({ row }) => (
+                <div className="flex justify-center">
+                    <Barcode value={row.original.barcode!} height={70} width={2} fontSize={10} margin={10} />
+                </div>
+            )
         },
         {
             accessorKey: 'size',

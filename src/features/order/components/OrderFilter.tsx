@@ -6,7 +6,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { ArrowDown10, ArrowUp10 } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { ORDER_STATUS_OPTIONS } from '@/configs/constants'
 import DateRangePicker from '@/components/common/DateRangePicker'
 
 type OrderFilterProps = {
@@ -14,11 +13,12 @@ type OrderFilterProps = {
     onChange: (params: OrderSortAndFilterParams) => void
     onSearch: () => void
     onReset: () => void
+    orderStatuses: IOrderStatus[]
 }
 
-const OrderFilter = ({ setHavingFilters, onChange, onSearch, onReset }: OrderFilterProps) => {
+const OrderFilter = ({ setHavingFilters, onChange, onSearch, onReset, orderStatuses }: OrderFilterProps) => {
     const [searchName, setSearchName] = useState<string>('')
-    const [searchStatus, setSearchStatus] = useState<OrderStatus | undefined>(undefined)
+    const [searchStatus, setSearchStatus] = useState<number>(0)
     const [searchMinPrice, setSearchMinPrice] = useState<string>('')
     const [searchMaxPrice, setSearchMaxPrice] = useState<string>('')
     const [searchRange, setSearchRange] = useState<string[] | any[]>()
@@ -64,7 +64,7 @@ const OrderFilter = ({ setHavingFilters, onChange, onSearch, onReset }: OrderFil
 
     const handleReset = () => {
         setSearchName('')
-        setSearchStatus(undefined)
+        setSearchStatus(0)
         setSearchMinPrice('')
         setSearchMaxPrice('')
         setSearchRange([])
@@ -118,18 +118,17 @@ const OrderFilter = ({ setHavingFilters, onChange, onSearch, onReset }: OrderFil
                     />
                 </div>
 
-                <Select
-                    value={searchStatus === undefined ? 'undefined' : searchStatus}
-                    onValueChange={value => setSearchStatus(value === 'undefined' ? undefined : (value as OrderStatus))}
-                >
+                <Select value={searchStatus.toString()} onValueChange={value => setSearchStatus(parseInt(value))}>
                     <SelectTrigger className="text-card-foreground h-10! w-full rounded border-2 text-sm font-semibold">
                         <SelectValue />
                     </SelectTrigger>
                     <SelectContent side="top">
-                        <SelectItem value="undefined">Lọc theo trạng thái: Tất cả</SelectItem>
-                        {ORDER_STATUS_OPTIONS.map(statusOption => (
-                            <SelectItem key={statusOption.value} value={statusOption.value}>
-                                Lọc theo trạng thái: {statusOption.label}
+                        <SelectItem key={0} value="0">
+                            Lọc theo trạng thái: Tất cả
+                        </SelectItem>
+                        {orderStatuses.map(status => (
+                            <SelectItem key={status.statusId} value={status.statusId.toString()}>
+                                Lọc theo trạng thái: {status.name}
                             </SelectItem>
                         ))}
                     </SelectContent>

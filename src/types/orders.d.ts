@@ -5,7 +5,7 @@ declare global {
         orderStatusId: number
         couponId: number
         totalAmount: number
-        status: OrderStatus
+        statusId: number
         recipientName?: string
         deliveryAddress?: string
         deliveryPhone?: string
@@ -15,6 +15,7 @@ declare global {
         refundedAt?: string
 
         customer: Partial<ICustomer>
+        status: Partial<IOrderStatus>
         coupon?: ICoupon
         orderItems: {
             productItemId: number
@@ -24,6 +25,7 @@ declare global {
             productItem?: {
                 productItemId: number
                 size: string
+                barcode: string
                 rootProduct: {
                     name: string
                     slug: string
@@ -32,27 +34,43 @@ declare global {
             }
         }[]
         statusUpdateLogs: IOrderStatusUpdateLog[]
+        availableTransitions: IOrderStatusTransition[]
     }
 
     interface IOrderStatusUpdateLog {
         logId: number
         orderId: number
-        status: OrderStatus
+        statusId: number
         updatedAt: string
         updatedBy: number
 
         updatedByStaff?: Partial<IStaff>
+        status: Partial<IOrderStatus>
     }
 
-    type OrderStatus =
-        | 'PENDING'
-        | 'ACCEPTED'
-        | 'PACKED'
-        | 'DISPATCHED'
-        | 'DELIVERY_SUCCESS'
-        | 'DELIVERY_FAILED'
-        | 'CANCELLED'
-        | 'RETURNED'
+    interface IOrderStatus {
+        statusId: number
+        name: string
+        description: string
+        isDefault: boolean
+        shouldReserveStock: boolean
+        shouldReleaseStock: boolean
+        shouldReduceStock: boolean
+        shouldIncreaseStock: boolean
+        shouldMarkAsDelivered: boolean
+        shouldMarkAsRefunded: boolean
+        shouldSendNotification: boolean
+    }
+
+    interface IOrderStatusTransition {
+        fromStatusId: number
+        toStatusId: number
+        label: string
+        isScanningRequired: boolean
+
+        fromStatus?: Partial<IOrderStatus>
+        toStatus?: Partial<IOrderStatus>
+    }
 }
 
 export {}

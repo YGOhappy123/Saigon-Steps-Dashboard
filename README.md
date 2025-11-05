@@ -51,7 +51,7 @@ Follow these steps to set up and run the application locally.
 3. Install dependencies:
 
     ```bash
-    npm install
+    npm install --force
     ```
 
 ## Before You Run

@@ -146,7 +146,7 @@ const ChatWindow = ({ selectedConversationId, setSelectedConversationId, hasChat
                         </Button>
                     </div>
 
-                    <CardContent className="h-full overflow-y-auto p-4 lg:p-6">
+                    <CardContent className="h-full overflow-x-hidden overflow-y-auto p-4 lg:p-6">
                         <ChatMessagesDisplay conversation={conversation} messageEndRef={messageEndRef} />
                     </CardContent>
 

@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux'
+import { useQuery } from '@tanstack/react-query'
 import { Avatar, AvatarImage } from '@/components/ui/avatar'
 import { RootState } from '@/store'
 import orderService from '@/features/order/services/orderService'
@@ -6,11 +7,21 @@ import OrderSummary from '@/features/order/components/OrderSummary'
 import OrderGrid from '@/features/order/components/OrderGrid'
 import verifyPermission from '@/utils/verifyPermission'
 import permissions from '@/configs/permissions'
+import useAxiosIns from '@/hooks/useAxiosIns'
 
 const OrderManagementPage = () => {
+    const axios = useAxiosIns()
     const user = useSelector((state: RootState) => state.auth.user)
     const hasUpdatePermission = verifyPermission(user, permissions.processOrder)
     const orderServiceData = orderService({ enableFetching: true })
+
+    const fetchAllOrderStatusesQuery = useQuery({
+        queryKey: ['statues-all'],
+        queryFn: () => axios.get<IResponseData<IOrderStatus[]>>('/orders/statuses'),
+        enabled: true,
+        select: res => res.data
+    })
+    const orderStatuses = fetchAllOrderStatusesQuery.data?.data || []
 
     return (
         <div className="flex h-full flex-1 flex-col space-y-8 p-4">
@@ -30,6 +41,7 @@ const OrderManagementPage = () => {
 
             <OrderGrid
                 orders={orderServiceData.orders}
+                orderStatuses={orderStatuses}
                 total={orderServiceData.total}
                 page={orderServiceData.page}
                 limit={orderServiceData.limit}

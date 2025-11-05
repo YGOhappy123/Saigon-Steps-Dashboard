@@ -56,7 +56,7 @@ const MessageGroup = ({ group, customer }: MessageGroupProps) => {
     const isCustomer = group.senderId === 0
 
     return (
-        <div className={twMerge('flex w-full gap-4', isCustomer ? '' : 'flex-row-reverse')}>
+        <div className={twMerge('flex w-full max-w-full gap-4', isCustomer ? '' : 'flex-row-reverse')}>
             <Avatar className="size-12 rounded-full">
                 {isCustomer ? (
                     <AvatarImage src={customer?.avatar} alt={customer.name} className="bg-muted" />
@@ -69,7 +69,7 @@ const MessageGroup = ({ group, customer }: MessageGroupProps) => {
                 )}
             </Avatar>
 
-            <div className="flex flex-1 flex-col gap-2">
+            <div className="flex max-w-full flex-1 flex-col gap-2">
                 <>
                     <span
                         className={twMerge('text-muted-foreground font-medium', isCustomer ? 'text-start' : 'text-end')}
