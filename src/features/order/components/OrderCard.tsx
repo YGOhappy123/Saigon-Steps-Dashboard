@@ -219,14 +219,11 @@ const OrderCard = ({ order, hasPermission, updateStatusMutation }: OrderCardProp
                                     <Button
                                         key={item.toStatusId}
                                         size="lg"
-                                        className="rounded"
-                                        variant={
-                                            item.toStatus?.shouldMarkAsRefunded
-                                                ? 'destructive'
-                                                : item.toStatus?.shouldMarkAsDelivered
-                                                  ? 'success'
-                                                  : 'default'
-                                        }
+                                        variant="ghost"
+                                        className="text-primary-foreground hover:text-primary-foreground/80 rounded"
+                                        style={{
+                                            backgroundColor: item.toStatus?.color
+                                        }}
                                         onClick={() => {
                                             setSelectedStatusId(item.toStatusId)
                                             setScanDialogOpen(true)
@@ -245,14 +242,11 @@ const OrderCard = ({ order, hasPermission, updateStatusMutation }: OrderCardProp
                                         trigger={
                                             <Button
                                                 size="lg"
-                                                className="rounded"
-                                                variant={
-                                                    item.toStatus?.shouldMarkAsRefunded
-                                                        ? 'destructive'
-                                                        : item.toStatus?.shouldMarkAsDelivered
-                                                          ? 'success'
-                                                          : 'default'
-                                                }
+                                                variant="ghost"
+                                                className="text-primary-foreground hover:text-primary-foreground/80 rounded"
+                                                style={{
+                                                    backgroundColor: item.toStatus?.color
+                                                }}
                                             >
                                                 {item.label}
                                             </Button>
