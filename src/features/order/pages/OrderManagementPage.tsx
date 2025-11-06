@@ -16,8 +16,8 @@ const OrderManagementPage = () => {
     const orderServiceData = orderService({ enableFetching: true })
 
     const fetchAllOrderStatusesQuery = useQuery({
-        queryKey: ['statues-all'],
-        queryFn: () => axios.get<IResponseData<IOrderStatus[]>>('/orders/statuses'),
+        queryKey: ['order-statuses-all'],
+        queryFn: () => axios.get<IResponseData<IOrderStatus[]>>('/order-statuses'),
         enabled: true,
         select: res => res.data
     })

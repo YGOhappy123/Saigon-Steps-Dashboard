@@ -37,10 +37,21 @@ const OrderCard = ({ order, hasPermission, updateStatusMutation }: OrderCardProp
                 <CardDescription>Đặt lúc {dayjs(order.createdAt).format('HH:mm:ss ngày DD/MM/YYYY')}</CardDescription>
             </CardHeader>
             <CardContent>
-                <div className="bg-primary-foreground border-primary mx-auto mb-2 flex w-fit items-center justify-center gap-6 rounded-full border-4 px-6">
-                    <span className="text-primary py-2 text-xl font-semibold">{order.status.name}</span>
-                    <div className="border-primary h-12 border-l-4"></div>
-                    <span className="text-primary py-2 text-xl font-semibold">{formatCurrency(order.totalAmount)}</span>
+                <div
+                    className="bg-primary-foreground mx-auto mb-2 flex w-fit items-center justify-center gap-6 rounded-full border-4 px-6"
+                    style={{
+                        borderColor: order.status.color,
+                        color: order.status.color
+                    }}
+                >
+                    <span className="py-2 text-xl font-semibold">{order.status.name}</span>
+                    <div
+                        className="h-12 border-l-4"
+                        style={{
+                            borderColor: order.status.color
+                        }}
+                    ></div>
+                    <span className="py-2 text-xl font-semibold">{formatCurrency(order.totalAmount)}</span>
                 </div>
 
                 <Accordion type="multiple" className="w-full" defaultValue={['item-1', 'item-2']}>
@@ -137,7 +148,7 @@ const OrderCard = ({ order, hasPermission, updateStatusMutation }: OrderCardProp
                         <AccordionContent className="flex flex-1 flex-col gap-4 p-4 text-base">
                             <div className="text-card-foreground flex justify-between gap-10">
                                 <span className="shrink-0 font-medium">4.1. Ghi chú đơn hàng: {}</span>
-                                <span className="text-end">{order.note ?? '(Không có)'}</span>
+                                <span className="text-end">{order.note || '(Không có)'}</span>
                             </div>
                             <div className="text-card-foreground flex justify-between gap-10">
                                 <span className="shrink-0 font-medium">4.2. Thời gian giao hàng: {}</span>

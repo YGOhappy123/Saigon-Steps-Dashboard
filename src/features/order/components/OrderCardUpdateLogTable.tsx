@@ -47,7 +47,13 @@ const OrderCardUpdateLogTable = ({ statusUpdateLogs }: OrderCardUpdateLogTablePr
             header: () => <div className="text-center">Trạng thái mới</div>,
             cell: ({ row }) => (
                 <div className="flex justify-center">
-                    <Badge>{row.original.status.name}</Badge>
+                    <Badge
+                        style={{
+                            background: row.original.status.color
+                        }}
+                    >
+                        {row.original.status.name}
+                    </Badge>
                 </div>
             )
         }

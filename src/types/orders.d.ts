@@ -52,6 +52,7 @@ declare global {
         statusId: number
         name: string
         description: string
+        color: string
         isDefault: boolean
         shouldReserveStock: boolean
         shouldReleaseStock: boolean

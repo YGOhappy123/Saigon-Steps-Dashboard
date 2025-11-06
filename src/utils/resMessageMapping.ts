@@ -57,6 +57,18 @@ const ERROR_MESSAGES = {
     ORDER_NOT_FOUND: 'Không tìm thấy đơn hàng.',
     INVALID_STATUS_SELECTED: 'Không thể chuyển đổi sang trạng thái này.',
 
+    // Order statuses related
+    ORDER_STATUS_NOT_FOUND: 'Không tìm thấy trạng thái đơn hàng.',
+    CANNOT_RESERVE_AND_RELEASE_STOCK_SIMULTANEOUSLY: 'Không thể vừa tạm trữ vừa mở khóa tồn kho.',
+    CANNOT_DECREASE_AND_INCREASE_STOCK_SIMULTANEOUSLY: 'Không thể vừa giảm vừa tăng tồn kho.',
+    CANNOT_MARK_AS_DELIVERED_AND_REFUNDED_SIMULTANEOUSLY:
+        'Không thể vừa đánh dấu đã giao hàng vừa đánh dấu hoàn hàng - trả tiền.',
+    ORDER_STATUS_EXISTED: 'Trạng thái đơn hàng đã tồn tại.',
+    ORDER_STATUS_BEING_USED: 'Trạng thái đơn hàng đang được sử dụng.',
+    CANNOT_DELETE_DEFAULT_ORDER_STATUS: 'Không thể xóa trạng thái đơn hàng mặc định.',
+    TRANSITION_EXISTED: 'Hướng chuyển trạng thái đã tồn tại.',
+    TRANSITION_NOT_FOUND: 'Không tìm thấy hướng chuyển trạng thái.',
+
     // Promotions and coupons related
     PROMOTION_NOT_FOUND: 'Không tìm thấy chương trình khuyến mãi.',
     PROMOTION_EXISTED: 'Tên chương trình khuyến mãi đã được sử dụng.',
@@ -118,6 +130,13 @@ const SUCCESS_MESSAGES = {
     RESET_CART_SUCCESSFULLY: 'Đặt lại giỏ hàng thành công.',
     PLACE_ORDER_SUCCESSFULLY: 'Đặt hàng thành công.',
     UPDATE_ORDER_SUCCESSFULLY: 'Cập nhật đơn hàng thành công.',
+
+    // Order statuses related
+    CREATE_ORDER_STATUS_SUCCESSFULLY: 'Tạo trạng thái đơn hàng thành công.',
+    UPDATE_ORDER_STATUS_SUCCESSFULLY: 'Cập nhật trạng thái đơn hàng thành công.',
+    DELETE_ORDER_STATUS_SUCCESSFULLY: 'Xóa trạng thái đơn hàng thành công.',
+    CREATE_TRANSITION_SUCCESSFULLY: 'Tạo hướng chuyển đổi trạng thái thành công.',
+    DELETE_TRANSITION_SUCCESSFULLY: 'Xóa hướng chuyển đổi trạng thái thành công.',
 
     // Promotions and coupons related
     CREATE_PROMOTION_SUCCESSFULLY: 'Tạo chương trình khuyến mãi thành công.',

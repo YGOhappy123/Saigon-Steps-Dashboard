@@ -8,6 +8,7 @@ import BrandRoutes from '@/features/brand/BrandRoutes'
 import ProductRoutes from '@/features/product/ProductRoutes'
 import PromotionRoutes from '@/features/promotion/PromotionRoutes'
 import OrderRoutes from '@/features/order/OrderRoutes'
+import OrderStatusRoutes from '@/features/orderStatus/OrderStatusRoutes'
 import ProductImportRoutes from '@/features/productImport/ProductImportRoutes'
 import DamageReportRoutes from '@/features/damageReport/DamageReportRoutes'
 import StatisticRoutes from '@/features/statistic/StatisticRoutes'
@@ -22,6 +23,7 @@ const developmentRoutes = createBrowserRouter([
     ...ProductRoutes,
     ...PromotionRoutes,
     ...OrderRoutes,
+    ...OrderStatusRoutes,
     ...ProductImportRoutes,
     ...DamageReportRoutes,
     ...StatisticRoutes
@@ -36,6 +38,7 @@ const productionRoutes = createBrowserRouter([
     ...ProductRoutes,
     ...PromotionRoutes,
     ...OrderRoutes,
+    ...OrderStatusRoutes,
     ...ProductImportRoutes,
     ...DamageReportRoutes,
     ...StatisticRoutes

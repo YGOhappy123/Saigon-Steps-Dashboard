@@ -4,6 +4,8 @@ import {
     ChartLine,
     CircleDollarSignIcon,
     ClipboardType,
+    ClockArrowUp,
+    Cog,
     Crown,
     Footprints,
     KeyRound,
@@ -76,6 +78,17 @@ export const sidebarGroups: SidebarGroupData[] = [
                 icon: ShoppingCart,
                 url: '/don-hang',
                 accessRequirement: permissions.accessOrderDashboardPage
+            },
+            {
+                title: 'Trạng thái đơn hàng',
+                icon: ClockArrowUp,
+                url: '/trang-thai-don-hang'
+            },
+            {
+                title: 'Chuyển đổi trạng thái',
+                icon: Cog,
+                url: '/trang-thai-don-hang/chuyen-trang-thai',
+                accessRequirement: permissions.accessTransitionDashboardPage
             }
         ]
     },

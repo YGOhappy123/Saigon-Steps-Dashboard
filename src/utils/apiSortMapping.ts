@@ -13,6 +13,8 @@ export const SORT_MAPPING = {
     '+productId': { rootProductId: 'asc' },
     '-orderId': { orderId: 'desc' },
     '+orderId': { orderId: 'asc' },
+    '-statusId': { statusId: 'desc' },
+    '+statusId': { statusId: 'asc' },
     '-promotionId': { promotionId: 'desc' },
     '+promotionId': { promotionId: 'asc' },
     '-couponId': { couponId: 'desc' },
