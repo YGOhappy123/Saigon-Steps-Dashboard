@@ -38,21 +38,21 @@ Follow these steps to set up and run the application locally.
 
 1. Clone the repository:
 
-    ```bash
-    git clone https://github.com/YGOhappy123/Saigon_Steps_Dashboard.git
-    ```
+   ```bash
+   git clone https://github.com/YGOhappy123/Saigon_Steps_Dashboard.git
+   ```
 
 2. Navigate to the project directory:
 
-    ```bash
-    cd Saigon_Steps_Dashboard
-    ```
+   ```bash
+   cd Saigon_Steps_Dashboard
+   ```
 
 3. Install dependencies:
 
-    ```bash
-    npm install --force
-    ```
+   ```bash
+   npm install --force
+   ```
 
 ## Before You Run
 
@@ -60,15 +60,15 @@ Before running the project, make sure to set up the environment variables:
 
 1. Create a `.env` file:
 
-    In the root directory of your project (at the same level as `.env.example`), create a `.env` file.
+   In the root directory of your project (at the same level as `.env.example`), create a `.env` file.
 
 2. Populate the environment variables:
 
-    Copy the variables from `.env.example` into `.env` and replace the placeholder values with your actual configuration.
+   Copy the variables from `.env.example` into `.env` and replace the placeholder values with your actual configuration.
 
 3. For collaborators:
 
-    If you are a collaborator on this project, please contact the project owner to obtain the values for the environment variables.
+   If you are a collaborator on this project, please contact the project owner to obtain the values for the environment variables.
 
 ## Development
 

@@ -5,5 +5,15 @@
     "trailingComma": "none",
     "semi": false,
     "arrowParens": "avoid",
-    "plugins": ["prettier-plugin-tailwindcss"]
+    "plugins": ["prettier-plugin-tailwindcss"],
+    "overrides": [
+        {
+            "files": "*.md",
+            "options": {
+                "parser": "markdown",
+                "plugins": [],
+                "tabWidth": 2
+            }
+        }
+    ]
 }
