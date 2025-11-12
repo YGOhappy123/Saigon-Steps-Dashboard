@@ -112,7 +112,11 @@ const ProductPriceForm = ({ product, hasModifyItemPermission, onUpdateSuccess }:
                                     disabled={!hasModifyItemPermission || form.formState.isSubmitting}
                                     className="h-12 rounded text-base capitalize"
                                 >
-                                    {form.formState.isSubmitting ? 'Đang tải...' : 'Cập nhật giá sản phẩm'}
+                                    {form.formState.isSubmitting
+                                        ? product.isAccessory === false
+                                            ? 'Đang tải và đồng bộ với AI...'
+                                            : 'Đang tải...'
+                                        : 'Cập nhật giá sản phẩm'}
                                 </Button>
                             </>
                         )}

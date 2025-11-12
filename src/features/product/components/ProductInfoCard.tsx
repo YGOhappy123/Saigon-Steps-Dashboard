@@ -570,7 +570,11 @@ const ProductInfoCard = ({
                                             disabled={!hasModifyInfoPermission || form.formState.isSubmitting}
                                             className="h-12 rounded text-base capitalize"
                                         >
-                                            {form.formState.isSubmitting ? 'Đang tải...' : 'Cập nhật thông tin'}
+                                            {form.formState.isSubmitting
+                                                ? product.isAccessory === false
+                                                    ? 'Đang tải và đồng bộ với AI...'
+                                                    : 'Đang tải...'
+                                                : 'Cập nhật thông tin'}
                                         </Button>
                                     </>
                                 )}

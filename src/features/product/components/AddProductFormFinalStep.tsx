@@ -209,7 +209,11 @@ const AddProductFormFinalStep = ({
                     }}
                     className="h-12 rounded text-base capitalize"
                 >
-                    {isLoading ? 'Đang tải...' : 'Tạo sản phẩm'}
+                    {isLoading
+                        ? data.type === 'shoe'
+                            ? 'Đang tải và đồng bộ với AI...'
+                            : 'Đang tải...'
+                        : 'Tạo sản phẩm'}
                 </Button>
             </div>
         </div>
