@@ -123,7 +123,7 @@ const DataStatusDialog = ({
                     </DialogTitle>
                     <DialogDescription>
                         {mode === 'view'
-                            ? 'Thông tin chi tiết về tên, mô tả và các hành động của trạng thái đơn hàng.'
+                            ? 'Thông tin chi tiết về tên, mô tả và các tác vụ của trạng thái đơn hàng.'
                             : 'Chỉnh sửa các thông tin của trạng thái đơn hàng. Ấn "Xác nhận" sau khi hoàn tất.'}
                     </DialogDescription>
                 </DialogHeader>
@@ -192,7 +192,7 @@ const DataStatusDialog = ({
                             />
 
                             <div className="grid max-h-[120px] grid-cols-1 gap-2 overflow-y-auto">
-                                <FormLabel className="text-card-foreground">Hành động</FormLabel>
+                                <FormLabel className="text-card-foreground">Danh sách tác vụ</FormLabel>
                                 {statusActions.map(item => (
                                     <FormField
                                         key={item.name}

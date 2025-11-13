@@ -156,7 +156,7 @@ const AddStatusDialog = ({ addNewStatusMutation, statusActions }: AddStatusDialo
                             />
 
                             <div className="grid max-h-[120px] grid-cols-1 gap-2 overflow-y-auto">
-                                <FormLabel className="text-card-foreground">Hành động</FormLabel>
+                                <FormLabel className="text-card-foreground">Danh sách tác vụ</FormLabel>
                                 {statusActions.map(item => (
                                     <FormField
                                         key={item.name}

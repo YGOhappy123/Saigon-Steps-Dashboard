@@ -73,7 +73,7 @@ const StatusFilter = ({ setHavingFilters, onChange, onSearch, onReset, statusAct
 
                 <div className="border-primary relative rounded border-2 py-2 pr-1 pl-3">
                     <h3 className="text-primary bg-popover absolute -top-0.5 -left-2 -translate-y-1/2 scale-[0.8] px-1 font-medium">
-                        Lọc theo quyền truy cập khả dụng
+                        Lọc theo danh sách tác vụ
                     </h3>
                     <div className="mt-2 flex max-h-[200px] flex-col gap-2 overflow-y-auto pr-2">
                         {statusActions.map(action => (
