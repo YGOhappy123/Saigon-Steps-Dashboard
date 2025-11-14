@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 import { Avatar, AvatarImage } from '@/components/ui/avatar'
 import { RootState } from '@/store'
 import SummaryCards from '@/features/statistic/components/SummaryCards'
-import RevenueChart from '@/features/statistic/components/RevenueChart'
+import RevenuesChart from '@/features/statistic/components/RevenuesChart'
 import KeyCustomers from '@/features/statistic/components/KeyCustomers'
 
 export type StatisticCriteria = 'daily' | 'weekly' | 'monthly' | 'yearly'
@@ -47,7 +47,7 @@ const RevenueStatisticPage = () => {
 
             <div className="grid grid-cols-6 gap-6">
                 <SummaryCards />
-                <RevenueChart />
+                <RevenuesChart />
                 <KeyCustomers />
             </div>
         </div>

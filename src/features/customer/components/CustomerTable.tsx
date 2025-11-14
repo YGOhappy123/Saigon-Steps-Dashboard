@@ -29,6 +29,7 @@ type CustomerTableProps = {
     hasSendMessagePermission: boolean
     hasDeactivateCustomerPermission: boolean
     onSendMessage: (value: ICustomer) => void
+    onViewStatistic: (value: ICustomer) => void
     getCsvCustomersQuery: UseQueryResult<any, any>
     deactivateCustomerMutation: UseMutationResult<any, any, number, any>
 }
@@ -59,6 +60,7 @@ const CustomerTable = ({
     hasSendMessagePermission,
     hasDeactivateCustomerPermission,
     onSendMessage,
+    onViewStatistic,
     getCsvCustomersQuery,
     deactivateCustomerMutation
 }: CustomerTableProps) => {
@@ -134,6 +136,14 @@ const CustomerTable = ({
                                 }}
                             >
                                 Gửi tin nhắn
+                            </DropdownMenuItem>
+                            <DropdownMenuItem
+                                className="cursor-pointer"
+                                onClick={() => {
+                                    onViewStatistic(row.original)
+                                }}
+                            >
+                                Xem thống kê
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />
                             <ConfirmationDialog

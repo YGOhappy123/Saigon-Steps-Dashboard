@@ -4,13 +4,15 @@ import { Avatar, AvatarImage } from '@/components/ui/avatar'
 import { RootState } from '@/store'
 import CustomerTable from '@/features/customer/components/CustomerTable'
 import SendMessageDialog from '@/features/customer/components/SendMessageDialog'
+import ViewOrdersStatisticDialog from '@/features/customer/components/ViewOrdersStatisticDialog'
 import customerService from '@/features/customer/services/customerService'
 import verifyPermission from '@/utils/verifyPermission'
 import appPermissions from '@/configs/permissions'
 
 const CustomerListPage = () => {
     const user = useSelector((state: RootState) => state.auth.user!)
-    const [dialogOpen, setDialogOpen] = useState(false)
+    const [sendMessageDialogOpen, setSendMessageDialogOpen] = useState(false)
+    const [viewStatisticDialogOpen, setViewStatisticDialogOpen] = useState(false)
     const [selectedCustomer, setSelectedCustomer] = useState<ICustomer | null>(null)
     const customerServiceData = customerService({ enableFetching: true })
 
@@ -28,7 +30,17 @@ const CustomerListPage = () => {
                 </div>
             </div>
 
-            <SendMessageDialog customer={selectedCustomer} open={dialogOpen} setOpen={setDialogOpen} />
+            <SendMessageDialog
+                customer={selectedCustomer}
+                open={sendMessageDialogOpen}
+                setOpen={setSendMessageDialogOpen}
+            />
+
+            <ViewOrdersStatisticDialog
+                customer={selectedCustomer}
+                open={viewStatisticDialogOpen}
+                setOpen={setViewStatisticDialogOpen}
+            />
 
             <CustomerTable
                 customers={customerServiceData.customers}
@@ -44,7 +56,11 @@ const CustomerListPage = () => {
                 hasDeactivateCustomerPermission={verifyPermission(user, appPermissions.deactivateCustomerAccount)}
                 onSendMessage={(customer: ICustomer) => {
                     setSelectedCustomer(customer)
-                    setDialogOpen(true)
+                    setSendMessageDialogOpen(true)
+                }}
+                onViewStatistic={(customer: ICustomer) => {
+                    setSelectedCustomer(customer)
+                    setViewStatisticDialogOpen(true)
                 }}
                 getCsvCustomersQuery={customerServiceData.getCsvCustomersQuery}
                 deactivateCustomerMutation={customerServiceData.deactivateCustomerMutation}
