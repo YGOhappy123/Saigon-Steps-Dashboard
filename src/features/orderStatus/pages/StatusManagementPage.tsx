@@ -31,13 +31,13 @@ const statusActions = [
     },
     {
         name: 'shouldMarkAsDelivered',
-        shorten: 'Đánh dấu đơn hàng là đã giao thành công',
-        label: 'Đánh dấu đơn hàng là đã giao thành công, ghi nhận thời gian giao hàng và tăng doanh thu cho cửa hàng.'
+        shorten: 'Đánh dấu đơn hàng đã được giao thành công',
+        label: 'Đánh dấu đơn hàng đã được giao thành công, ghi nhận thời gian giao hàng và tăng doanh thu cho cửa hàng.'
     },
     {
         name: 'shouldMarkAsRefunded',
-        shorten: 'Đánh dấu đơn hàng là đã hoàn hàng - trả tiền',
-        label: 'Đánh dấu đơn hàng là đã hoàn hàng - trả tiền, ghi nhận thời gian hoàn trả và cập nhật lại doanh thu cho cửa hàng.'
+        shorten: 'Đánh dấu đơn hàng đã được hoàn hàng - trả tiền',
+        label: 'Đánh dấu đơn hàng đã được hoàn hàng - trả tiền, ghi nhận thời gian hoàn trả và cập nhật lại doanh thu cho cửa hàng.'
     },
     {
         name: 'shouldSendNotification',
