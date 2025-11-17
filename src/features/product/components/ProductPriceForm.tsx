@@ -10,7 +10,7 @@ import productService from '@/features/product/services/productService'
 
 const productPriceFormSchema = z
     .object({
-        price: z.coerce.number().min(1000, { message: 'Giá tiền phải lớn hơn 1000 đồng.' })
+        price: z.coerce.number().min(1000, { message: 'Giá tiền phải lớn hơn hoặc bằng 1000 đồng.' })
     })
     .refine(data => data.price % 1000 === 0, {
         message: 'Giá tiền phải là bội số của 1000 đồng.',

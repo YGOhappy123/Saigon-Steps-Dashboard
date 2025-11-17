@@ -23,7 +23,7 @@ import { Checkbox } from '@/components/ui/checkbox'
 const dataRoleFormSchema = z.object({
     name: z.string().min(1, { message: 'Tên vai trò không được để trống.' }),
     isImmutable: z.boolean(),
-    permissions: z.array(z.number()).min(1, { message: 'Vui lòng chọn ít nhất một quyền truy cập.' })
+    permissions: z.array(z.number())
 })
 
 type DataRoleDialogProps = {

@@ -14,12 +14,19 @@ const secondStepFormSchema = z.object({
                 .object({
                     rootProductId: z.number().min(1, { message: 'Vui lòng chọn sản phẩm.' }),
                     productItemId: z.number().min(1, { message: 'Vui lòng chọn phân loại.' }),
-                    expectedCost: z.coerce.number().min(100, { message: 'Thiệt hại ước tính phải lớn hơn 100 đồng.' }),
-                    quantity: z.coerce.number().min(1, { message: 'Số lượng không được bé hơn 1.' })
+                    expectedCost: z.coerce
+                        .number()
+                        .min(100, { message: 'Thiệt hại ước tính phải lớn hơn hoặc bằng 100 đồng.' }),
+                    quantity: z.coerce.number().min(1, { message: 'Số lượng không được bé hơn 1.' }),
+                    maxQuantity: z.number()
                 })
                 .refine(data => data.expectedCost % 100 === 0, {
                     message: 'Thiệt hại ước tính phải là bội số của 100 đồng.',
                     path: ['expectedCost']
+                })
+                .refine(data => data.quantity <= data.maxQuantity, {
+                    message: 'Số lượng không được vượt quá số lượng tồn kho.',
+                    path: ['quantity']
                 })
         )
         .min(1, { message: 'Phải chọn ít nhất một sản phẩm.' })
@@ -41,7 +48,7 @@ const AddDamageFormSecondStep = ({ defaultValues, rootProducts, onNext, onPrev }
     const form = useForm<SecondStepData>({
         resolver: zodResolver(secondStepFormSchema) as any,
         defaultValues: defaultValues ?? {
-            items: [{ rootProductId: 0, productItemId: 0, expectedCost: 0, quantity: 1 }]
+            items: [{ rootProductId: 0, productItemId: 0, expectedCost: 0, quantity: 1, maxQuantity: 0 }]
         }
     })
 
@@ -60,7 +67,8 @@ const AddDamageFormSecondStep = ({ defaultValues, rootProducts, onNext, onPrev }
 
         return (product.productItems ?? []).map(pi => ({
             productItemId: pi.productItemId,
-            label: pi.size
+            label: pi.size,
+            stock: pi.stock
         }))
     }
 
@@ -71,7 +79,15 @@ const AddDamageFormSecondStep = ({ defaultValues, rootProducts, onNext, onPrev }
                     <span className="font-medium">Tổng số sản phẩm: {form.getValues('items').length}</span>
                     <Button
                         type="button"
-                        onClick={() => append({ rootProductId: 0, productItemId: 0, expectedCost: 0, quantity: 1 })}
+                        onClick={() =>
+                            append({
+                                rootProductId: 0,
+                                productItemId: 0,
+                                expectedCost: 0,
+                                quantity: 1,
+                                maxQuantity: 0
+                            })
+                        }
                     >
                         <FunnelPlus /> Thêm sản phẩm
                     </Button>
@@ -120,35 +136,48 @@ const AddDamageFormSecondStep = ({ defaultValues, rootProducts, onNext, onPrev }
                             <FormField
                                 control={form.control}
                                 name={`items.${index}.productItemId`}
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel className="text-card-foreground">Phân loại</FormLabel>
-                                        <Select
-                                            onValueChange={value => field.onChange(Number(value))}
-                                            value={field.value.toString()}
-                                            disabled={!form.watch(`items.${index}.rootProductId`)}
-                                        >
-                                            <FormControl>
-                                                <SelectTrigger className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2 font-semibold">
-                                                    <SelectValue placeholder="Phân loại..." />
-                                                </SelectTrigger>
-                                            </FormControl>
-                                            <SelectContent>
-                                                {getVariants(form.watch(`items.${index}.rootProductId`)).map(
-                                                    productItem => (
+                                render={({ field }) => {
+                                    const variants = getVariants(form.watch(`items.${index}.rootProductId`))
+
+                                    return (
+                                        <FormItem>
+                                            <FormLabel className="text-card-foreground">Phân loại</FormLabel>
+                                            <Select
+                                                onValueChange={value => {
+                                                    field.onChange(Number(value))
+                                                    const selectedVariant = variants.find(
+                                                        v => v.productItemId === Number(value)
+                                                    )
+                                                    form.setValue(
+                                                        `items.${index}.maxQuantity`,
+                                                        selectedVariant?.stock ?? 0
+                                                    )
+                                                }}
+                                                value={field.value.toString()}
+                                                disabled={!form.watch(`items.${index}.rootProductId`)}
+                                            >
+                                                <FormControl>
+                                                    <SelectTrigger className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2 font-semibold">
+                                                        <SelectValue placeholder="Phân loại..." />
+                                                    </SelectTrigger>
+                                                </FormControl>
+                                                <SelectContent>
+                                                    {variants.map(productItem => (
                                                         <SelectItem
                                                             key={productItem.productItemId}
                                                             value={productItem.productItemId!.toString()}
+                                                            disabled={productItem.stock! <= 0}
                                                         >
-                                                            {productItem.label}
+                                                            {productItem.label} (Tồn kho:{' '}
+                                                            {productItem.stock?.toString().padStart(2, '0')})
                                                         </SelectItem>
-                                                    )
-                                                )}
-                                            </SelectContent>
-                                        </Select>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                                    ))}
+                                                </SelectContent>
+                                            </Select>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )
+                                }}
                             />
 
                             <div className="grid w-full grid-cols-2 items-start gap-4">
@@ -157,11 +186,11 @@ const AddDamageFormSecondStep = ({ defaultValues, rootProducts, onNext, onPrev }
                                     name={`items.${index}.expectedCost`}
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel className="text-card-foreground">Đơn giá</FormLabel>
+                                            <FormLabel className="text-card-foreground">Thiệt hại ước tính</FormLabel>
                                             <FormControl>
                                                 <Input
                                                     type="number"
-                                                    placeholder="Đơn giá..."
+                                                    placeholder="Thiệt hại ước tính..."
                                                     className="caret-card-foreground text-card-foreground h-12 rounded border-2 font-semibold"
                                                     {...field}
                                                 />

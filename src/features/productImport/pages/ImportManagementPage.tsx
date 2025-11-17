@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { Avatar, AvatarImage } from '@/components/ui/avatar'
 import { RootState } from '@/store'
 import importService from '@/features/productImport/services/importService'
-import DataProductImportDialog from '@/features/productImport/components/DataProductImportDialog'
+import ViewProductImportDialog from '@/features/productImport/components/ViewProductImportDialog'
 import ProductImportTable from '@/features/productImport/components/ProductImportTable'
 import verifyPermission from '@/utils/verifyPermission'
 import permissions from '@/configs/permissions'
@@ -28,7 +28,7 @@ const ImportManagementPage = () => {
                 </div>
             </div>
 
-            <DataProductImportDialog productImport={selectedImport} open={dialogOpen} setOpen={setDialogOpen} />
+            <ViewProductImportDialog productImport={selectedImport} open={dialogOpen} setOpen={setDialogOpen} />
 
             <ProductImportTable
                 imports={importServiceData.imports}

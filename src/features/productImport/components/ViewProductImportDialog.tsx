@@ -14,19 +14,18 @@ import { Separator } from '@/components/ui/separator'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { formSteps } from '@/features/damageReport/pages/AddDamagePage'
-import { INVENTORY_DAMAGE_REASON_MAP } from '@/configs/constants'
+import { formSteps } from '@/features/productImport/pages/AddImportPage'
 import formatCurrency from '@/utils/formatCurrency'
 import dayjs from '@/libs/dayjs'
 
-type DataDamageReportDialogProps = {
-    damageReport: IInventoryDamageReport | null
+type ViewProductImportDialogProps = {
+    productImport: IProductImport | null
     open: boolean
     setOpen: (value: boolean) => void
 }
 
-const DataDamageReportDialog = ({ damageReport, open, setOpen }: DataDamageReportDialogProps) => {
-    const columns: ColumnDef<IInventoryDamageReport['reportItems'][number]>[] = [
+const ViewProductImportDialog = ({ productImport, open, setOpen }: ViewProductImportDialogProps) => {
+    const columns: ColumnDef<IProductImport['importItems'][number]>[] = [
         {
             id: 'product',
             header: () => <div>Sản phẩm</div>,
@@ -66,11 +65,11 @@ const DataDamageReportDialog = ({ damageReport, open, setOpen }: DataDamageRepor
         },
         {
             accessorKey: 'cost',
-            header: () => <div className="text-center">Thiệt hại ước tính</div>,
+            header: () => <div className="text-center">Đơn giá</div>,
             cell: ({ row }) => (
                 <div className="flex justify-center">
                     <Badge variant="success">
-                        <BadgeDollarSign /> {formatCurrency(row.original.expectedCost)}
+                        <BadgeDollarSign /> {formatCurrency(row.original.cost)}
                     </Badge>
                 </div>
             )
@@ -81,14 +80,14 @@ const DataDamageReportDialog = ({ damageReport, open, setOpen }: DataDamageRepor
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogContent className="min-w-2xl md:min-w-3xl">
                 <DialogHeader>
-                    <DialogTitle>Thông tin báo cáo thiệt hại</DialogTitle>
+                    <DialogTitle>Thông tin đơn nhập hàng</DialogTitle>
                     <DialogDescription>
-                        Thông tin chi tiết về thiệt hại ước tính và các sản phẩm của báo cáo thiệt hại.
+                        Thông tin chi tiết về ngày nhập hàng, số tiền và các sản phẩm của đơn nhập hàng.
                     </DialogDescription>
                 </DialogHeader>
                 <Separator />
 
-                <Accordion type="multiple" className="w-full" defaultValue={['item-1']}>
+                <Accordion type="multiple" className="max-h-[480px] w-full overflow-y-auto" defaultValue={['item-1']}>
                     <AccordionItem value="item-1">
                         <AccordionTrigger className="hover:bg-muted/50 cursor-pointer items-center px-4">
                             <div className="flex flex-col">
@@ -99,18 +98,16 @@ const DataDamageReportDialog = ({ damageReport, open, setOpen }: DataDamageRepor
                         <AccordionContent>
                             <div className="flex flex-1 flex-col gap-4 p-4">
                                 <div className="text-justify">
-                                    <span className="text-card-foreground font-medium">1.1. Phân loại thiệt hại: </span>
-                                    {INVENTORY_DAMAGE_REASON_MAP[damageReport?.reason as InventoryDamageReason]}
-                                </div>
-                                <div className="text-justify">
-                                    <span className="text-card-foreground font-medium">1.2. Ghi chú: </span>
-                                    {damageReport?.note ?? '(Không có)'}
+                                    <span className="text-card-foreground font-medium">1.1. Mã hóa đơn: </span>
+                                    {productImport?.invoiceNumber}
                                 </div>
                                 <div>
-                                    <span className="text-card-foreground font-medium">
-                                        1.3. Tổng thiệt hại ước tính:{' '}
-                                    </span>
-                                    {formatCurrency(damageReport?.totalExpectedCost)}
+                                    <span className="text-card-foreground font-medium">1.2. Ngày nhập hàng: </span>
+                                    {dayjs(productImport?.importDate).format('DD/MM/YYYY HH:mm:ss')}
+                                </div>
+                                <div>
+                                    <span className="text-card-foreground font-medium">1.3. Tổng số tiền: </span>
+                                    {formatCurrency(productImport?.totalCost)}
                                 </div>
                             </div>
                         </AccordionContent>
@@ -123,8 +120,8 @@ const DataDamageReportDialog = ({ damageReport, open, setOpen }: DataDamageRepor
                                 <span className="text-muted-foreground text-sm">{formSteps[1].description}</span>
                             </div>
                         </AccordionTrigger>
-                        <AccordionContent className="max-h-[200px] overflow-y-auto p-4">
-                            <DataTable data={damageReport?.reportItems ?? []} columns={columns} />
+                        <AccordionContent className="p-4">
+                            <DataTable data={productImport?.importItems ?? []} columns={columns} />
                         </AccordionContent>
                     </AccordionItem>
 
@@ -143,30 +140,28 @@ const DataDamageReportDialog = ({ damageReport, open, setOpen }: DataDamageRepor
                                 <div className="flex items-start gap-2">
                                     <div className="border-primary flex w-[70px] items-center justify-center overflow-hidden rounded-full border-3 p-1">
                                         <img
-                                            src={damageReport?.reportedByStaff?.avatar as string}
+                                            src={productImport?.trackedByStaff?.avatar as string}
                                             alt="product image"
                                             className="aspect-square h-full w-full rounded-full object-cover"
                                         />
                                     </div>
                                     <div className="flex flex-1 flex-col">
                                         <p className="text-base font-medium break-words whitespace-normal">
-                                            {damageReport?.reportedByStaff?.name}
+                                            {productImport?.trackedByStaff?.name}
                                         </p>
                                         <p className="text-muted-foreground break-words whitespace-normal">
                                             <span className="font-medium">Mã nhân viên: </span>
-                                            {damageReport?.reportedBy}
+                                            {productImport?.trackedBy}
                                         </p>
                                         <p className="text-muted-foreground break-words whitespace-normal">
                                             <span className="font-medium">Email: </span>
-                                            {damageReport?.reportedByStaff?.email}
+                                            {productImport?.trackedByStaff?.email}
                                         </p>
                                     </div>
                                 </div>
                                 <div>
-                                    <span className="text-card-foreground font-medium">
-                                        3.2. Thời gian tạo báo cáo:{' '}
-                                    </span>
-                                    {dayjs(damageReport?.reportedAt).format('DD/MM/YYYY HH:mm:ss')}
+                                    <span className="text-card-foreground font-medium">3.2. Thời gian ghi nhận: </span>
+                                    {dayjs(productImport?.trackedAt).format('DD/MM/YYYY HH:mm:ss')}
                                 </div>
                             </div>
                         </AccordionContent>
@@ -184,4 +179,4 @@ const DataDamageReportDialog = ({ damageReport, open, setOpen }: DataDamageRepor
     )
 }
 
-export default DataDamageReportDialog
+export default ViewProductImportDialog

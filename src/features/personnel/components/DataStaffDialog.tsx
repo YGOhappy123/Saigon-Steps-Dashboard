@@ -99,7 +99,9 @@ const DataStaffDialog = ({
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogContent className="min-w-2xl md:min-w-3xl">
                 <DialogHeader>
-                    <DialogTitle>{mode === 'view' ? 'Thông tin nhân viên' : 'Cập nhật nhân viên'}</DialogTitle>
+                    <DialogTitle>
+                        {mode === 'view' ? 'Thông tin nhân viên' : 'Cập nhật thông tin nhân viên'}
+                    </DialogTitle>
                     <DialogDescription>
                         {mode === 'view'
                             ? 'Thông tin chi tiết về tên, email và vai trò của nhân viên.'

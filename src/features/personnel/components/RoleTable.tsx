@@ -100,14 +100,17 @@ const RoleTable = ({
             header: () => <div>Danh sách quyền truy cập</div>,
             cell: ({ row }) => {
                 const permissions = (row.original.permissions ?? []) as IPermission[]
+                const accessPermissions = permissions.filter(permission => permission.code.startsWith('ACCESS'))
 
                 return (
                     <div className="flex flex-col items-start space-y-2">
-                        {permissions
-                            .filter(permission => permission.code.startsWith('ACCESS'))
-                            .map((permission, index) => (
-                                <span key={index}>{permission.name}</span>
-                            ))}
+                        {accessPermissions.length === 0 && (
+                            <span>(Không có quyền truy cập vào các trang đặc biệt)</span>
+                        )}
+
+                        {accessPermissions.map((permission, index) => (
+                            <span key={index}>{permission.name}</span>
+                        ))}
                     </div>
                 )
             }

@@ -14,7 +14,7 @@ const secondStepFormSchema = z.object({
                 .object({
                     rootProductId: z.number().min(1, { message: 'Vui lòng chọn sản phẩm.' }),
                     productItemId: z.number().min(1, { message: 'Vui lòng chọn phân loại.' }),
-                    cost: z.coerce.number().min(100, { message: 'Giá tiền phải lớn hơn 100 đồng.' }),
+                    cost: z.coerce.number().min(100, { message: 'Giá tiền phải lớn hơn hoặc bằng 100 đồng.' }),
                     quantity: z.coerce.number().min(1, { message: 'Số lượng không được bé hơn 1.' })
                 })
                 .refine(data => data.cost % 100 === 0, {

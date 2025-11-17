@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -43,8 +43,8 @@ const addCouponFormSchema = z
                 message: 'Ngày kết thúc phải lớn hơn hoặc bằng ngày hiện tại.'
             })
     })
-    .refine(data => data.type !== 'FIXED' || data.amount % 1000 === 0, {
-        message: 'Giá trị giảm phải là bội số của 1000 đồng.',
+    .refine(data => data.type !== 'FIXED' || (data.amount >= 1000 && data.amount % 1000 === 0), {
+        message: 'Giá trị giảm phải lớn hơn hoặc bằng 1000 đồng và là bội số của 1000 đồng.',
         path: ['amount']
     })
     .refine(data => data.type !== 'PERCENTAGE' || (data.amount >= 1 && data.amount <= 100), {

@@ -35,7 +35,7 @@ const AddDamageFormFinalStep = ({ data, rootProducts, onConfirm, onPrev, isLoadi
                             </div>
                             <div>
                                 <span className="text-card-foreground font-medium">1.2. Ghi chú: </span>
-                                {data.note ?? '(Không có)'}
+                                {data.note || '(Không có)'}
                             </div>
                             <div>
                                 <span className="text-card-foreground font-medium">1.3. Tổng thiệt hại ước tính: </span>

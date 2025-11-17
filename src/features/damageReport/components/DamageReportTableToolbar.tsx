@@ -80,7 +80,7 @@ const DamageReportTableToolbar = ({
                 {hasAddPermission && (
                     <Button variant="lighter" onClick={() => navigate('/bao-cao-thiet-hai/them')}>
                         <PencilLine />
-                        Tạo báo cáo
+                        Tạo báo cáo thiệt hại
                     </Button>
                 )}
 

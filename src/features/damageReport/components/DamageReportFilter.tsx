@@ -121,7 +121,7 @@ const DamageReportFilter = ({ setHavingFilters, onChange, onSearch, onReset }: D
                 <DateRangePicker
                     date={date}
                     setDate={setDate}
-                    placeHolder="Lọc theo ngày nhập hàng..."
+                    placeHolder="Lọc theo ngày tạo báo cáo..."
                     triggerClassName="text-card-foreground h-10 text-sm"
                 />
 

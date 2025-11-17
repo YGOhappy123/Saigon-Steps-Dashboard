@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { Avatar, AvatarImage } from '@/components/ui/avatar'
 import { RootState } from '@/store'
 import damageService from '@/features/damageReport/services/damageService'
-import DataDamageReportDialog from '@/features/damageReport/components/DataDamageReportDialog'
+import ViewDamageReportDialog from '@/features/damageReport/components/ViewDamageReportDialog'
 import DamageReportTable from '@/features/damageReport/components/DamageReportTable'
 import verifyPermission from '@/utils/verifyPermission'
 import permissions from '@/configs/permissions'
@@ -30,7 +30,7 @@ const DamageManagementPage = () => {
                 </div>
             </div>
 
-            <DataDamageReportDialog damageReport={selectedDamage} open={dialogOpen} setOpen={setDialogOpen} />
+            <ViewDamageReportDialog damageReport={selectedDamage} open={dialogOpen} setOpen={setDialogOpen} />
 
             <DamageReportTable
                 damages={damageServiceData.damages}

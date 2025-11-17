@@ -73,10 +73,11 @@ const AddImportFormFirstStep = ({ defaultValues, onNext }: AddImportFormFirstSte
                                     field.onChange(undefined)
                                     return
                                 }
-                                const [h, m] = time.split(':').map(Number)
+                                const [h, m, s] = time.split(':').map(Number)
                                 const newDate = new Date(date)
                                 newDate.setHours(h)
                                 newDate.setMinutes(m)
+                                newDate.setSeconds(s)
                                 field.onChange(newDate)
                             }, [date, time])
 
