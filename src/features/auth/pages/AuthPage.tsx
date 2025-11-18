@@ -33,7 +33,7 @@ const AuthPage = () => {
         return (
             <div className="bg-primary flex h-screen w-full items-center justify-center">
                 <div className="bg-primary-foreground flex gap-3 rounded-xl p-3">
-                    <div>
+                    <div className="hidden lg:block">
                         <AuthCarousel
                             images={AUTH_CAROUSEL_IMAGES}
                             size={{
