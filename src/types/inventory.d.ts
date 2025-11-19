@@ -51,7 +51,32 @@ declare global {
         }[]
     }
 
+    interface IInventoryUpdateLog {
+        logId: number
+        productItemId: number
+        type: InventoryUpdateType
+        orderId?: number
+        importId?: number
+        damageReportId?: number
+        quantity: number
+        updatedAt: string
+
+        order?: Partial<IOrder>
+        import?: Partial<IProductImport>
+        damageReport?: Partial<IInventoryDamageReport>
+        productItem?: {
+            productItemId: number
+            size: string
+            rootProduct: {
+                name: string
+                slug: string
+                images: Partial<IProductImage>[] | string[]
+            }
+        }
+    }
+
     type InventoryDamageReason = 'LOST' | 'BROKEN' | 'DEFECTIVE' | 'OTHER'
+    type InventoryUpdateType = 'RESERVE' | 'RELEASE' | 'STOCK_IN' | 'STOCK_OUT' | 'RETURN' | 'DAMAGE'
 }
 
 export {}

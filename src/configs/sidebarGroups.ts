@@ -17,7 +17,8 @@ import {
     ShoppingCart,
     TicketCheck,
     UserIcon,
-    Users
+    Users,
+    CalendarRange
 } from 'lucide-react'
 import permissions from '@/configs/permissions'
 
@@ -159,6 +160,12 @@ export const sidebarGroups: SidebarGroupData[] = [
                 icon: ClipboardType,
                 url: '/bao-cao-thiet-hai',
                 accessRequirement: permissions.accessDamageReportDashboardPage
+            },
+            {
+                title: 'Lịch sử nhập xuất kho',
+                icon: CalendarRange,
+                url: '/ton-kho/lich-su-nhap-xuat-kho',
+                accessRequirement: permissions.accessInventoryDashboardPage
             }
         ]
     },

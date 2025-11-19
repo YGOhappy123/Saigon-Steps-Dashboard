@@ -23,6 +23,8 @@ export const SORT_MAPPING = {
     '+importId': { importId: 'asc' },
     '-reportId': { reportId: 'desc' },
     '+reportId': { reportId: 'asc' },
+    '-logId': { logId: 'desc' },
+    '+logId': { logId: 'asc' },
 
     '-createdAt': { createdAt: 'desc' },
     '+createdAt': { createdAt: 'asc' },

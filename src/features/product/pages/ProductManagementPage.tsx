@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import { useQuery } from '@tanstack/react-query'
 import { Avatar, AvatarImage } from '@/components/ui/avatar'
 import { RootState } from '@/store'
-import { getProductSlug } from '@/utils/getProductSlug'
 import useAxiosIns from '@/hooks/useAxiosIns'
 import productService from '@/features/product/services/productService'
 import ProductTable from '@/features/product/components/ProductTable'
@@ -62,9 +61,9 @@ const ProductManagementPage = () => {
                 hasUpdateInfoPermission={verifyPermission(user, permissions.updateProductInformation)}
                 hasUpdatePricePermission={verifyPermission(user, permissions.updateProductPrice)}
                 hasDeletePermission={verifyPermission(user, permissions.deleteProduct)}
-                onViewProduct={product => navigate(`/san-pham/${getProductSlug(product.name)}`)}
-                onUpdateProductInfo={product => navigate(`/san-pham/${getProductSlug(product.name)}`)}
-                onUpdateProductPrice={product => navigate(`/san-pham/${getProductSlug(product.name)}`)}
+                onViewProduct={product => navigate(`/san-pham/${product.slug}`)}
+                onUpdateProductInfo={product => navigate(`/san-pham/${product.slug}`)}
+                onUpdateProductPrice={product => navigate(`/san-pham/${product.slug}`)}
                 getCsvProductsQuery={productServiceData.getCsvProductsQuery}
                 deleteProductMutation={productServiceData.deleteProductMutation}
             />

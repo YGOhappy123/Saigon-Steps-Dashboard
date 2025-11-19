@@ -46,3 +46,17 @@ export const INVENTORY_DAMAGE_REASON_OPTIONS = Object.entries(INVENTORY_DAMAGE_R
     value,
     label
 }))
+
+export const INVENTORY_UPDATE_TYPE_MAP: { [key in InventoryUpdateType]: string } = {
+    DAMAGE: 'Bị thiệt hại',
+    STOCK_IN: 'Nhập hàng vào kho',
+    STOCK_OUT: 'Xuất hàng khỏi kho',
+    RESERVE: 'Tạm trữ kho',
+    RELEASE: 'Mở khóa tạm trữ',
+    RETURN: 'Hoàn trả về kho'
+}
+
+export const INVENTORY_UPDATE_TYPE_OPTIONS = Object.entries(INVENTORY_UPDATE_TYPE_MAP).map(([value, label]) => ({
+    value,
+    label
+}))

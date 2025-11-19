@@ -76,7 +76,7 @@ const AddDamageFormFinalStep = ({ data, rootProducts, onConfirm, onPrev, isLoadi
                     }}
                     className="h-12 rounded text-base capitalize"
                 >
-                    {isLoading ? 'Đang tải...' : 'Tạo đơn nhập hàng'}
+                    {isLoading ? 'Đang tải...' : 'Tạo báo cáo thiệt hại'}
                 </Button>
             </div>
         </div>

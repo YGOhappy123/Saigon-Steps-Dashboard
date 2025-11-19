@@ -86,6 +86,7 @@ const DamageReportTable = ({
             header: () => <div className="text-center">Tổng số sản phẩm</div>,
             cell: ({ getValue }) => {
                 const totalStock = getValue<number>()
+
                 return (
                     <div className="flex justify-center">
                         <Badge variant="secondary" className="bg-blue-500 text-white dark:bg-blue-600">

@@ -39,6 +39,7 @@ const permissions = {
     accessCouponDashboardPage: 'ACCESS_COUPON_DASHBOARD_PAGE',
     addNewCoupon: 'ADD_NEW_COUPON',
     disableCoupon: 'DISABLE_COUPON',
+    accessInventoryDashboardPage: 'ACCESS_INVENTORY_DASHBOARD_PAGE',
     accessDamageReportDashboardPage: 'ACCESS_DAMAGE_REPORT_DASHBOARD_PAGE',
     addNewDamageReport: 'ADD_NEW_DAMAGE_REPORT',
     accessProductStatisticPage: 'ACCESS_PRODUCT_STATISTIC_PAGE',
