@@ -268,17 +268,18 @@ const AddPromotionDialog = ({ products, addNewPromotionMutation }: AddPromotionD
                                                             >
                                                                 <FormControl>
                                                                     <Checkbox
-                                                                        checked={field.value?.includes(
+                                                                        checked={(field.value ?? []).includes(
                                                                             product.rootProductId
                                                                         )}
                                                                         onCheckedChange={checked => {
+                                                                            const current = field.value ?? []
                                                                             return checked
                                                                                 ? field.onChange([
-                                                                                      ...field.value,
+                                                                                      ...current,
                                                                                       product.rootProductId
                                                                                   ])
                                                                                 : field.onChange(
-                                                                                      field.value?.filter(
+                                                                                      current.filter(
                                                                                           value =>
                                                                                               value !==
                                                                                               product.rootProductId

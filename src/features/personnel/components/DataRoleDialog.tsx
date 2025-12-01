@@ -165,23 +165,6 @@ const DataRoleDialog = ({
                                                                 <FormControl>
                                                                     <Checkbox
                                                                         disabled={mode === 'view'}
-                                                                        // checked={field.value?.includes(
-                                                                        //     permission.permissionId
-                                                                        // )}
-                                                                        // onCheckedChange={checked => {
-                                                                        //     return checked
-                                                                        //         ? field.onChange([
-                                                                        //               ...field.value,
-                                                                        //               permission.permissionId
-                                                                        //           ])
-                                                                        //         : field.onChange(
-                                                                        //               field.value?.filter(
-                                                                        //                   value =>
-                                                                        //                       value !==
-                                                                        //                       permission.permissionId
-                                                                        //               )
-                                                                        //           )
-                                                                        // }}
                                                                         checked={(field.value ?? []).includes(
                                                                             permission.permissionId
                                                                         )}
