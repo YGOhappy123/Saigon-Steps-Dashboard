@@ -96,7 +96,7 @@ const AddRoleDialog = ({ permissions, addNewRoleMutation }: AddRoleDialogProps) 
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel className="text-card-foreground">Loại vai trò</FormLabel>
-                                        <Select onValueChange={() => {}} defaultValue={field.value?.toString()}>
+                                        <Select onValueChange={() => {}} defaultValue={String(field.value ?? '')}>
                                             <FormControl>
                                                 <SelectTrigger className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2 font-semibold">
                                                     <SelectValue placeholder="Chọn loại vai trò..." />
@@ -132,19 +132,20 @@ const AddRoleDialog = ({ permissions, addNewRoleMutation }: AddRoleDialogProps) 
                                                             >
                                                                 <FormControl>
                                                                     <Checkbox
-                                                                        checked={field.value?.includes(
+                                                                        checked={(field.value ?? []).includes(
                                                                             permission.permissionId
                                                                         )}
                                                                         onCheckedChange={checked => {
+                                                                            const current = field.value ?? []
                                                                             return checked
                                                                                 ? field.onChange([
-                                                                                      ...field.value,
+                                                                                      ...current,
                                                                                       permission.permissionId
                                                                                   ])
                                                                                 : field.onChange(
-                                                                                      field.value?.filter(
-                                                                                          value =>
-                                                                                              value !==
+                                                                                      current.filter(
+                                                                                          v =>
+                                                                                              v !==
                                                                                               permission.permissionId
                                                                                       )
                                                                                   )

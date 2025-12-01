@@ -135,7 +135,7 @@ const AddBrandDialog = ({ addNewBrandMutation }: AddBrandDialogProps) => {
                                             <FormLabel className="text-card-foreground">Mô tả thương hiệu</FormLabel>
                                             <FormControl>
                                                 <RichTextEditor
-                                                    content={field.value}
+                                                    content={field.value ?? ''}
                                                     onChange={field.onChange}
                                                     containerClassName="rounded border-2"
                                                     editorClassName="caret-card-foreground text-card-foreground"

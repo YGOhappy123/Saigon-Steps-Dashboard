@@ -123,7 +123,7 @@ const DataRoleDialog = ({
                                         <FormControl>
                                             <Select
                                                 onValueChange={() => {}}
-                                                defaultValue={field.value?.toString()}
+                                                defaultValue={String(field.value ?? '')}
                                                 disabled
                                             >
                                                 <FormControl>

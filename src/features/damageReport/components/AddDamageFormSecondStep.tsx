@@ -111,7 +111,7 @@ const AddDamageFormSecondStep = ({ defaultValues, rootProducts, onNext, onPrev }
                                                         ?.price ?? 0
                                                 )
                                             }}
-                                            value={field.value.toString()}
+                                            value={String(field.value ?? '')}
                                         >
                                             <FormControl>
                                                 <SelectTrigger className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2 font-semibold">
@@ -153,7 +153,7 @@ const AddDamageFormSecondStep = ({ defaultValues, rootProducts, onNext, onPrev }
                                                         selectedVariant?.stock ?? 0
                                                     )
                                                 }}
-                                                value={field.value.toString()}
+                                                value={String(field.value ?? '')}
                                                 disabled={!form.watch(`items.${index}.rootProductId`)}
                                             >
                                                 <FormControl>

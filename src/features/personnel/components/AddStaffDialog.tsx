@@ -148,7 +148,7 @@ const AddStaffDialog = ({ roles, addNewStaffMutation }: AddStaffDialogProps) => 
                                             <FormLabel className="text-card-foreground">Vai trò</FormLabel>
                                             <Select
                                                 onValueChange={value => field.onChange(Number(value))}
-                                                value={field.value?.toString() ?? ''}
+                                                value={String(field.value ?? '')}
                                             >
                                                 <FormControl>
                                                     <SelectTrigger className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2 font-semibold">
