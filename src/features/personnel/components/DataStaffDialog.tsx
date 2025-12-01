@@ -122,7 +122,7 @@ const DataStaffDialog = ({
                                             <FormControl>
                                                 <NoButtonImageUploader
                                                     hasPermission={mode === 'update'}
-                                                    image={field.value}
+                                                    image={field.value ?? ''}
                                                     setImage={field.onChange}
                                                     originalImage={staff?.avatar ?? ''}
                                                 />

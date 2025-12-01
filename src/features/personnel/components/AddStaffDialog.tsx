@@ -94,7 +94,7 @@ const AddStaffDialog = ({ roles, addNewStaffMutation }: AddStaffDialogProps) => 
                                             <FormControl>
                                                 <NoButtonImageUploader
                                                     hasPermission
-                                                    image={field.value}
+                                                    image={field.value ?? ''}
                                                     setImage={field.onChange}
                                                     originalImage={''}
                                                 />
