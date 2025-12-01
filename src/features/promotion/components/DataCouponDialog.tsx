@@ -69,7 +69,7 @@ const DataCouponDialog = ({ coupon, open, setOpen }: DataCouponDialogProps) => {
         }
     })
 
-    const onSubmit = async (values: z.infer<typeof dataCouponFormSchema>) => {
+    const onSubmit = async (_: z.infer<typeof dataCouponFormSchema>) => {
         if (!coupon) return
 
         form.reset()
