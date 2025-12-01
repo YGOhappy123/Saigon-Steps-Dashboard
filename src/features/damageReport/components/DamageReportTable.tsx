@@ -1,7 +1,7 @@
 import { UseQueryResult } from '@tanstack/react-query'
 import { ColumnDef } from '@tanstack/react-table'
 import { DataTable } from '@/components/ui/data-table'
-import { ScanBarcode, Footprints, MoreHorizontal, Wallet, BadgeDollarSign, Package, ClipboardType } from 'lucide-react'
+import { ScanBarcode, Footprints, MoreHorizontal, Wallet, BadgeDollarSign, ClipboardType } from 'lucide-react'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'

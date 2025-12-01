@@ -88,7 +88,7 @@ const AddImportFormSecondStep = ({ defaultValues, rootProducts, onNext, onPrev }
                                         <FormLabel className="text-card-foreground">Sản phẩm</FormLabel>
                                         <Select
                                             onValueChange={value => field.onChange(Number(value))}
-                                            value={field.value.toString()}
+                                            value={String(field.value ?? '')}
                                         >
                                             <FormControl>
                                                 <SelectTrigger className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2 font-semibold">
@@ -118,7 +118,7 @@ const AddImportFormSecondStep = ({ defaultValues, rootProducts, onNext, onPrev }
                                         <FormLabel className="text-card-foreground">Phân loại</FormLabel>
                                         <Select
                                             onValueChange={value => field.onChange(Number(value))}
-                                            value={field.value.toString()}
+                                            value={String(field.value ?? '')}
                                             disabled={!form.watch(`items.${index}.rootProductId`)}
                                         >
                                             <FormControl>

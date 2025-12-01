@@ -246,7 +246,7 @@ const ProductInfoCard = ({
                                             <FormLabel className="text-card-foreground">Thương hiệu</FormLabel>
                                             <Select
                                                 onValueChange={value => field.onChange(Number(value))}
-                                                value={field.value.toString()}
+                                                value={String(field.value ?? '')}
                                                 disabled={!hasModifyInfoPermission || mode === 'view'}
                                             >
                                                 <FormControl>
@@ -300,7 +300,7 @@ const ProductInfoCard = ({
                                         <FormControl>
                                             <RichTextEditor
                                                 disabled={!hasModifyInfoPermission || mode === 'view'}
-                                                content={field.value}
+                                                content={field.value ?? ''}
                                                 onChange={field.onChange}
                                                 containerClassName="rounded border-2"
                                                 editorClassName="caret-card-foreground text-card-foreground font-semibold"
@@ -366,7 +366,7 @@ const ProductInfoCard = ({
                                                 <FormLabel className="text-card-foreground">Danh mục</FormLabel>
                                                 <Select
                                                     onValueChange={value => field.onChange(Number(value))}
-                                                    value={field.value.toString()}
+                                                    value={String(field.value ?? '')}
                                                     disabled={!hasModifyInfoPermission || mode === 'view'}
                                                 >
                                                     <FormControl>

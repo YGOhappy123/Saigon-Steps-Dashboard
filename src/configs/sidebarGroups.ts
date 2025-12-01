@@ -173,16 +173,22 @@ export const sidebarGroups: SidebarGroupData[] = [
         title: 'Thống kê',
         items: [
             {
-                title: 'Thống kê sản phẩm',
+                title: 'Doanh số sản phẩm',
                 icon: CircleDollarSignIcon,
                 url: '/thong-ke/san-pham',
                 accessRequirement: permissions.accessProductStatisticPage
             },
             {
-                title: 'Thống kê doanh thu',
+                title: 'Doanh thu và chi phí',
                 icon: ChartLine,
                 url: '/thong-ke/doanh-thu',
                 accessRequirement: permissions.accessRevenueStatisticPage
+            },
+            {
+                title: 'Khách hàng nổi bật',
+                icon: ShieldUser,
+                url: '/thong-ke/khach-hang-noi-bat',
+                accessRequirement: permissions.accessKeyCustomerStatisticPage
             }
         ]
     }

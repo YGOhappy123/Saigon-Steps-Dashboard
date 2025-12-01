@@ -2,27 +2,26 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Avatar, AvatarImage } from '@/components/ui/avatar'
 import { RootState } from '@/store'
-import SummaryCards from '@/features/statistic/components/SummaryCards'
-import RevenuesChartFilter from '@/features/statistic/components/RevenuesChartFilter'
-import RevenuesChart from '@/features/statistic/components/RevenuesChart'
+import KeyCustomersFilter from '@/features/statistic/components/KeyCustomersFilter'
+import KeyCustomers from '@/features/statistic/components/KeyCustomers'
 
 export type ReportData = {
     range: {
         from: string
         to: string
     }
-    chart: {
-        name: string
-        totalImports: number
-        totalDamages: number
-        totalRefunds: number
-        totalSales: number
-    }[]
+    highestOrderCountCustomers: (ICustomer & { orderCount: number })[]
+    highestSpendingCustomers: (ICustomer & { orderAmount: number })[]
 }
 
-const RevenueStatisticPage = () => {
+const KeyCustomerStatisticPage = () => {
     const user = useSelector((state: RootState) => state.auth.user)
-    const [reportData, setReportData] = useState<ReportData>({ range: { from: '', to: '' }, chart: [] })
+    const [limit, setLimit] = useState('5')
+    const [reportData, setReportData] = useState<ReportData>({
+        range: { from: '', to: '' },
+        highestOrderCountCustomers: [],
+        highestSpendingCustomers: []
+    })
 
     return (
         <div className="flex h-full flex-1 flex-col space-y-8 p-4">
@@ -30,7 +29,7 @@ const RevenueStatisticPage = () => {
                 <div>
                     <h2 className="text-2xl font-bold tracking-tight">Xin chào, {user!.name}!</h2>
                     <p className="text-muted-foreground">
-                        Đây là thống kê chi tiết về tình hình hoạt động của hệ thống Saigon Steps.
+                        Đây là thống kê chi tiết về khách hàng nổi bật của hệ thống Saigon Steps.
                     </p>
                 </div>
                 <div className="flex items-center space-x-2">
@@ -40,11 +39,10 @@ const RevenueStatisticPage = () => {
                 </div>
             </div>
 
-            <SummaryCards />
-            <RevenuesChartFilter onSuccess={setReportData} />
-            <RevenuesChart reportData={reportData} />
+            <KeyCustomersFilter limit={limit} setLimit={setLimit} onSuccess={setReportData} />
+            <KeyCustomers limit={limit} reportData={reportData} />
         </div>
     )
 }
 
-export default RevenueStatisticPage
+export default KeyCustomerStatisticPage

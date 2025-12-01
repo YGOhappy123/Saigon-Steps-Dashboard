@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { ColumnDef } from '@tanstack/react-table'
-import { CirclePlus, PencilLine } from 'lucide-react'
+import { PencilLine } from 'lucide-react'
 import { Result as ScanResult } from '@zxing/library'
 import {
     Dialog,

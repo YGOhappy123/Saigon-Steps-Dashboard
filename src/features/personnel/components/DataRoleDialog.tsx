@@ -123,7 +123,7 @@ const DataRoleDialog = ({
                                         <FormControl>
                                             <Select
                                                 onValueChange={() => {}}
-                                                defaultValue={field.value?.toString()}
+                                                defaultValue={String(field.value ?? '')}
                                                 disabled
                                             >
                                                 <FormControl>
@@ -165,19 +165,20 @@ const DataRoleDialog = ({
                                                                 <FormControl>
                                                                     <Checkbox
                                                                         disabled={mode === 'view'}
-                                                                        checked={field.value?.includes(
+                                                                        checked={(field.value ?? []).includes(
                                                                             permission.permissionId
                                                                         )}
                                                                         onCheckedChange={checked => {
+                                                                            const current = field.value ?? []
                                                                             return checked
                                                                                 ? field.onChange([
-                                                                                      ...field.value,
+                                                                                      ...current,
                                                                                       permission.permissionId
                                                                                   ])
                                                                                 : field.onChange(
-                                                                                      field.value?.filter(
-                                                                                          value =>
-                                                                                              value !==
+                                                                                      current.filter(
+                                                                                          v =>
+                                                                                              v !==
                                                                                               permission.permissionId
                                                                                       )
                                                                                   )

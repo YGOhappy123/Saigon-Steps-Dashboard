@@ -29,7 +29,7 @@ const OrderSummary = () => {
             <OrderSummaryCard
                 title="Số đơn hàng đang chờ xử lý"
                 data={orders
-                    .filter(o => o.status === 'PENDING')
+                    .filter(o => o.status.isDefault === true)
                     .length.toString()
                     .padStart(2, '0')}
             />

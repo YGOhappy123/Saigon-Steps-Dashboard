@@ -1,25 +1,25 @@
-import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
-import { Bar, CartesianGrid, ComposedChart, Legend, Line, XAxis, YAxis } from 'recharts'
+import { useSelector } from 'react-redux'
+import { PDFDownloadLink } from '@react-pdf/renderer'
+import { Printer } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart'
 import { Separator } from '@/components/ui/separator'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
-import { StatisticCriteria, statisticTypes } from '@/features/statistic/pages/RevenueStatisticPage'
-import useAxiosIns from '@/hooks/useAxiosIns'
+import { ReportData } from '@/features/statistic/pages/RevenueStatisticPage'
+import { RootState } from '@/store'
+import RevenuesReportPDF from '@/features/statistic/components/RevenuesReportPDF'
+import RevenuesChartBody from '@/features/statistic/components/RevenuesChartBody'
+import dayjs from '@/libs/dayjs'
 
-const chartConfig = {
-    views: {
-        label: 'Số tiền (vnđ)'
-    }
-} satisfies ChartConfig
+type RevenuesChartProps = {
+    reportData: ReportData
+}
 
-const RevenuesChart = () => {
-    const axios = useAxiosIns()
-    const [type, setType] = useState<StatisticCriteria>('daily')
+const RevenuesChart = ({ reportData }: RevenuesChartProps) => {
+    const user = useSelector((state: RootState) => state.auth.user)
 
     const [visibleBars, setVisibleBars] = useState({
         totalSales: true,
@@ -33,39 +33,27 @@ const RevenuesChart = () => {
         setVisibleBars(prev => ({ ...prev, [key]: !prev[key] }))
     }
 
-    const getRevenuesChartQuery = useQuery({
-        queryKey: ['revenues-chart', type],
-        queryFn: () => axios.get<IResponseData<any>>(`/statistics/revenues?type=${type}`),
-        enabled: true,
-        refetchIntervalInBackground: true,
-        refetchInterval: 20000,
-        select: res => res.data
-    })
-    const chartData = getRevenuesChartQuery.data?.data ?? []
-
     return (
         <Card className="col-span-6">
             <CardHeader className="flex items-center justify-between gap-12">
                 <div className="flex flex-col justify-center gap-1">
                     <CardTitle className="text-xl">Biểu đồ doanh thu</CardTitle>
                     <CardDescription>
-                        Hiển thị doanh thu của cửa hàng trong{' '}
-                        {statisticTypes.find(item => item.value === type)!.label.toLowerCase()}.
+                        Hiển thị doanh thu của cửa hàng từ{' '}
+                        {dayjs(reportData.range.from).format('HH:mm ngày DD/MM/YYYY')} đến{' '}
+                        {dayjs(reportData.range.to).format('HH:mm ngày DD/MM/YYYY')}.
                     </CardDescription>
                 </div>
-                <div className="grid shrink-0 grid-cols-2 gap-4 xl:grid-cols-4">
-                    {statisticTypes.map(button => (
-                        <Button
-                            key={button.value}
-                            variant={type === button.value ? 'default' : 'outline'}
-                            size="lg"
-                            onClick={() => setType(button.value as StatisticCriteria)}
-                            className="w-[120px]"
-                        >
-                            {button.label}
-                        </Button>
-                    ))}
-                </div>
+                <PDFDownloadLink
+                    key={`${reportData.range.from}-${reportData.range.to}`}
+                    document={<RevenuesReportPDF reportData={reportData} user={user!} />}
+                    fileName={`SS_thong_ke_doanh_thu ${dayjs(reportData.range.from).format('DD-MM-YYYY')} ${dayjs(reportData.range.to).format('DD-MM-YYYY')}.pdf`}
+                >
+                    <Button>
+                        <Printer />
+                        <span className="hidden xl:inline">In báo cáo</span>
+                    </Button>
+                </PDFDownloadLink>
             </CardHeader>
             <Separator />
 
@@ -104,7 +92,7 @@ const RevenuesChart = () => {
                         onCheckedChange={() => toggleBar('totalRefunds')}
                         id="toggle-refunds"
                     />
-                    <Label htmlFor="toggle-refunds">Tổng tiền hoàn trả</Label>
+                    <Label htmlFor="toggle-refunds">Số tiền hoàn trả</Label>
                 </div>
 
                 <div className="flex items-center gap-2">
@@ -118,71 +106,10 @@ const RevenuesChart = () => {
             </div>
 
             <CardContent>
-                {chartData.length === 0 && <Skeleton className="h-[200px] w-full" />}
+                {reportData.chart.length === 0 && <Skeleton className="h-[200px] w-full" />}
 
-                {chartData.length > 0 && (
-                    <ChartContainer config={chartConfig} className="aspect-auto h-[400px] w-full">
-                        <ComposedChart
-                            data={chartData.map((item: any) => ({
-                                ...item,
-                                revenue: item.totalDamages + item.totalImports + item.totalSales + item.totalRefunds
-                            }))}
-                            stackOffset="sign"
-                        >
-                            <CartesianGrid vertical={false} />
-                            <XAxis dataKey="name" />
-                            <YAxis />
-                            <Legend />
-                            <ChartTooltip content={<ChartTooltipContent className="w-[200px]" nameKey="views" />} />
-
-                            {visibleBars.totalSales && (
-                                <Bar
-                                    dataKey="totalSales"
-                                    stackId="a"
-                                    fill="var(--chart-2)"
-                                    name="Tiền từ đơn hàng"
-                                    maxBarSize={40}
-                                />
-                            )}
-                            {visibleBars.totalImports && (
-                                <Bar
-                                    dataKey="totalImports"
-                                    stackId="a"
-                                    fill="var(--chart-1)"
-                                    name="Chi phí nhập hàng"
-                                    maxBarSize={40}
-                                />
-                            )}
-                            {visibleBars.totalDamages && (
-                                <Bar
-                                    dataKey="totalDamages"
-                                    stackId="a"
-                                    fill="var(--chart-3)"
-                                    name="Thiệt hại sản phẩm"
-                                    maxBarSize={40}
-                                />
-                            )}
-                            {visibleBars.totalRefunds && (
-                                <Bar
-                                    dataKey="totalRefunds"
-                                    stackId="a"
-                                    fill="var(--chart-5)"
-                                    name="Tổng tiền hoàn trả"
-                                    maxBarSize={40}
-                                />
-                            )}
-                            {visibleBars.revenue && (
-                                <Line
-                                    type="monotone"
-                                    dataKey="revenue"
-                                    stroke="var(--chart-4)"
-                                    strokeWidth={2}
-                                    dot={{ r: 4 }}
-                                    name="Doanh thu"
-                                />
-                            )}
-                        </ComposedChart>
-                    </ChartContainer>
+                {reportData.chart.length > 0 && (
+                    <RevenuesChartBody chartData={reportData.chart} visibleBars={visibleBars} />
                 )}
             </CardContent>
         </Card>

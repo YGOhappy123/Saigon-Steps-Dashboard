@@ -5,6 +5,7 @@ import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '
 import { Checkbox } from '@/components/ui/checkbox'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Label } from '@/components/ui/label'
+import { ReportData } from '@/features/customer/components/ViewOrdersStatisticDialog'
 
 const chartConfig = {
     views: {
@@ -13,7 +14,7 @@ const chartConfig = {
 } satisfies ChartConfig
 
 type OrdersChartProps = {
-    chartData: any[]
+    chartData: ReportData['chart']
 }
 
 const OrdersChart = ({ chartData }: OrdersChartProps) => {
@@ -46,7 +47,7 @@ const OrdersChart = ({ chartData }: OrdersChartProps) => {
                         onCheckedChange={() => toggleBar('totalRefunds')}
                         id="toggle-refunds"
                     />
-                    <Label htmlFor="toggle-refunds">Tổng tiền hoàn trả</Label>
+                    <Label htmlFor="toggle-refunds">Số tiền hoàn trả</Label>
                 </div>
 
                 <div className="flex items-center gap-2">
@@ -91,7 +92,7 @@ const OrdersChart = ({ chartData }: OrdersChartProps) => {
                                     dataKey="totalRefunds"
                                     stackId="a"
                                     fill="var(--chart-5)"
-                                    name="Tổng tiền hoàn trả"
+                                    name="Số tiền hoàn trả"
                                     maxBarSize={40}
                                 />
                             )}

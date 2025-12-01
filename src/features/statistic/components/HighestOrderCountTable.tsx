@@ -5,10 +5,11 @@ import { Badge } from '@/components/ui/badge'
 import dayjs from '@/libs/dayjs'
 
 type HighestOrderCountTableProps = {
+    limit: string
     customers: (ICustomer & { orderCount: number })[]
 }
 
-const HighestOrderCountTable = ({ customers }: HighestOrderCountTableProps) => {
+const HighestOrderCountTable = ({ limit, customers }: HighestOrderCountTableProps) => {
     const columns: ColumnDef<ICustomer & { orderCount: number }>[] = [
         {
             accessorKey: 'customerId',
@@ -79,7 +80,7 @@ const HighestOrderCountTable = ({ customers }: HighestOrderCountTableProps) => {
     return (
         <div>
             <div className="mb-4 flex flex-col items-center gap-1.5">
-                <h4 className="text-xl font-semibold">Top 5 khách hàng có số lượng đơn đặt hàng cao nhẩt</h4>
+                <h4 className="text-xl font-semibold">Top {limit} khách hàng có số lượng đơn đặt hàng cao nhất</h4>
                 <span className="text-muted-foreground text-sm">Có bao gồm các đơn hàng chưa xử lý hoặc thất bại.</span>
             </div>
 

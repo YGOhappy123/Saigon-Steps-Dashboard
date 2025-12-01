@@ -6,6 +6,7 @@ import PermissionProtector from '@/components/container/PermissionProtector'
 import permissions from '@/configs/permissions'
 import ProductStatisticPage from '@/features/statistic/pages/ProductStatisticPage'
 import RevenueStatisticPage from '@/features/statistic/pages/RevenueStatisticPage'
+import KeyCustomerStatisticPage from '@/features/statistic/pages/KeyCustomerStatisticPage'
 
 const StatisticRoutes = [
     {
@@ -32,6 +33,15 @@ const StatisticRoutes = [
                     <PermissionProtector
                         children={<RevenueStatisticPage />}
                         permission={permissions.accessRevenueStatisticPage}
+                    />
+                )
+            },
+            {
+                path: 'khach-hang-noi-bat',
+                element: (
+                    <PermissionProtector
+                        children={<KeyCustomerStatisticPage />}
+                        permission={permissions.accessKeyCustomerStatisticPage}
                     />
                 )
             }

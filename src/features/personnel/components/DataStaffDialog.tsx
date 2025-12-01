@@ -122,7 +122,7 @@ const DataStaffDialog = ({
                                             <FormControl>
                                                 <NoButtonImageUploader
                                                     hasPermission={mode === 'update'}
-                                                    image={field.value}
+                                                    image={field.value ?? ''}
                                                     setImage={field.onChange}
                                                     originalImage={staff?.avatar ?? ''}
                                                 />
@@ -178,7 +178,7 @@ const DataStaffDialog = ({
                                             <FormLabel className="text-card-foreground">Vai trò</FormLabel>
                                             <Select
                                                 onValueChange={value => field.onChange(Number(value))}
-                                                value={field.value?.toString() ?? ''}
+                                                value={String(field.value ?? '')}
                                                 disabled
                                             >
                                                 <FormControl>

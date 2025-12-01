@@ -161,7 +161,7 @@ const AddProductFormFirstStep = ({ defaultValues, brands, categories, onNext }: 
                                     <FormLabel className="text-card-foreground">Thương hiệu</FormLabel>
                                     <Select
                                         onValueChange={value => field.onChange(Number(value))}
-                                        value={field.value.toString()}
+                                        value={String(field.value ?? '')}
                                     >
                                         <FormControl>
                                             <SelectTrigger className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2 font-semibold">
@@ -223,7 +223,7 @@ const AddProductFormFirstStep = ({ defaultValues, brands, categories, onNext }: 
                                 <FormLabel className="text-card-foreground">Mô tả sản phẩm</FormLabel>
                                 <FormControl>
                                     <RichTextEditor
-                                        content={field.value}
+                                        content={field.value ?? ''}
                                         onChange={field.onChange}
                                         containerClassName="rounded border-2"
                                         editorClassName="caret-card-foreground text-card-foreground font-semibold"
@@ -244,7 +244,7 @@ const AddProductFormFirstStep = ({ defaultValues, brands, categories, onNext }: 
                                         <FormLabel className="text-card-foreground">Danh mục</FormLabel>
                                         <Select
                                             onValueChange={value => field.onChange(Number(value))}
-                                            value={field.value.toString()}
+                                            value={String(field.value ?? '')}
                                         >
                                             <FormControl>
                                                 <SelectTrigger className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2 font-semibold">
