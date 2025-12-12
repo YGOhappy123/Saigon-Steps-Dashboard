@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { UseMutationResult } from '@tanstack/react-query'
-import { TicketCheck } from 'lucide-react'
+import { PDFDownloadLink } from '@react-pdf/renderer'
+import { Printer, TicketCheck } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { Button } from '@/components/ui/button'
@@ -9,6 +10,7 @@ import ConfirmationDialog from '@/components/common/ConfirmationDialog'
 import OrderCardItemTable from '@/features/order/components/OrderCardItemTable'
 import OrderCardUpdateLogTable from '@/features/order/components/OrderCardUpdateLogTable'
 import ScanBarcodeDialog from '@/features/order/components/ScanBarcodeDialog'
+import InvoicePDF from '@/features/order/components/InvoicePDF'
 import formatCurrency from '@/utils/formatCurrency'
 import dayjs from '@/libs/dayjs'
 
@@ -32,9 +34,19 @@ const OrderCard = ({ order, hasPermission, updateStatusMutation }: OrderCardProp
 
     return (
         <Card>
-            <CardHeader className="text-center">
+            <CardHeader className="relative text-center">
                 <CardTitle className="text-xl">Thông tin đơn hàng mã: {order.orderId}</CardTitle>
                 <CardDescription>Đặt lúc {dayjs(order.createdAt).format('HH:mm:ss ngày DD/MM/YYYY')}</CardDescription>
+                <PDFDownloadLink
+                    className="absolute right-6"
+                    document={<InvoicePDF order={order} />}
+                    fileName={`SS_hoa_don ${order.orderId}.pdf`}
+                >
+                    <Button>
+                        <Printer />
+                        <span className="hidden xl:inline">In hóa đơn</span>
+                    </Button>
+                </PDFDownloadLink>
             </CardHeader>
             <CardContent>
                 <div
