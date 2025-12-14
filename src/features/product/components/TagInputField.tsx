@@ -17,7 +17,7 @@ type TagInputFieldProps = {
     tagTextColor?: string
 }
 
-export default function TagInputField({
+const TagInputField = ({
     label,
     value,
     onChange,
@@ -27,7 +27,7 @@ export default function TagInputField({
     errorMessage,
     tagBackgroundColor = 'bg-blue-100',
     tagTextColor = 'text-blue-600'
-}: TagInputFieldProps) {
+}: TagInputFieldProps) => {
     const [input, setInput] = useState('')
     useEffect(() => {
         setInput('')
@@ -94,3 +94,5 @@ export default function TagInputField({
         </div>
     )
 }
+
+export default TagInputField

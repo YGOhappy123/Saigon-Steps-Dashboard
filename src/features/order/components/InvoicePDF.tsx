@@ -1,5 +1,6 @@
-import { Page, Text, View, Document, Image, Font } from '@react-pdf/renderer'
+import { Page, Text, View, Document, Font } from '@react-pdf/renderer'
 import { Table, TD, TH, TR } from '@ag-media/react-pdf-table'
+import PDFHeaderTemplate from '@/components/common/PDFHeaderTemplate'
 import formatCurrency from '@/utils/formatCurrency'
 import dayjs from '@/libs/dayjs'
 
@@ -19,7 +20,6 @@ type InvoicePDFProps = {
 
 const InvoicePDF = ({ order }: InvoicePDFProps) => {
     const isDelivery = order.deliveryAddress != null
-    const total = order.orderItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
 
     return (
         <Document>
@@ -70,19 +70,7 @@ const InvoicePDF = ({ order }: InvoicePDFProps) => {
                     </Text>
                 </View>
                 <InvoiceProductsTable order={order} />
-                <View style={{ fontSize: 12, gap: 4, alignItems: 'flex-end' }}>
-                    <Text>
-                        <Text style={{ fontWeight: 'medium' }}>Tổng tiền hàng:</Text> {formatCurrency(total)}
-                    </Text>
-                    <Text>
-                        <Text style={{ fontWeight: 'medium' }}>Giảm giá:</Text>{' '}
-                        {formatCurrency(total - order.totalAmount)}
-                    </Text>
-                    <View style={{ width: 120, marginVertical: 2, height: 1, backgroundColor: '#000000' }}></View>
-                    <Text>
-                        <Text style={{ fontWeight: 'medium' }}>Thành tiền:</Text> {formatCurrency(order.totalAmount)}
-                    </Text>
-                </View>
+                <InvoiceSummary order={order} />
             </Page>
         </Document>
     )
@@ -90,44 +78,18 @@ const InvoicePDF = ({ order }: InvoicePDFProps) => {
 
 const InvoiceHeader = ({ order }: { order: IOrder }) => {
     return (
-        <View
-            style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'flex-start',
-                marginBottom: 20
-            }}
-        >
-            <View style={{ alignItems: 'center' }}>
-                <Text style={{ textTransform: 'uppercase', fontWeight: 'medium' }}>Cửa hàng giày dép thời trang</Text>
-                <Text style={{ textTransform: 'capitalize', fontWeight: 'bold', fontSize: 16 }}>Saigon Steps</Text>
-                <View style={{ width: 120, marginVertical: 6, height: 1, backgroundColor: '#000000' }}></View>
-                <View style={{ width: '100%', gap: 2 }}>
-                    <Text>
-                        <Text style={{ fontWeight: 'medium' }}>Địa chỉ:</Text> 97 Man Thiện, Hiệp Phú, Thủ Đức
-                    </Text>
-                    <Text>
-                        <Text style={{ fontWeight: 'medium' }}>Email:</Text> saigonsteps@gmail.com
-                    </Text>
-                    <Text>
-                        <Text style={{ fontWeight: 'medium' }}>Số điện thoại:</Text> (+84)913.283.742
-                    </Text>
-                </View>
-            </View>
-            <View style={{ alignItems: 'center', gap: 2, maxWidth: '50%' }}>
-                <Image src="/images/logo-with-slogan.png" style={{ width: 120, marginBottom: 6 }} />
-                <Text>
-                    <Text style={{ fontWeight: 'medium' }}>Mã đơn hàng:</Text> {order.orderId}
-                </Text>
-                <Text>
-                    <Text style={{ fontWeight: 'medium' }}>Đặt lúc:</Text>{' '}
-                    {dayjs(order.createdAt).format('HH:mm:ss ngày DD/MM/YYYY')}
-                </Text>
-                <Text>
-                    <Text style={{ fontWeight: 'medium' }}>Khách hàng:</Text> {order.customer.name}
-                </Text>
-            </View>
-        </View>
+        <PDFHeaderTemplate>
+            <Text>
+                <Text style={{ fontWeight: 'medium' }}>Mã đơn hàng:</Text> {order.orderId}
+            </Text>
+            <Text>
+                <Text style={{ fontWeight: 'medium' }}>Đặt lúc:</Text>{' '}
+                {dayjs(order.createdAt).format('HH:mm:ss ngày DD/MM/YYYY')}
+            </Text>
+            <Text>
+                <Text style={{ fontWeight: 'medium' }}>Khách hàng:</Text> {order.customer.name}
+            </Text>
+        </PDFHeaderTemplate>
     )
 }
 
@@ -157,6 +119,25 @@ const InvoiceProductsTable = ({ order }: { order: IOrder }) => {
                 </TR>
             ))}
         </Table>
+    )
+}
+
+const InvoiceSummary = ({ order }: { order: IOrder }) => {
+    const total = order.orderItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
+
+    return (
+        <View style={{ fontSize: 12, gap: 4, alignItems: 'flex-end' }}>
+            <Text>
+                <Text style={{ fontWeight: 'medium' }}>Tổng tiền hàng:</Text> {formatCurrency(total)}
+            </Text>
+            <Text>
+                <Text style={{ fontWeight: 'medium' }}>Giảm giá:</Text> {formatCurrency(total - order.totalAmount)}
+            </Text>
+            <View style={{ width: 120, marginVertical: 2, height: 1, backgroundColor: '#000000' }}></View>
+            <Text>
+                <Text style={{ fontWeight: 'medium' }}>Thành tiền:</Text> {formatCurrency(order.totalAmount)}
+            </Text>
+        </View>
     )
 }
 

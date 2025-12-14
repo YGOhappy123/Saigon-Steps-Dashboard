@@ -35,7 +35,8 @@ const RevenueStatisticPage = () => {
                 <div>
                     <h2 className="text-2xl font-bold tracking-tight">Xin chào, {user!.name}!</h2>
                     <p className="text-muted-foreground">
-                        Đây là thống kê chi tiết về tình hình hoạt động của hệ thống Saigon Steps.
+                        Đây là thống kê chi tiết về tình hình hoạt động và khách hàng tiêu biểu của hệ thống Saigon
+                        Steps.
                     </p>
                 </div>
                 <div className="flex items-center space-x-2">

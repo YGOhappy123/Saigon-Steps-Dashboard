@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Skeleton } from '@/components/ui/skeleton'
 import { TrendingDown, TrendingUp } from 'lucide-react'
+import { Skeleton } from '@/components/ui/skeleton'
 
-type StatisticCardProps = {
-    value: number
+type StatisticCompareCardProps = {
+    currValue: number
     prevValue: number
     label?: string
     unit?: string
@@ -12,28 +12,31 @@ type StatisticCardProps = {
     to: string
 }
 
-export default function StatisticCard({ value, prevValue, label, unit, loading, to }: StatisticCardProps) {
+const StatisticCompareCard = ({ currValue, prevValue, label, unit, loading, to }: StatisticCompareCardProps) => {
     const navigate = useNavigate()
     const [count, setCount] = useState(0)
-    const percentGrowth = useMemo(() => (((value - prevValue) / prevValue) * 100).toFixed(2), [prevValue, value])
+    const percentGrowth = useMemo(
+        () => (((currValue - prevValue) / prevValue) * 100).toFixed(2),
+        [prevValue, currValue]
+    )
     const isIncreasing = useMemo(() => parseFloat(percentGrowth) > 0, [percentGrowth])
 
     useEffect(() => {
         const speed = 100
         let from = 0
-        const step = value / speed
+        const step = currValue / speed
         const counter = setInterval(function () {
             from += step
-            if (from > value) {
+            if (from > currValue) {
                 clearInterval(counter)
-                setCount(value)
+                setCount(currValue)
             } else {
                 setCount(Math.ceil(from))
             }
         }, 1)
 
         return () => clearInterval(counter)
-    }, [value])
+    }, [currValue])
 
     return (
         <div
@@ -50,7 +53,7 @@ export default function StatisticCard({ value, prevValue, label, unit, loading, 
                     <div className="flex items-center gap-2 text-3xl">
                         <strong>{count ? count.toLocaleString('en-US') : 0}</strong>
                         {unit && <strong>{unit}</strong>}
-                        {value > 0 && prevValue > 0 && (
+                        {currValue > 0 && prevValue > 0 && (
                             <span className={`text-xl font-bold ${isIncreasing ? 'text-success' : 'text-destructive'}`}>
                                 ({isIncreasing ? '+' : ''}
                                 {percentGrowth}%)
@@ -63,3 +66,5 @@ export default function StatisticCard({ value, prevValue, label, unit, loading, 
         </div>
     )
 }
+
+export default StatisticCompareCard

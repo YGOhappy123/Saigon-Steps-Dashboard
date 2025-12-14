@@ -5,7 +5,7 @@ import { Separator } from '@/components/ui/separator'
 import { Button } from '@/components/ui/button'
 import { StatisticCriteria, statisticTypes } from '@/features/statistic/pages/RevenueStatisticPage'
 import useAxiosIns from '@/hooks/useAxiosIns'
-import StatisticSummaryCard from '@/features/statistic/components/StatisticSummaryCard'
+import StatisticCompareCard from '@/features/statistic/components/StatisticCompareCard'
 
 type StatisticSummary = {
     currentCount: number
@@ -60,25 +60,25 @@ const SummaryCards = () => {
 
             <CardContent>
                 <div className="grid grid-cols-1 gap-6 xl:grid-cols-3">
-                    <StatisticSummaryCard
+                    <StatisticCompareCard
                         loading={getSummaryStatisticQuery.isLoading}
-                        value={summaryData?.customers.currentCount ?? 0}
+                        currValue={summaryData?.customers.currentCount ?? 0}
                         prevValue={summaryData?.customers.previousCount ?? 0}
                         label="Khách hàng mới"
                         unit="tài khoản"
                         to="/khach-hang"
                     />
-                    <StatisticSummaryCard
+                    <StatisticCompareCard
                         loading={getSummaryStatisticQuery.isLoading}
-                        value={summaryData?.revenues.currentCount ?? 0}
+                        currValue={summaryData?.revenues.currentCount ?? 0}
                         prevValue={summaryData?.revenues.previousCount ?? 0}
                         label="Doanh thu đơn hàng"
                         unit="vnđ"
                         to="/don-hang"
                     />
-                    <StatisticSummaryCard
+                    <StatisticCompareCard
                         loading={getSummaryStatisticQuery.isLoading}
-                        value={summaryData?.orders.currentCount ?? 0}
+                        currValue={summaryData?.orders.currentCount ?? 0}
                         prevValue={summaryData?.orders.previousCount ?? 0}
                         label="Đơn hàng được đặt"
                         unit="đơn"

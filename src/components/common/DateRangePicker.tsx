@@ -12,9 +12,17 @@ type DateRangePickerProps = {
     className?: string
     triggerClassName?: string
     placeHolder?: string
+    disableFutureDates?: boolean
 }
 
-const DateRangePicker = ({ date, setDate, className, triggerClassName, placeHolder }: DateRangePickerProps) => {
+const DateRangePicker = ({
+    date,
+    setDate,
+    className,
+    triggerClassName,
+    placeHolder,
+    disableFutureDates
+}: DateRangePickerProps) => {
     return (
         <div className={twMerge(`${className}`)}>
             <Popover>
@@ -47,6 +55,7 @@ const DateRangePicker = ({ date, setDate, className, triggerClassName, placeHold
                         onSelect={setDate}
                         numberOfMonths={2}
                         locale={vi}
+                        disabled={disableFutureDates ? { after: new Date() } : undefined}
                     />
                 </PopoverContent>
             </Popover>
