@@ -31,6 +31,7 @@ const KeyCustomers = ({ limit, reportData }: KeyCustomersProps) => {
                     </CardDescription>
                 </div>
                 <PDFDownloadLink
+                    key={`${limit}-${reportData.range.from}-${reportData.range.to}`}
                     document={<KeyCustomersReportPDF reportData={reportData} user={user!} limit={limit} />}
                     fileName={`SS_thong_ke_khach_hang_noi_bat ${dayjs(reportData.range.from).format('DD-MM-YYYY')} ${dayjs(reportData.range.to).format('DD-MM-YYYY')}.pdf`}
                 >

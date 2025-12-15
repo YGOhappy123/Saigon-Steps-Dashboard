@@ -45,6 +45,7 @@ const RevenuesChart = ({ reportData }: RevenuesChartProps) => {
                     </CardDescription>
                 </div>
                 <PDFDownloadLink
+                    key={`${reportData.range.from}-${reportData.range.to}`}
                     document={<RevenuesReportPDF reportData={reportData} user={user!} />}
                     fileName={`SS_thong_ke_doanh_thu ${dayjs(reportData.range.from).format('DD-MM-YYYY')} ${dayjs(reportData.range.to).format('DD-MM-YYYY')}.pdf`}
                 >

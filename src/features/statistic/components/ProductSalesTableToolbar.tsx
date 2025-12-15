@@ -25,6 +25,7 @@ const ProductSalesTableToolbar = ({ limit, setLimit, reportData, hasActivity }: 
 
             <div className="flex justify-center gap-2">
                 <PDFDownloadLink
+                    key={`${hasActivity}-${reportData.range.from}-${reportData.range.to}`}
                     document={<ProductsSalesReportPDF reportData={reportData} user={user!} hasActivity={hasActivity} />}
                     fileName={`SS_thong_ke_doanh_so_san_pham ${dayjs(reportData.range.from).format('DD-MM-YYYY')} ${dayjs(reportData.range.to).format('DD-MM-YYYY')}.pdf`}
                 >

@@ -47,7 +47,7 @@ const SummaryCards = () => {
                     <CardTitle className="text-xl">Tóm tắt hoạt động</CardTitle>
                     <CardDescription>
                         Hiển thị số liệu {FIXED_STATISTIC_TYPES.find(item => item.value === type)!.label.toLowerCase()}{' '}
-                        so với cùng kì trước.
+                        so với cùng kỳ trước.
                     </CardDescription>
                 </div>
                 <div className="grid shrink-0 grid-cols-2 gap-4 xl:grid-cols-4">
