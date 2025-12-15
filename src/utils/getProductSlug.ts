@@ -1,7 +1,7 @@
 import slugify from 'slugify'
 
 const slugifyConfig = {
-    separator: '-',
+    replacement: '-',
     lower: true,
     strict: false,
     locale: 'vi'
