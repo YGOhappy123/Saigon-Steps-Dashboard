@@ -3,7 +3,6 @@ import { useQuery } from '@tanstack/react-query'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { Button } from '@/components/ui/button'
-import { StatisticCriteria, statisticTypes } from '@/features/statistic/pages/RevenueStatisticPage'
 import useAxiosIns from '@/hooks/useAxiosIns'
 import StatisticCompareCard from '@/features/statistic/components/StatisticCompareCard'
 
@@ -17,6 +16,15 @@ type StatisticsResponse = {
     orders: StatisticSummary
     revenues: StatisticSummary
 }
+
+type StatisticCriteria = 'daily' | 'weekly' | 'monthly' | 'yearly'
+
+const FIXED_STATISTIC_TYPES = [
+    { label: 'Hôm nay', value: 'daily' },
+    { label: 'Tuần này', value: 'weekly' },
+    { label: 'Tháng này', value: 'monthly' },
+    { label: 'Năm nay', value: 'yearly' }
+]
 
 const SummaryCards = () => {
     const axios = useAxiosIns()
@@ -33,17 +41,17 @@ const SummaryCards = () => {
     const summaryData = getSummaryStatisticQuery.data?.data
 
     return (
-        <Card className="col-span-6">
+        <Card>
             <CardHeader className="flex items-center justify-between gap-12">
                 <div className="flex flex-col justify-center gap-1">
                     <CardTitle className="text-xl">Tóm tắt hoạt động</CardTitle>
                     <CardDescription>
-                        Hiển thị số liệu {statisticTypes.find(item => item.value === type)!.label.toLowerCase()} so với
-                        cùng kì trước.
+                        Hiển thị số liệu {FIXED_STATISTIC_TYPES.find(item => item.value === type)!.label.toLowerCase()}{' '}
+                        so với cùng kì trước.
                     </CardDescription>
                 </div>
                 <div className="grid shrink-0 grid-cols-2 gap-4 xl:grid-cols-4">
-                    {statisticTypes.map(button => (
+                    {FIXED_STATISTIC_TYPES.map(button => (
                         <Button
                             key={button.value}
                             variant={type === button.value ? 'default' : 'outline'}

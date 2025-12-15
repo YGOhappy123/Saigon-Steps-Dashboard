@@ -6,10 +6,11 @@ import formatCurrency from '@/utils/formatCurrency'
 import dayjs from '@/libs/dayjs'
 
 type HighestOrderAmountTableProps = {
+    limit: string
     customers: (ICustomer & { orderAmount: number })[]
 }
 
-const HighestOrderAmountTable = ({ customers }: HighestOrderAmountTableProps) => {
+const HighestOrderAmountTable = ({ limit, customers }: HighestOrderAmountTableProps) => {
     const columns: ColumnDef<ICustomer & { orderAmount: number }>[] = [
         {
             accessorKey: 'customerId',
@@ -80,7 +81,7 @@ const HighestOrderAmountTable = ({ customers }: HighestOrderAmountTableProps) =>
     return (
         <div>
             <div className="mb-4 flex flex-col items-center gap-1.5">
-                <h4 className="text-xl font-semibold">Top 5 khách hàng có tổng giá trị đơn hàng cao nhẩt</h4>
+                <h4 className="text-xl font-semibold">Top {limit} khách hàng có tổng giá trị đơn hàng cao nhất</h4>
                 <span className="text-muted-foreground text-sm">Chỉ tính trên các đơn hàng đã thu tiền.</span>
             </div>
 

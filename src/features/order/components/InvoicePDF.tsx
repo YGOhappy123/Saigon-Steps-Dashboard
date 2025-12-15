@@ -1,18 +1,8 @@
-import { Page, Text, View, Document, Font } from '@react-pdf/renderer'
+import { Page, Text, View, Document } from '@react-pdf/renderer'
 import { Table, TD, TH, TR } from '@ag-media/react-pdf-table'
 import PDFHeaderTemplate from '@/components/common/PDFHeaderTemplate'
 import formatCurrency from '@/utils/formatCurrency'
 import dayjs from '@/libs/dayjs'
-
-Font.register({
-    family: 'Roboto',
-    fonts: [
-        { src: '/fonts/Roboto-Regular.ttf', fontWeight: 'normal' },
-        { src: '/fonts/Roboto-Medium.ttf', fontWeight: 'medium' },
-        { src: '/fonts/Roboto-SemiBold.ttf', fontWeight: 'semibold' },
-        { src: '/fonts/Roboto-Bold.ttf', fontWeight: 'bold' }
-    ]
-})
 
 type InvoicePDFProps = {
     order: IOrder

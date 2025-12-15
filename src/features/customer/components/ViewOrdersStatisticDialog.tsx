@@ -14,9 +14,29 @@ import {
 } from '@/components/ui/dialog'
 import { Separator } from '@/components/ui/separator'
 import { Card, CardContent } from '@/components/ui/card'
-import { StatisticCriteria, statisticTypes } from '@/features/statistic/pages/RevenueStatisticPage'
 import useAxiosIns from '@/hooks/useAxiosIns'
 import OrdersChart from '@/features/customer/components/OrdersChart'
+
+type StatisticCriteria = 'daily' | 'weekly' | 'monthly' | 'yearly'
+
+const statisticTypes = [
+    {
+        label: 'Hôm nay',
+        value: 'daily'
+    },
+    {
+        label: 'Tuần này',
+        value: 'weekly'
+    },
+    {
+        label: 'Tháng này',
+        value: 'monthly'
+    },
+    {
+        label: 'Năm nay',
+        value: 'yearly'
+    }
+]
 
 type ViewOrdersStatisticDialogProps = {
     customer: ICustomer | null

@@ -43,7 +43,8 @@ const permissions = {
     accessDamageReportDashboardPage: 'ACCESS_DAMAGE_REPORT_DASHBOARD_PAGE',
     addNewDamageReport: 'ADD_NEW_DAMAGE_REPORT',
     accessProductStatisticPage: 'ACCESS_PRODUCT_STATISTIC_PAGE',
-    accessRevenueStatisticPage: 'ACCESS_REVENUE_STATISTIC_PAGE'
+    accessRevenueStatisticPage: 'ACCESS_REVENUE_STATISTIC_PAGE',
+    accessKeyCustomerStatisticPage: 'ACCESS_KEY_CUSTOMER_STATISTIC_PAGE'
 } as const
 
 export default permissions

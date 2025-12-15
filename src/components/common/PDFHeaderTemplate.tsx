@@ -1,5 +1,15 @@
 import { ReactNode } from 'react'
-import { Text, View, Image } from '@react-pdf/renderer'
+import { Text, View, Image, Font } from '@react-pdf/renderer'
+
+Font.register({
+    family: 'Roboto',
+    fonts: [
+        { src: '/fonts/Roboto-Regular.ttf', fontWeight: 'normal' },
+        { src: '/fonts/Roboto-Medium.ttf', fontWeight: 'medium' },
+        { src: '/fonts/Roboto-SemiBold.ttf', fontWeight: 'semibold' },
+        { src: '/fonts/Roboto-Bold.ttf', fontWeight: 'bold' }
+    ]
+})
 
 type PDFHeaderPropsTemplate = {
     children?: ReactNode

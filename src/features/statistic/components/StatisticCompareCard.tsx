@@ -53,7 +53,7 @@ const StatisticCompareCard = ({ currValue, prevValue, label, unit, loading, to }
                     <div className="flex items-center gap-2 text-3xl">
                         <strong>{count ? count.toLocaleString('en-US') : 0}</strong>
                         {unit && <strong>{unit}</strong>}
-                        {currValue > 0 && prevValue > 0 && (
+                        {prevValue > 0 && (
                             <span className={`text-xl font-bold ${isIncreasing ? 'text-success' : 'text-destructive'}`}>
                                 ({isIncreasing ? '+' : ''}
                                 {percentGrowth}%)
