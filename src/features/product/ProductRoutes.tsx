@@ -5,6 +5,7 @@ import AuthProtector from '@/components/container/AuthProtector'
 import PermissionProtector from '@/components/container/PermissionProtector'
 import permissions from '@/configs/permissions'
 import ProductManagementPage from '@/features/product/pages/ProductManagementPage'
+import ProductDetailPage from '@/features/product/pages/ProductDetailPage'
 
 const ProductRoutes = [
     {
@@ -19,6 +20,10 @@ const ProductRoutes = [
             {
                 path: '',
                 element: <ProductManagementPage />
+            },
+            {
+                path: ':slug',
+                element: <ProductDetailPage />
             }
         ]
     }
