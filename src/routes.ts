@@ -12,6 +12,7 @@ import ProductImportRoutes from '@/features/productImport/ProductImportRoutes'
 import DamageReportRoutes from '@/features/damageReport/DamageReportRoutes'
 import InventoryRoutes from '@/features/inventory/InventoryRoutes'
 import StatisticRoutes from '@/features/statistic/StatisticRoutes'
+import PromotionRoutes from '@/features/promotion/PromotionRoutes'
 
 const developmentRoutes = createBrowserRouter([
     ...AuthRoutes,
@@ -26,7 +27,9 @@ const developmentRoutes = createBrowserRouter([
     ...ProductImportRoutes,
     ...DamageReportRoutes,
     ...InventoryRoutes,
-    ...StatisticRoutes
+    ...StatisticRoutes,
+    ...PromotionRoutes
+
 ])
 const productionRoutes = createBrowserRouter([
     ...AuthRoutes,
@@ -41,7 +44,8 @@ const productionRoutes = createBrowserRouter([
     ...ProductImportRoutes,
     ...DamageReportRoutes,
     ...InventoryRoutes,
-    ...StatisticRoutes
+    ...StatisticRoutes,
+    ...PromotionRoutes
 ])
 
 const getRouter = (environment: 'development' | 'production') => {
