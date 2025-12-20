@@ -6,7 +6,6 @@ import PersonnelRoutes from '@/features/personnel/PersonnelRoutes'
 import CategoryRoutes from '@/features/category/CategoryRoutes'
 import BrandRoutes from '@/features/brand/BrandRoutes'
 import ProductRoutes from '@/features/product/ProductRoutes'
-import PromotionRoutes from '@/features/promotion/PromotionRoutes'
 import OrderRoutes from '@/features/order/OrderRoutes'
 import OrderStatusRoutes from '@/features/orderStatus/OrderStatusRoutes'
 import ProductImportRoutes from '@/features/productImport/ProductImportRoutes'
@@ -22,7 +21,6 @@ const developmentRoutes = createBrowserRouter([
     ...CategoryRoutes,
     ...BrandRoutes,
     ...ProductRoutes,
-    ...PromotionRoutes,
     ...OrderRoutes,
     ...OrderStatusRoutes,
     ...ProductImportRoutes,
@@ -38,7 +36,6 @@ const productionRoutes = createBrowserRouter([
     ...CategoryRoutes,
     ...BrandRoutes,
     ...ProductRoutes,
-    ...PromotionRoutes,
     ...OrderRoutes,
     ...OrderStatusRoutes,
     ...ProductImportRoutes,
