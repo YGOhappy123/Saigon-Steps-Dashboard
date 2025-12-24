@@ -56,7 +56,7 @@ const OrderFilter = ({ setHavingFilters, onChange, onSearch, onReset, orderStatu
 
         const isChanged =
             searchName !== '' ||
-            searchStatus != null ||
+            searchStatus !== 0 ||
             searchMinPrice !== '' ||
             searchMaxPrice !== '' ||
             searchIsDelivery != null ||
