@@ -46,13 +46,14 @@ const StatusTableToolbar = ({
                 ['Mã trạng thái']: status.statusId,
                 ['Tên trạng thái']: status.name,
                 ['Mô tả']: status.description,
-                ['Loại trạng thái']: status.isDefault ? 'Trạng thái mặc định' : 'Trạng thái thông thường'
+                ['Loại trạng thái']: status.isDefault ? 'Trạng thái mặc định' : 'Trạng thái thông thường',
+                ['Yêu cầu giải thích']: status.isExplanationRequired ? 'Có' : 'Không'
             }))
 
             exportToCSV(
                 formattedStatuses,
                 `SS_danh_sach_trang_thai ${dayjs(Date.now()).format('DD/MM/YYYY HH:mm:ss')}`,
-                [{ wch: 15 }, { wch: 30 }, { wch: 80 }, { wch: 20 }]
+                [{ wch: 15 }, { wch: 30 }, { wch: 80 }, { wch: 20 }, { wch: 20 }]
             )
         })
     }

@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { PencilLine } from 'lucide-react'
 import { UseMutationResult } from '@tanstack/react-query'
+import { twMerge } from 'tailwind-merge'
 import { Button } from '@/components/ui/button'
 import {
     Dialog,
@@ -16,11 +17,12 @@ import {
 } from '@/components/ui/dialog'
 import { Separator } from '@/components/ui/separator'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Input } from '@/components/ui/input'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Textarea } from '@/components/ui/textarea'
 
-const addStatusFormSchema = z.object({
+const baseSchema = z.object({
     name: z.string().min(1, { message: 'Tên trạng thái không được để trống.' }),
     description: z.string().min(1, { message: 'Mô tả trạng thái không được để trống.' }),
     color: z.string().min(1, { message: 'Màu sắc trạng thái không được để trống.' }),
@@ -32,6 +34,17 @@ const addStatusFormSchema = z.object({
     shouldMarkAsRefunded: z.boolean(),
     shouldSendNotification: z.boolean()
 })
+
+const explanationRequiredSchema = baseSchema.extend({
+    type: z.literal('require'),
+    explanationLabel: z.string().min(1, { message: 'Mô tả yêu cầu không được để trống.' })
+})
+
+const noExplanationRequiredSchema = baseSchema.extend({
+    type: z.literal('no_require')
+})
+
+const addStatusFormSchema = z.discriminatedUnion('type', [explanationRequiredSchema, noExplanationRequiredSchema])
 
 type AddStatusDialogProps = {
     addNewStatusMutation: UseMutationResult<any, any, Partial<IOrderStatus>, any>
@@ -48,6 +61,7 @@ const AddStatusDialog = ({ addNewStatusMutation, statusActions }: AddStatusDialo
     const form = useForm<z.infer<typeof addStatusFormSchema>>({
         resolver: zodResolver(addStatusFormSchema),
         defaultValues: {
+            type: 'no_require',
             name: '',
             description: '',
             color: '#f4f4f5',
@@ -62,10 +76,11 @@ const AddStatusDialog = ({ addNewStatusMutation, statusActions }: AddStatusDialo
     })
 
     const onSubmit = async (values: z.infer<typeof addStatusFormSchema>) => {
-        await addNewStatusMutation.mutateAsync({
+        const data: Partial<IOrderStatus> = {
             name: values.name,
             description: values.description,
             color: values.color,
+            isExplanationRequired: values.type === 'require',
             shouldReserveStock: values.shouldReserveStock,
             shouldReleaseStock: values.shouldReleaseStock,
             shouldReduceStock: values.shouldReduceStock,
@@ -73,11 +88,18 @@ const AddStatusDialog = ({ addNewStatusMutation, statusActions }: AddStatusDialo
             shouldMarkAsDelivered: values.shouldMarkAsDelivered,
             shouldMarkAsRefunded: values.shouldMarkAsRefunded,
             shouldSendNotification: values.shouldSendNotification
-        })
+        }
+        if (values.type === 'require') {
+            data.explanationLabel = values.explanationLabel
+        }
+
+        await addNewStatusMutation.mutateAsync(data)
 
         form.reset()
         setOpen(false)
     }
+
+    const type = form.watch('type')
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
@@ -154,6 +176,49 @@ const AddStatusDialog = ({ addNewStatusMutation, statusActions }: AddStatusDialo
                                     </FormItem>
                                 )}
                             />
+
+                            <div className="grid grid-cols-2 items-start gap-4">
+                                <div className={twMerge('flex flex-col gap-2', type === 'no_require' && 'col-span-2')}>
+                                    <FormLabel className="text-card-foreground">Loại yêu cầu</FormLabel>
+                                    <Select
+                                        onValueChange={value => {
+                                            form.setValue('type', value as 'require' | 'no_require')
+                                            if (value === 'require') form.setValue('explanationLabel', '')
+                                        }}
+                                        defaultValue="no_require"
+                                    >
+                                        <SelectTrigger className="caret-card-foreground text-card-foreground h-12! w-full rounded border-2 font-semibold">
+                                            <SelectValue placeholder="Chọn loại yêu cầu..." />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            <SelectItem value="require">Yêu cầu nguyên nhân/ giải thích</SelectItem>
+                                            <SelectItem value="no_require">
+                                                Không yêu cầu nguyên nhân/ giải thích
+                                            </SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                </div>
+
+                                {type === 'require' && (
+                                    <FormField
+                                        control={form.control}
+                                        name="explanationLabel"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel className="text-card-foreground">Mô tả yêu cầu</FormLabel>
+                                                <FormControl>
+                                                    <Input
+                                                        placeholder="Mô tả yêu cầu..."
+                                                        className="text-card-foreground caret-card-foreground h-12 rounded border-2 font-semibold"
+                                                        {...field}
+                                                    />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                )}
+                            </div>
 
                             <div className="grid max-h-[120px] grid-cols-1 gap-2 overflow-y-auto">
                                 <FormLabel className="text-card-foreground">Danh sách tác vụ</FormLabel>

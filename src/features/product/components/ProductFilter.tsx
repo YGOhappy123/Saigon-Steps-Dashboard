@@ -73,10 +73,10 @@ const ProductFilter = ({ setHavingFilters, onChange, onSearch, onReset, brands, 
             searchName !== '' ||
             searchBrand !== 0 ||
             searchCategory !== 0 ||
-            searchIsAccessory !== null ||
+            searchIsAccessory != null ||
             searchMinPrice !== '' ||
             searchMaxPrice !== '' ||
-            searchInStock !== null ||
+            searchInStock != null ||
             (searchRange && searchRange.length > 0) ||
             sort !== '-productId'
         setHavingFilters(isChanged)

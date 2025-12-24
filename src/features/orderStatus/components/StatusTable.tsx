@@ -16,6 +16,19 @@ import StatusTableToolbar from '@/features/orderStatus/components/StatusTableToo
 import ConfirmationDialog from '@/components/common/ConfirmationDialog'
 import Pagination from '@/components/common/Pagination'
 
+const statusTypes = [
+    {
+        value: true,
+        label: 'Trạng thái mặc định',
+        icon: CircleCheck
+    },
+    {
+        value: false,
+        label: 'Trạng thái thông thường',
+        icon: CircleX
+    }
+]
+
 type StatusTableProps = {
     statuses: IOrderStatus[]
     statusActions: {
@@ -40,19 +53,6 @@ type StatusTableProps = {
     addNewStatusMutation: UseMutationResult<any, any, Partial<IOrderStatus>, any>
     deleteStatusMutation: UseMutationResult<any, any, number, any>
 }
-
-export const statusTypes = [
-    {
-        value: true,
-        label: 'Trạng thái mặc định',
-        icon: CircleCheck
-    },
-    {
-        value: false,
-        label: 'Trạng thái thông thường',
-        icon: CircleX
-    }
-]
 
 const StatusTable = ({
     statuses,
@@ -97,10 +97,23 @@ const StatusTable = ({
         },
         {
             accessorKey: 'description',
-            header: () => <div>Mô tả</div>,
+            header: () => <div>Thông tin trạng thái</div>,
             cell: ({ row }) => (
-                <div className="flex max-w-[300px] flex-col gap-2 break-words whitespace-normal">
-                    <p className="line-clamp-3">{row.original.description}</p>
+                <div className="flex max-w-[350px] flex-col gap-2 break-words whitespace-normal">
+                    <p className="line-clamp-3">
+                        <span className="font-semibold">Mô tả: </span>
+                        {row.original.description}
+                    </p>
+                    <p>
+                        <span className="font-semibold">Yêu cầu giải thích: </span>
+                        {row.original.isExplanationRequired ? 'Có' : 'Không'}
+                    </p>
+                    {row.original.explanationLabel && (
+                        <p>
+                            <span className="font-semibold">Mô tả yêu cầu: </span>
+                            {row.original.explanationLabel}
+                        </p>
+                    )}
                 </div>
             )
         },

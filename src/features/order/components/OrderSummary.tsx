@@ -1,7 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
+import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import useAxiosIns from '@/hooks/useAxiosIns'
-import OrderSummaryCard from '@/features/order/components/OrderSummaryCard'
 import formatCurrency from '@/utils/formatCurrency'
+import dayjs from '@/libs/dayjs'
 
 const OrderSummary = () => {
     const axios = useAxiosIns()
@@ -34,6 +35,26 @@ const OrderSummary = () => {
                     .padStart(2, '0')}
             />
         </div>
+    )
+}
+
+type OrderSummaryCardProps = {
+    title: string
+    data: number | string
+}
+
+const OrderSummaryCard = ({ title, data }: OrderSummaryCardProps) => {
+    return (
+        <Card className="@container/card">
+            <CardHeader>
+                <CardDescription>{title}</CardDescription>
+                <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">{data}</CardTitle>
+            </CardHeader>
+            <CardFooter className="flex-col items-start gap-1.5 text-sm">
+                <div className="line-clamp-1 flex gap-2 font-medium">Ngày tổng hợp số liệu</div>
+                <div className="text-muted-foreground">{dayjs().format('DD/MM/YYYY - HH:mm:ss')}</div>
+            </CardFooter>
+        </Card>
     )
 }
 

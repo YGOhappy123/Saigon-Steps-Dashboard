@@ -23,24 +23,30 @@ const StatusFilter = ({ setHavingFilters, onChange, onSearch, onReset, statusAct
     const [searchName, setSearchName] = useState<string>('')
     const [searchStatusActions, setSearchStatusActions] = useState<string[]>([])
     const [searchIsDefault, setSearchIsDefault] = useState<boolean | undefined>(undefined)
+    const [searchIsExplanationRequired, setSearchIsExplanationRequired] = useState<boolean | undefined>(undefined)
     const [sort, setSort] = useState<string>('-statusId')
 
     useEffect(() => {
         const appliedFilters: StatusSortAndFilterParams = {
             searchName: searchName,
             searchIsDefault: searchIsDefault,
+            searchIsExplanationRequired: searchIsExplanationRequired,
             searchStatusActions: searchStatusActions,
             sort: sort
         }
 
         onChange(appliedFilters)
-    }, [searchName, searchStatusActions, searchIsDefault, sort])
+    }, [searchName, searchStatusActions, searchIsDefault, searchIsExplanationRequired, sort])
 
     const handleSearch = () => {
         onSearch()
 
         const isChanged =
-            searchName !== '' || searchStatusActions.length > 0 || searchIsDefault !== null || sort !== '-statusId'
+            searchName !== '' ||
+            searchStatusActions.length > 0 ||
+            searchIsDefault != null ||
+            searchIsExplanationRequired != null ||
+            sort !== '-statusId'
         setHavingFilters(isChanged)
     }
 
@@ -48,6 +54,7 @@ const StatusFilter = ({ setHavingFilters, onChange, onSearch, onReset, statusAct
         setSearchName('')
         setSearchStatusActions([])
         setSearchIsDefault(undefined)
+        setSearchIsExplanationRequired(undefined)
         setSort('-statusId')
 
         setHavingFilters(false)
@@ -111,6 +118,30 @@ const StatusFilter = ({ setHavingFilters, onChange, onSearch, onReset, statusAct
                             { value: 'undefined', label: 'Lọc theo loại: Tất cả', Icon: CircleStar },
                             { value: 'true', label: 'Lọc theo loại: Trạng thái mặc định', Icon: CircleCheck },
                             { value: 'false', label: 'Lọc theo loại: Trạng thái thông thường', Icon: CircleX }
+                        ].map(sortOption => (
+                            <SelectItem key={sortOption.value} value={sortOption.value}>
+                                <sortOption.Icon /> {sortOption.label}
+                            </SelectItem>
+                        ))}
+                    </SelectContent>
+                </Select>
+
+                <Select
+                    value={
+                        searchIsExplanationRequired === undefined ? 'undefined' : searchIsExplanationRequired.toString()
+                    }
+                    onValueChange={value =>
+                        setSearchIsExplanationRequired(value === 'true' ? true : value === 'false' ? false : undefined)
+                    }
+                >
+                    <SelectTrigger className="text-card-foreground h-10! w-full rounded border-2 text-sm font-semibold">
+                        <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent side="top">
+                        {[
+                            { value: 'undefined', label: 'Lọc theo yêu cầu giải thích: Tất cả', Icon: CircleStar },
+                            { value: 'true', label: 'Lọc theo yêu cầu giải thích: Có yêu cầu', Icon: CircleCheck },
+                            { value: 'false', label: 'Lọc theo yêu cầu giải thích: Không yêu cầu', Icon: CircleX }
                         ].map(sortOption => (
                             <SelectItem key={sortOption.value} value={sortOption.value}>
                                 <sortOption.Icon /> {sortOption.label}

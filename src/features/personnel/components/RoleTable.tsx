@@ -15,6 +15,19 @@ import RoleTableToolbar from '@/features/personnel/components/RoleTableToolbar'
 import ConfirmationDialog from '@/components/common/ConfirmationDialog'
 import Pagination from '@/components/common/Pagination'
 
+const roleTypes = [
+    {
+        value: false,
+        label: 'Có thể chỉnh sửa',
+        icon: CircleCheck
+    },
+    {
+        value: true,
+        label: 'Không thể chỉnh sửa',
+        icon: CircleX
+    }
+]
+
 type RoleTableProps = {
     roles: IStaffRole[]
     permissions: IPermission[]
@@ -35,19 +48,6 @@ type RoleTableProps = {
     addNewRoleMutation: UseMutationResult<any, any, Partial<IStaffRole>, any>
     removeRoleMutation: UseMutationResult<any, any, number, any>
 }
-
-export const roleTypes = [
-    {
-        value: false,
-        label: 'Có thể chỉnh sửa',
-        icon: CircleCheck
-    },
-    {
-        value: true,
-        label: 'Không thể chỉnh sửa',
-        icon: CircleX
-    }
-]
 
 const RoleTable = ({
     roles,

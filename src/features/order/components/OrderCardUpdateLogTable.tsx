@@ -56,6 +56,18 @@ const OrderCardUpdateLogTable = ({ statusUpdateLogs }: OrderCardUpdateLogTablePr
                     </Badge>
                 </div>
             )
+        },
+        {
+            accessorKey: 'explanation',
+            header: () => <div>Ghi chú/ giải thích</div>,
+            cell: ({ row }) => {
+                const explanation = row.original.explanation
+                return (
+                    <p className="max-w-[180px] break-words whitespace-normal">
+                        {explanation ? `${row.original.status.explanationLabel}: ${explanation}` : '(Không có)'}
+                    </p>
+                )
+            }
         }
     ]
 

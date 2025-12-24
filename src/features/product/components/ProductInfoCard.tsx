@@ -18,7 +18,7 @@ import TagInputField from '@/features/product/components/TagInputField'
 import fileService from '@/services/fileService'
 import striptags from 'striptags'
 
-const baseInfoFormSchema = z.object({
+const baseSchema = z.object({
     name: z
         .string()
         .min(1, { message: 'Tên sản phẩm không được để trống.' })
@@ -35,7 +35,7 @@ const baseInfoFormSchema = z.object({
     images: z.array(z.string()).min(1, { message: 'Vui lòng chọn ít nhất một ảnh sản phẩm.' })
 })
 
-const shoeProductSchema = baseInfoFormSchema.extend({
+const shoeProductSchema = baseSchema.extend({
     type: z.literal('shoe'),
     features: z.object({
         categoryId: z.number().min(1, { message: 'Vui lòng chọn danh mục.' }),
@@ -67,7 +67,7 @@ const shoeProductSchema = baseInfoFormSchema.extend({
     })
 })
 
-const accessoryProductSchema = baseInfoFormSchema.extend({
+const accessoryProductSchema = baseSchema.extend({
     type: z.literal('accessory')
 })
 

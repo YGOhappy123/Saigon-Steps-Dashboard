@@ -11,6 +11,7 @@ export type StatusSortAndFilterParams = {
     searchName: string
     searchStatusActions: string[]
     searchIsDefault: boolean | undefined
+    searchIsExplanationRequired: boolean | undefined
     sort: string
 }
 
@@ -26,12 +27,18 @@ const statusService = ({ enableFetching }: { enableFetching: boolean }) => {
     const [query, setQuery] = useState<string>('{}')
     const [sort, setSort] = useState<string>('{}')
 
-    const buildQuery = ({ searchName, searchStatusActions, searchIsDefault, sort }: StatusSortAndFilterParams) => {
+    const buildQuery = ({
+        searchName,
+        searchStatusActions,
+        searchIsDefault,
+        searchIsExplanationRequired,
+        sort
+    }: StatusSortAndFilterParams) => {
         const query: any = {}
         if (searchName) query.name = searchName.trim()
         if (searchStatusActions.length > 0) query.statusActions = searchStatusActions
         if (searchIsDefault != null) query.isDefault = searchIsDefault
-
+        if (searchIsExplanationRequired != null) query.isExplanationRequired = searchIsExplanationRequired
         setQuery(JSON.stringify(query))
         if (sort) setSort(JSON.stringify(getMappedSort(sort)))
     }

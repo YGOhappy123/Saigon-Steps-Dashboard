@@ -19,6 +19,19 @@ import Pagination from '@/components/common/Pagination'
 import formatCurrency from '@/utils/formatCurrency'
 import dayjs from '@/libs/dayjs'
 
+const couponTypes = [
+    {
+        value: false,
+        label: 'Đã bị khóa',
+        icon: CircleX
+    },
+    {
+        value: true,
+        label: 'Chưa bị khóa',
+        icon: CircleCheck
+    }
+]
+
 type CouponTableProps = {
     coupons: ICoupon[]
     total: number
@@ -36,19 +49,6 @@ type CouponTableProps = {
     addNewCouponMutation: UseMutationResult<any, any, Partial<ICoupon>, any>
     disableCouponMutation: UseMutationResult<any, any, number, any>
 }
-
-export const couponTypes = [
-    {
-        value: false,
-        label: 'Đã bị khóa',
-        icon: CircleX
-    },
-    {
-        value: true,
-        label: 'Chưa bị khóa',
-        icon: CircleCheck
-    }
-]
 
 const CouponTable = ({
     coupons,

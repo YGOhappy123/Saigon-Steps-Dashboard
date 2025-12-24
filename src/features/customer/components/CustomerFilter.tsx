@@ -52,7 +52,7 @@ const CustomerFilter = ({ setHavingFilters, onChange, onSearch, onReset }: Custo
         const isChanged =
             searchName !== '' ||
             searchEmail !== '' ||
-            searchIsActive !== null ||
+            searchIsActive != null ||
             (searchRange && searchRange.length > 0) ||
             sort !== '-customerId'
         setHavingFilters(isChanged)

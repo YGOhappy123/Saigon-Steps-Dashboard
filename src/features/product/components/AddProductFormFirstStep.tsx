@@ -12,7 +12,7 @@ import striptags from 'striptags'
 import RichTextEditor from '@/components/common/RichTextEditor'
 import TagInputField from '@/features/product/components/TagInputField'
 
-const baseInfoFormSchema = z
+const baseSchema = z
     .object({
         name: z
             .string()
@@ -34,7 +34,7 @@ const baseInfoFormSchema = z
         path: ['price']
     })
 
-const shoeProductSchema = baseInfoFormSchema.safeExtend({
+const shoeProductSchema = baseSchema.safeExtend({
     type: z.literal('shoe'),
     sizes: z.array(z.string()).min(1, { message: 'Vui lòng chọn ít nhất một kích thước.' }),
     features: z.object({
@@ -67,7 +67,7 @@ const shoeProductSchema = baseInfoFormSchema.safeExtend({
     })
 })
 
-const accessoryProductSchema = baseInfoFormSchema.safeExtend({
+const accessoryProductSchema = baseSchema.safeExtend({
     type: z.literal('accessory')
 })
 

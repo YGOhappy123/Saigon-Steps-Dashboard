@@ -19,6 +19,19 @@ import Pagination from '@/components/common/Pagination'
 import formatCurrency from '@/utils/formatCurrency'
 import dayjs from '@/libs/dayjs'
 
+const productTypes = [
+    {
+        value: false,
+        label: 'Giày / dép',
+        icon: Footprints
+    },
+    {
+        value: true,
+        label: 'Phụ kiện',
+        icon: Wallet
+    }
+]
+
 type ProductTableProps = {
     products: IRootProduct[]
     brands: IProductBrand[]
@@ -41,19 +54,6 @@ type ProductTableProps = {
     getCsvProductsQuery: UseQueryResult<any, any>
     deleteProductMutation: UseMutationResult<any, any, number, any>
 }
-
-export const productTypes = [
-    {
-        value: false,
-        label: 'Giày / dép',
-        icon: Footprints
-    },
-    {
-        value: true,
-        label: 'Phụ kiện',
-        icon: Wallet
-    }
-]
 
 const ProductTable = ({
     products,

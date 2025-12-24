@@ -16,6 +16,19 @@ import ConfirmationDialog from '@/components/common/ConfirmationDialog'
 import Pagination from '@/components/common/Pagination'
 import dayjs from '@/libs/dayjs'
 
+const customerTypes = [
+    {
+        value: false,
+        label: 'Đã bị khóa',
+        icon: CircleX
+    },
+    {
+        value: true,
+        label: 'Đang hoạt động',
+        icon: CircleCheck
+    }
+]
+
 type CustomerTableProps = {
     customers: ICustomer[]
     total: number
@@ -33,19 +46,6 @@ type CustomerTableProps = {
     getCsvCustomersQuery: UseQueryResult<any, any>
     deactivateCustomerMutation: UseMutationResult<any, any, number, any>
 }
-
-const customerTypes = [
-    {
-        value: false,
-        label: 'Đã bị khóa',
-        icon: CircleX
-    },
-    {
-        value: true,
-        label: 'Đang hoạt động',
-        icon: CircleCheck
-    }
-]
 
 const CustomerTable = ({
     customers,

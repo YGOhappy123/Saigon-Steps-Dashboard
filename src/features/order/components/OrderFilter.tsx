@@ -3,7 +3,7 @@ import { DateRange } from 'react-day-picker'
 import { OrderSortAndFilterParams } from '@/features/order/services/orderService'
 import { PopoverContent } from '@/components/ui/popover'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { ArrowDown10, ArrowUp10 } from 'lucide-react'
+import { ArrowDown10, ArrowUp10, CircleStar, Store, Truck } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import DateRangePicker from '@/components/common/DateRangePicker'
@@ -21,6 +21,7 @@ const OrderFilter = ({ setHavingFilters, onChange, onSearch, onReset, orderStatu
     const [searchStatus, setSearchStatus] = useState<number>(0)
     const [searchMinPrice, setSearchMinPrice] = useState<string>('')
     const [searchMaxPrice, setSearchMaxPrice] = useState<string>('')
+    const [searchIsDelivery, setSearchIsDelivery] = useState<boolean | undefined>(undefined)
     const [searchRange, setSearchRange] = useState<string[] | any[]>()
     const [sort, setSort] = useState<string>('-orderId')
 
@@ -42,12 +43,13 @@ const OrderFilter = ({ setHavingFilters, onChange, onSearch, onReset, orderStatu
             searchStatus: searchStatus,
             searchMinPrice: searchMinPrice,
             searchMaxPrice: searchMaxPrice,
+            searchIsDelivery: searchIsDelivery,
             searchRange: searchRange,
             sort: sort
         }
 
         onChange(appliedFilters)
-    }, [searchName, searchStatus, searchMinPrice, searchMaxPrice, searchRange, sort])
+    }, [searchName, searchStatus, searchMinPrice, searchMaxPrice, searchIsDelivery, searchRange, sort])
 
     const handleSearch = () => {
         onSearch()
@@ -57,6 +59,7 @@ const OrderFilter = ({ setHavingFilters, onChange, onSearch, onReset, orderStatu
             searchStatus != null ||
             searchMinPrice !== '' ||
             searchMaxPrice !== '' ||
+            searchIsDelivery != null ||
             (searchRange && searchRange.length > 0) ||
             sort !== '-orderId'
         setHavingFilters(isChanged)
@@ -67,6 +70,7 @@ const OrderFilter = ({ setHavingFilters, onChange, onSearch, onReset, orderStatu
         setSearchStatus(0)
         setSearchMinPrice('')
         setSearchMaxPrice('')
+        setSearchIsDelivery(undefined)
         setSearchRange([])
         setSort('-orderId')
         setDate(undefined)
@@ -117,6 +121,32 @@ const OrderFilter = ({ setHavingFilters, onChange, onSearch, onReset, orderStatu
                         onChange={e => setSearchMaxPrice(e.target.value)}
                     />
                 </div>
+
+                <Select
+                    value={searchIsDelivery === undefined ? 'undefined' : searchIsDelivery.toString()}
+                    onValueChange={value =>
+                        setSearchIsDelivery(value === 'true' ? true : value === 'false' ? false : undefined)
+                    }
+                >
+                    <SelectTrigger className="text-card-foreground h-10! w-full rounded border-2 text-sm font-semibold">
+                        <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent side="top">
+                        {[
+                            { value: 'undefined', label: 'Lọc theo phương thức: Tất cả', Icon: CircleStar },
+                            {
+                                value: 'true',
+                                label: 'Lọc theo phương thức: Vận chuyển qua đường bưu điện',
+                                Icon: Truck
+                            },
+                            { value: 'false', label: 'Lọc theo phương thức: Nhận trực tiếp tại cửa hàng', Icon: Store }
+                        ].map(sortOption => (
+                            <SelectItem key={sortOption.value} value={sortOption.value}>
+                                <sortOption.Icon /> {sortOption.label}
+                            </SelectItem>
+                        ))}
+                    </SelectContent>
+                </Select>
 
                 <Select value={searchStatus.toString()} onValueChange={value => setSearchStatus(parseInt(value))}>
                     <SelectTrigger className="text-card-foreground h-10! w-full rounded border-2 text-sm font-semibold">

@@ -10,7 +10,7 @@ import OrderFilter from '@/features/order/components/OrderFilter'
 import formatCurrency from '@/utils/formatCurrency'
 import dayjs from '@/libs/dayjs'
 
-type OrderGridToolbarProps = {
+type OrderTableToolbarProps = {
     limit: number
     setLimit: (limit: number) => void
     getCsvOrdersQuery: UseQueryResult<any, any>
@@ -20,7 +20,7 @@ type OrderGridToolbarProps = {
     orderStatuses: IOrderStatus[]
 }
 
-const OrderGridToolbar = ({
+const OrderTableToolbar = ({
     getCsvOrdersQuery,
     limit,
     setLimit,
@@ -28,7 +28,7 @@ const OrderGridToolbar = ({
     onFilterSearch,
     onResetFilterSearch,
     orderStatuses
-}: OrderGridToolbarProps) => {
+}: OrderTableToolbarProps) => {
     const [havingFilters, setHavingFilters] = useState(false)
 
     const exportCsvFile = () => {
@@ -92,4 +92,4 @@ const OrderGridToolbar = ({
     )
 }
 
-export default OrderGridToolbar
+export default OrderTableToolbar

@@ -1,7 +1,7 @@
 import { UseQueryResult } from '@tanstack/react-query'
 import { ColumnDef } from '@tanstack/react-table'
 import { DataTable } from '@/components/ui/data-table'
-import { ScanBarcode, Footprints, MoreHorizontal, Wallet, BadgeDollarSign, ClipboardType } from 'lucide-react'
+import { ScanBarcode, MoreHorizontal, BadgeDollarSign, ClipboardType } from 'lucide-react'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -26,19 +26,6 @@ type DamageReportTableProps = {
     onViewDamage: (value: IInventoryDamageReport) => void
     getCsvDamagesQuery: UseQueryResult<any, any>
 }
-
-export const damageReportTypes = [
-    {
-        value: false,
-        label: 'Giày / dép',
-        icon: Footprints
-    },
-    {
-        value: true,
-        label: 'Phụ kiện',
-        icon: Wallet
-    }
-]
 
 const DamageReportTable = ({
     damages,

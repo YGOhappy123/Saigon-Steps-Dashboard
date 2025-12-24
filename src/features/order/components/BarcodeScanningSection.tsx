@@ -1,49 +1,20 @@
 import { useEffect, useMemo, useState } from 'react'
 import { ColumnDef } from '@tanstack/react-table'
-import { PencilLine } from 'lucide-react'
-import { Result as ScanResult } from '@zxing/library'
-import {
-    Dialog,
-    DialogClose,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle
-} from '@/components/ui/dialog'
 import { Separator } from '@/components/ui/separator'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { DataTable } from '@/components/ui/data-table'
-import BarcodeScanner from 'react-qr-barcode-scanner'
 
-type ScanBarcodeDialogProps = {
+type BarcodeScanningSectionProps = {
     orderItems: IOrder['orderItems']
-    selectedStatusId: number | null
     open: boolean
-    setOpen: (value: boolean) => void
-    onSubmit: (newStatus: number) => Promise<void>
-    isLoading: boolean
+    setIsBarcodeSubmittable: (value: boolean) => void
 }
 
-const ScanBarcodeDialog = ({
-    orderItems,
-    selectedStatusId,
-    open,
-    setOpen,
-    onSubmit,
-    isLoading
-}: ScanBarcodeDialogProps) => {
+const BarcodeScanningSection = ({ orderItems, open, setIsBarcodeSubmittable }: BarcodeScanningSectionProps) => {
     const [input, setInput] = useState('')
     const [message, setMessage] = useState('')
     const [scannedValues, setScannedValues] = useState<{ [key: string]: number }>({})
-
-    const handleSubmit = async () => {
-        if (selectedStatusId == null) return
-
-        await onSubmit(selectedStatusId)
-        setOpen(false)
-    }
 
     const isSubmittable = useMemo(() => {
         for (const item of orderItems) {
@@ -54,6 +25,10 @@ const ScanBarcodeDialog = ({
         }
         return true
     }, [orderItems, scannedValues])
+
+    useEffect(() => {
+        setIsBarcodeSubmittable(isSubmittable)
+    }, [isSubmittable, setIsBarcodeSubmittable])
 
     useEffect(() => {
         if (open && orderItems.length > 0) {
@@ -68,12 +43,6 @@ const ScanBarcodeDialog = ({
             setMessage('Quét hoặc nhập mã vạch của sản phẩm.')
         }
     }, [open, orderItems])
-
-    const handleScan = (_: any, result: ScanResult | undefined) => {
-        if (result) {
-            handleAdd(result.getText())
-        }
-    }
 
     const handleAdd = (scannedCode: string) => {
         if (scannedValues[scannedCode] === undefined) {
@@ -92,6 +61,40 @@ const ScanBarcodeDialog = ({
         }
         setInput('')
     }
+
+    useEffect(() => {
+        if (!open) return
+
+        let buffer = ''
+        let lastTime = Date.now()
+        const SCAN_TIMEOUT = 100
+
+        const handleKeyDown = (e: KeyboardEvent) => {
+            const now = Date.now()
+
+            if (now - lastTime > SCAN_TIMEOUT) {
+                buffer = ''
+            }
+            lastTime = now
+
+            if (e.key === 'Enter') {
+                if (buffer) {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    handleAdd(buffer)
+                    buffer = ''
+                }
+                return
+            }
+
+            if (/^\d$/.test(e.key)) {
+                buffer += e.key
+            }
+        }
+
+        window.addEventListener('keydown', handleKeyDown)
+        return () => window.removeEventListener('keydown', handleKeyDown)
+    }, [open, scannedValues])
 
     const columns: ColumnDef<IOrder['orderItems'][number]>[] = [
         {
@@ -138,68 +141,34 @@ const ScanBarcodeDialog = ({
     ]
 
     return (
-        <Dialog open={open} onOpenChange={setOpen}>
-            <DialogContent className="min-w-2xl md:min-w-3xl xl:min-w-4xl">
-                <DialogHeader>
-                    <DialogTitle>Quét mã vạch để cập nhật trạng thái đơn hàng</DialogTitle>
-                    <DialogDescription>
-                        Trạng thái đơn hàng này yêu cầu quét mã vạch của sản phẩm. Vui lòng sử dụng camera để quét mã
-                        vạch và xác nhận cập nhật trạng thái.
-                    </DialogDescription>
-                </DialogHeader>
-                <Separator />
-                <div className="grid grid-cols-3 gap-4">
-                    <div className="col-span-2 flex flex-col gap-4">
-                        <p className="text-primary text-base">
-                            <span className="font-semibold">Thông báo: </span>
-                            {message}
-                        </p>
-                        <DataTable data={orderItems ?? []} columns={columns} />
-                    </div>
+        <>
+            <div className="flex flex-col gap-4">
+                <p className="text-primary text-base">
+                    <span className="font-semibold">Thông báo: </span>
+                    {message}
+                </p>
 
-                    <div className="flex flex-col gap-4">
-                        <div className="border-primary overflow-hidden rounded border-2">
-                            <BarcodeScanner
-                                delay={1500}
-                                onUpdate={handleScan}
-                                onError={(error: any) => {
-                                    if (error.name === 'NotAllowedError') {
-                                        setMessage('Không có quyền truy cập camera.')
-                                    }
-                                }}
-                            />
-                        </div>
-                        <div className="flex items-center gap-4">
-                            <Input
-                                placeholder="Nhập mã vạch"
-                                className="caret-card-foreground text-card-foreground h-12 rounded border-2 font-semibold"
-                                value={input}
-                                onChange={e => /^\d*$/.test(e.target.value) && setInput(e.target.value)}
-                                onKeyDown={e => e.key === 'Enter' && (e.preventDefault(), handleAdd(input))}
-                            />
-                            <Button
-                                disabled={!input}
-                                onClick={() => handleAdd(input)}
-                                className="aspect-square h-12 rounded text-base capitalize"
-                            >
-                                Nhập
-                            </Button>
-                        </div>
-                    </div>
-                </div>
-                <Separator />
-                <DialogFooter>
-                    <DialogClose asChild>
-                        <Button variant="outline">Đóng</Button>
-                    </DialogClose>
-                    <Button type="button" onClick={handleSubmit} disabled={isLoading || !isSubmittable}>
-                        <PencilLine />
-                        Xác nhận
+                <DataTable data={orderItems ?? []} columns={columns} />
+
+                <div className="flex items-center gap-4">
+                    <Input
+                        placeholder="Nhập mã vạch"
+                        className="caret-card-foreground text-card-foreground h-12 rounded border-2 font-semibold"
+                        value={input}
+                        onChange={e => /^\d*$/.test(e.target.value) && setInput(e.target.value)}
+                    />
+                    <Button
+                        disabled={!input}
+                        onClick={() => handleAdd(input)}
+                        className="aspect-square h-12 rounded text-base capitalize"
+                    >
+                        Nhập
                     </Button>
-                </DialogFooter>
-            </DialogContent>
-        </Dialog>
+                </div>
+            </div>
+            <Separator />
+        </>
     )
 }
 
-export default ScanBarcodeDialog
+export default BarcodeScanningSection

@@ -22,13 +22,12 @@ const ProductVariantsCard = ({ product, hasModifyItemPermission, onUpdateSuccess
             header: () => <div className="text-center">Mã sản phẩm</div>,
             cell: ({ row }) => <div>{row.original.productItemId}</div>
         },
-
         {
             accessorKey: 'barcode',
             header: () => <div className="text-center">Mã vạch</div>,
             cell: ({ row }) => (
                 <div className="flex justify-center">
-                    <Barcode value={row.original.barcode!} height={70} width={2} fontSize={10} margin={10} />
+                    <Barcode value={row.original.barcode!} format="EAN13" width={1} height={50} />
                 </div>
             )
         },

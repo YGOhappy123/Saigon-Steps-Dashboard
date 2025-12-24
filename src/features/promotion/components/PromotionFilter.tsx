@@ -68,7 +68,7 @@ const PromotionFilter = ({ setHavingFilters, onChange, onSearch, onReset, produc
         const isChanged =
             searchName !== '' ||
             searchProducts.length > 0 ||
-            searchIsActive !== null ||
+            searchIsActive != null ||
             (searchRange && searchRange.length > 0) ||
             (searchApplyRange && searchApplyRange.length > 0) ||
             sort !== '-promotionId'

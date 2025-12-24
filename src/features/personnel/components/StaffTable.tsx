@@ -18,6 +18,19 @@ import ConfirmationDialog from '@/components/common/ConfirmationDialog'
 import Pagination from '@/components/common/Pagination'
 import dayjs from '@/libs/dayjs'
 
+const staffTypes = [
+    {
+        value: false,
+        label: 'Đã bị khóa',
+        icon: CircleX
+    },
+    {
+        value: true,
+        label: 'Đang hoạt động',
+        icon: CircleCheck
+    }
+]
+
 type StaffTableProps = {
     staffs: IStaff[]
     roles: IStaffRole[]
@@ -40,19 +53,6 @@ type StaffTableProps = {
     addNewStaffMutation: UseMutationResult<any, any, Partial<IStaff>, any>
     deactivateStaffAccountMutation: UseMutationResult<any, any, number, any>
 }
-
-export const staffTypes = [
-    {
-        value: false,
-        label: 'Đã bị khóa',
-        icon: CircleX
-    },
-    {
-        value: true,
-        label: 'Đang hoạt động',
-        icon: CircleCheck
-    }
-]
 
 const StaffTable = ({
     staffs,

@@ -36,7 +36,7 @@ const RoleFilter = ({ setHavingFilters, onChange, onSearch, onReset, permissions
         onSearch()
 
         const isChanged =
-            searchName !== '' || searchPermissions.length > 0 || searchIsImmutable !== null || sort !== '-roleId'
+            searchName !== '' || searchPermissions.length > 0 || searchIsImmutable != null || sort !== '-roleId'
         setHavingFilters(isChanged)
     }
 

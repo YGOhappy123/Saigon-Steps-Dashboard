@@ -56,7 +56,7 @@ const StaffFilter = ({ setHavingFilters, onChange, onSearch, onReset, roles }: S
             searchName !== '' ||
             searchEmail !== '' ||
             searchRole !== 0 ||
-            searchIsActive !== null ||
+            searchIsActive != null ||
             (searchRange && searchRange.length > 0) ||
             sort !== '-staffId'
         setHavingFilters(isChanged)

@@ -17,6 +17,19 @@ import ConfirmationDialog from '@/components/common/ConfirmationDialog'
 import Pagination from '@/components/common/Pagination'
 import dayjs from '@/libs/dayjs'
 
+const promotionTypes = [
+    {
+        value: false,
+        label: 'Đã bị khóa',
+        icon: CircleX
+    },
+    {
+        value: true,
+        label: 'Chưa bị khóa',
+        icon: CircleCheck
+    }
+]
+
 type PromotionTableProps = {
     promotions: IPromotion[]
     products: IRootProduct[]
@@ -37,19 +50,6 @@ type PromotionTableProps = {
     addNewPromotionMutation: UseMutationResult<any, any, Partial<IPromotion>, any>
     disablePromotionMutation: UseMutationResult<any, any, number, any>
 }
-
-export const promotionTypes = [
-    {
-        value: false,
-        label: 'Đã bị khóa',
-        icon: CircleX
-    },
-    {
-        value: true,
-        label: 'Chưa bị khóa',
-        icon: CircleCheck
-    }
-]
 
 const PromotionTable = ({
     promotions,
