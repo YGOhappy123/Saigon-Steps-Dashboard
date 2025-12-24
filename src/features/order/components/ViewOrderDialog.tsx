@@ -30,7 +30,7 @@ const ViewOrderDialog = ({ order, open, setOpen }: ViewOrderDialogProps) => {
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
-            <DialogContent className="min-w-2xl md:min-w-3xl">
+            <DialogContent className="min-w-3xl md:min-w-4xl">
                 <DialogHeader>
                     <DialogTitle>Thông tin đơn hàng</DialogTitle>
                     <DialogDescription>
