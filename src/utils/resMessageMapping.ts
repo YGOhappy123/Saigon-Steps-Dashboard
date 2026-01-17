@@ -57,8 +57,6 @@ const ERROR_MESSAGES = {
     ORDER_NOT_FOUND: 'Không tìm thấy đơn hàng.',
     INVALID_STATUS_SELECTED: 'Không thể chuyển đổi sang trạng thái này.',
     MISSING_EXPLANATION: 'Yêu cầu cung cấp nguyên nhân hoặc giải thích.',
-    DEFAULT_ORDER_STATUS_MUST_NOT_REQUIRE_EXPLANATION:
-        'Trạng thái đơn hàng mặc định không được yêu cầu nguyên nhân hoặc giải thích.',
 
     // Order statuses related
     ORDER_STATUS_NOT_FOUND: 'Không tìm thấy trạng thái đơn hàng.',
